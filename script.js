@@ -1,0 +1,1528 @@
+// Initialize Lenis for Smooth Scrolling
+const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    direction: 'vertical',
+    gestureDirection: 'vertical',
+    smooth: true,
+    mouseMultiplier: 1,
+    smoothTouch: false,
+    touchMultiplier: 2,
+    infinite: false,
+});
+
+// Register GSAP Plugins
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+// Ensure ScrollTrigger updates with Lenis and update scroll progress bar
+lenis.on('scroll', (e) => {
+    if (document.body.classList.contains('modal-open')) return;
+    ScrollTrigger.update();
+    const scrollPx = window.scrollY || document.documentElement.scrollTop;
+    const winHeightPx = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = winHeightPx > 0 ? (scrollPx / winHeightPx) * 100 : 0;
+    const progressBar = document.querySelector('.scroll-progress-bar');
+    if (progressBar) {
+        progressBar.style.width = `${scrolled}%`;
+    }
+});
+
+gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+});
+
+gsap.ticker.lagSmoothing(0);
+
+// Wait for DOM
+document.addEventListener('DOMContentLoaded', () => {
+
+    /* --- Custom Cursor --- */
+    const cursorDot = document.querySelector('.cursor-dot');
+    const cursorOutline = document.querySelector('.cursor-outline');
+
+    window.addEventListener('mousemove', (e) => {
+        const posX = e.clientX;
+        const posY = e.clientY;
+
+        cursorDot.style.left = `${posX}px`;
+        cursorDot.style.top = `${posY}px`;
+
+        cursorOutline.animate({
+            left: `${posX}px`,
+            top: `${posY}px`
+        }, { duration: 500, fill: "forwards" });
+    });
+
+    // Cursor hover effects on links and buttons
+    const hoverElements = document.querySelectorAll('a, button, .accordion-item, .team-card, .session-video-placeholder');
+    
+    hoverElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursorOutline.style.width = '60px';
+            cursorOutline.style.height = '60px';
+            cursorOutline.style.borderColor = 'var(--accent-gold)';
+            cursorDot.style.transform = 'translate(-50%, -50%) scale(1.5)';
+        });
+        
+        el.addEventListener('mouseleave', () => {
+            cursorOutline.style.width = '40px';
+            cursorOutline.style.height = '40px';
+            cursorOutline.style.borderColor = 'var(--accent-gold-dim)';
+            cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
+        });
+    });
+
+    /* --- Navbar Scroll Effect --- */
+    const navbar = document.querySelector('.navbar');
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                lenis.scrollTo(targetElement, {
+                    offset: -80,
+                    duration: 1.5
+                });
+            }
+        });
+    });
+
+    /* --- Hero Section Animation --- */
+    const heroTl = gsap.timeline();
+
+    // Opening cinematic title
+    heroTl.to('.pre-title', {
+        opacity: 1,
+        duration: 2,
+        ease: "power2.inOut"
+    })
+    .to('.pre-title', {
+        opacity: 0,
+        duration: 1.5,
+        ease: "power2.inOut",
+        delay: 1.5
+    })
+    .set('.opening-titles', { display: 'none' })
+    .set('.main-titles', { display: 'block', opacity: 1 })
+    // Reveal main title lines
+    .from('.title-line', {
+        y: 100,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.2,
+        ease: "power4.out"
+    })
+    .to('.jbc-hero-line', {
+        width: '120px',
+        duration: 1.5,
+        ease: "power3.inOut"
+    }, "-=0.6")
+    .from('.hero-subtitle', {
+        y: 30,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out"
+    }, "-=0.5")
+    .from('.hero-cta .btn', {
+        y: 20,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power3.out"
+    }, "-=0.5");
+
+    // Parallax on hero video
+    gsap.to('.hero-video', {
+        yPercent: 30,
+        ease: "none",
+        scrollTrigger: {
+            trigger: ".hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: true
+        }
+    });
+
+    /* --- About Section Narrative --- */
+    const chapters = document.querySelectorAll('.chapter');
+    
+    chapters.forEach(chapter => {
+        gsap.fromTo(chapter, 
+            { opacity: 0, y: 50 },
+            { 
+                opacity: 1, 
+                y: 0,
+                duration: 1.5,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: chapter,
+                    start: "top 80%",
+                }
+            }
+        );
+    });
+
+    // Image Mask Reveals
+    const mediaReveals = document.querySelectorAll('.media-reveal');
+    mediaReveals.forEach(reveal => {
+        gsap.fromTo(reveal.querySelector('.image-placeholder'),
+            { clipPath: "inset(10% 10% 10% 10%)", filter: "grayscale(100%)" },
+            {
+                clipPath: "inset(0% 0% 0% 0%)",
+                filter: "grayscale(0%)",
+                duration: 1.5,
+                ease: "power3.inOut",
+                scrollTrigger: {
+                    trigger: reveal,
+                    start: "top 70%",
+                    end: "bottom 80%",
+                    scrub: 1
+                }
+            }
+        );
+    });
+
+    /* --- Ambient Particle Canvas with Mouse Proximity Reactivity --- */
+    const particleCanvas = document.getElementById('stats-particle-canvas');
+    if (particleCanvas) {
+        const ctx = particleCanvas.getContext('2d');
+        let width = 0, height = 0;
+        let particles = [];
+        let animId = null;
+        let isVisible = false;
+        let mouseX = -1000, mouseY = -1000;
+
+        function resizeParticleCanvas() {
+            const parent = particleCanvas.parentElement;
+            if (parent) {
+                width = particleCanvas.width = parent.clientWidth;
+                height = particleCanvas.height = parent.clientHeight;
+            }
+        }
+
+        class SubtleParticle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.baseVx = (Math.random() - 0.5) * 0.35;
+                this.baseVy = (Math.random() - 0.5) * 0.35;
+                this.vx = this.baseVx;
+                this.vy = this.baseVy;
+                this.radius = Math.random() * 1.2 + 1;
+                this.alpha = 0.35; // ~35% base opacity
+            }
+
+            update() {
+                // Subtle cursor proximity attraction & glow
+                const dx = mouseX - this.x;
+                const dy = mouseY - this.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+
+                if (dist < 120) {
+                    const factor = (1 - dist / 120);
+                    this.vx = this.baseVx + (dx / dist) * factor * 0.3;
+                    this.vy = this.baseVy + (dy / dist) * factor * 0.3;
+                    this.alpha = 0.35 + factor * 0.45; // Brighten up to ~80% near cursor
+                } else {
+                    this.vx += (this.baseVx - this.vx) * 0.05;
+                    this.vy += (this.baseVy - this.vy) * 0.05;
+                    this.alpha += (0.35 - this.alpha) * 0.05;
+                }
+
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0) this.x = width;
+                if (this.x > width) this.x = 0;
+                if (this.y < 0) this.y = height;
+                if (this.y > height) this.y = 0;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(212, 175, 55, ${this.alpha})`;
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            resizeParticleCanvas();
+            particles = [];
+            const particleCount = Math.min(Math.floor((width * height) / 11000), 45);
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new SubtleParticle());
+            }
+        }
+
+        function drawParticles() {
+            if (!isVisible) return;
+            ctx.clearRect(0, 0, width, height);
+
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    // Connecting lines at ~9% opacity when close
+                    if (dist < 110) {
+                        const lineAlpha = (1 - dist / 110) * 0.09;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(212, 175, 55, ${lineAlpha})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.stroke();
+                    }
+                }
+            }
+            animId = requestAnimationFrame(drawParticles);
+        }
+
+        const statsSectionEl = particleCanvas.closest('.stats-section');
+        if (statsSectionEl) {
+            statsSectionEl.addEventListener('mousemove', (e) => {
+                const rect = particleCanvas.getBoundingClientRect();
+                mouseX = e.clientX - rect.left;
+                mouseY = e.clientY - rect.top;
+            });
+
+            statsSectionEl.addEventListener('mouseleave', () => {
+                mouseX = -1000;
+                mouseY = -1000;
+            });
+        }
+
+        window.addEventListener('resize', () => {
+            resizeParticleCanvas();
+            initParticles();
+        });
+
+        initParticles();
+
+        ScrollTrigger.create({
+            trigger: ".stats-section",
+            start: "top bottom",
+            end: "bottom top",
+            onEnter: () => { isVisible = true; drawParticles(); },
+            onLeave: () => { isVisible = false; if (animId) cancelAnimationFrame(animId); },
+            onEnterBack: () => { isVisible = true; drawParticles(); },
+            onLeaveBack: () => { isVisible = false; if (animId) cancelAnimationFrame(animId); }
+        });
+    }
+
+    /* --- Scroll-Triggered Staggered Entrance & 1.5s Count-Up Animation --- */
+    const flatStatItems = document.querySelectorAll('.stats-flat-row .stat-flat-item');
+    if (flatStatItems.length > 0) {
+        ScrollTrigger.create({
+            trigger: ".stats-section",
+            start: "top 80%",
+            once: true,
+            onEnter: () => {
+                // 8. Staggered fade-in + slight upward translate (~100ms apart)
+                gsap.to(flatStatItems, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    stagger: 0.1, // 100ms stagger
+                    ease: "power2.out"
+                });
+
+                // 7. Count-up animation on scroll (~1.5s duration, power3.out ease)
+                flatStatItems.forEach(item => {
+                    const numEl = item.querySelector('.stat-number-flat');
+                    if (numEl) {
+                        const target = parseInt(numEl.getAttribute('data-target'));
+                        gsap.to(numEl, {
+                            innerHTML: target,
+                            duration: 1.5,
+                            ease: "power3.out",
+                            snap: { innerHTML: 1 },
+                            onUpdate: function() {
+                                numEl.innerHTML = Math.round(numEl.innerHTML);
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    /* --- Living Architectural Museum Exhibition Engine --- */
+    const museumSection = document.getElementById('legacy');
+    const museumViewport = document.querySelector('.museum-sticky-viewport');
+    const museumStage = document.getElementById('museum-stage');
+    const museumChapters = document.querySelectorAll('.museum-chapter');
+    const museumCanvas = document.getElementById('legacy-museum-canvas');
+    const crimsonThread = document.getElementById('crimson-thread');
+    const finaleMonolithInner = document.getElementById('finale-monolith-inner');
+    const finaleEngravedTitle = document.getElementById('finale-engraved-title');
+    const portalBeam = document.getElementById('portal-beam');
+
+    if (museumSection && museumViewport && museumChapters.length > 0) {
+        
+        /* 1. Atmospheric Volumetric & Ambient Particle Canvas Engine (60 FPS) */
+        if (museumCanvas) {
+            const ctx = museumCanvas.getContext('2d');
+            let mw = 0, mh = 0;
+            let dustParticles = [];
+            let animFrameId = null;
+            let isMuseumVisible = false;
+            let scrollProgress = 0;
+
+            function resizeMuseumCanvas() {
+                mw = museumCanvas.width = museumViewport.clientWidth;
+                mh = museumCanvas.height = museumViewport.clientHeight;
+            }
+
+            class DustParticle {
+                constructor() {
+                    this.reset();
+                }
+
+                reset() {
+                    this.x = (Math.random() - 0.5) * mw * 2.2;
+                    this.y = (Math.random() - 0.5) * mh * 2.2;
+                    this.z = Math.random() * 1200 + 1;
+                    this.size = Math.random() * 1.8 + 0.6;
+                    this.isCrimson = Math.random() < 0.22; // 22% JBC Crimson, 78% Gold/Ivory
+                    this.speed = Math.random() * 0.4 + 0.2;
+                }
+
+                update() {
+                    const dynamicSpeed = this.speed + scrollProgress * 12;
+                    this.z -= dynamicSpeed;
+                    if (this.z <= 0) {
+                        this.reset();
+                        this.z = 1200;
+                    }
+                }
+
+                draw() {
+                    const cx = mw / 2;
+                    const cy = mh / 2;
+                    const scale = 450 / this.z;
+                    const px = this.x * scale + cx;
+                    const py = this.y * scale + cy;
+
+                    if (px >= 0 && px <= mw && py >= 0 && py <= mh) {
+                        const alpha = Math.min(1, (1200 - this.z) / 900) * (this.isCrimson ? 0.65 : 0.75);
+                        const radius = Math.max(0.5, this.size * scale * 0.8);
+
+                        ctx.beginPath();
+                        ctx.arc(px, py, radius, 0, Math.PI * 2);
+                        ctx.fillStyle = this.isCrimson 
+                            ? `rgba(204, 0, 0, ${alpha})` 
+                            : `rgba(212, 175, 55, ${alpha})`;
+                        ctx.fill();
+                    }
+                }
+            }
+
+            function initMuseumParticles() {
+                resizeMuseumCanvas();
+                dustParticles = [];
+                for (let i = 0; i < 180; i++) {
+                    dustParticles.push(new DustParticle());
+                }
+            }
+
+            function renderMuseumParticles() {
+                if (!isMuseumVisible) return;
+                ctx.clearRect(0, 0, mw, mh);
+
+                for (let i = 0; i < dustParticles.length; i++) {
+                    dustParticles[i].update();
+                    dustParticles[i].draw();
+                }
+                animFrameId = requestAnimationFrame(renderMuseumParticles);
+            }
+
+            window.addEventListener('resize', () => {
+                resizeMuseumCanvas();
+                initMuseumParticles();
+            });
+
+            initMuseumParticles();
+
+            ScrollTrigger.create({
+                trigger: museumSection,
+                start: "top bottom",
+                end: "bottom top",
+                onUpdate: (self) => {
+                    scrollProgress = self.progress;
+                    // Living Crimson Thread Grows More Intense Towards 2026
+                    if (crimsonThread) {
+                        const threadOpacity = 0.15 + (self.progress * 0.8);
+                        const glowRadius = 15 + (self.progress * 40);
+                        crimsonThread.style.opacity = threadOpacity;
+                        crimsonThread.style.boxShadow = `0 0 ${glowRadius}px rgba(204, 0, 0, ${0.4 + self.progress * 0.5})`;
+                    }
+                },
+                onEnter: () => { isMuseumVisible = true; renderMuseumParticles(); },
+                onLeave: () => { isMuseumVisible = false; if (animFrameId) cancelAnimationFrame(animFrameId); },
+                onEnterBack: () => { isMuseumVisible = true; renderMuseumParticles(); },
+                onLeaveBack: () => { isMuseumVisible = false; if (animFrameId) cancelAnimationFrame(animFrameId); }
+            });
+        }
+
+        /* 2. GSAP ScrollTrigger Evolving Architectural Camera Trajectory & Finale Monolith Portal */
+        const museumTL = gsap.timeline({
+            scrollTrigger: {
+                trigger: museumSection,
+                start: "top top",
+                end: "bottom bottom",
+                pin: ".museum-sticky-viewport",
+                scrub: 0.8
+            }
+        });
+
+        museumChapters.forEach((chapter, idx) => {
+            const yearAttr = chapter.getAttribute('data-year');
+            const isFinale = yearAttr === 'finale';
+
+            if (!isFinale) {
+                // Phase 1: Enter from deep space (-4500px -> 0px) with architectural camera movement
+                museumTL.fromTo(chapter,
+                    { transform: 'translate3d(-50%, -50%, -4500px)', opacity: 0, filter: 'blur(12px)' },
+                    {
+                        transform: 'translate3d(-50%, -50%, 0px)',
+                        opacity: 1,
+                        filter: 'blur(0px)',
+                        duration: 1.4,
+                        ease: "power2.out"
+                    }
+                );
+
+                // Milestone specific 3D architectural transformations
+                if (yearAttr === '2023') {
+                    const pLeft = chapter.querySelector('.panel-left');
+                    const pRight = chapter.querySelector('.panel-right');
+                    if (pLeft && pRight) {
+                        museumTL.fromTo([pLeft, pRight],
+                            { opacity: 0, scale: 0.8 },
+                            { opacity: 1, scale: 1, duration: 0.8, ease: "power2.out" },
+                            "-=0.6"
+                        );
+                    }
+                } else if (yearAttr === '2024') {
+                    const photoCubes = chapter.querySelectorAll('.orbiting-photo-cube');
+                    if (photoCubes.length > 0) {
+                        museumTL.fromTo(photoCubes,
+                            { opacity: 0, scale: 0.5 },
+                            { opacity: 1, scale: 1, stagger: 0.1, duration: 1.0, ease: "power2.out" },
+                            "-=0.8"
+                        );
+                    }
+                } else if (yearAttr === '2025') {
+                    const tajCard = chapter.querySelector('.taj-media-card');
+                    if (tajCard) {
+                        museumTL.fromTo(tajCard,
+                            { opacity: 0, y: 40 },
+                            { opacity: 1, y: 0, duration: 1.0, ease: "power2.out" },
+                            "-=0.8"
+                        );
+                    }
+                }
+
+                // Phase 2: Hold & view milestone
+                museumTL.to(chapter, { transform: 'translate3d(-50%, -50%, 180px)', duration: 1.0, ease: "none" })
+
+                // Phase 3: Exit past camera lens into darkness
+                .to(chapter,
+                    {
+                        transform: 'translate3d(-50%, -50%, 1500px)',
+                        opacity: 0,
+                        filter: 'blur(16px)',
+                        duration: 1.2,
+                        ease: "power2.in"
+                    },
+                    "-=0.2"
+                );
+
+            } else {
+                // Finale Monolith Node: 180° Monolith Flip & Light Beam Portal Activation
+                museumTL.fromTo(chapter,
+                    { transform: 'translate3d(-50%, -50%, -4000px)', opacity: 0, filter: 'blur(12px)' },
+                    {
+                        transform: 'translate3d(-50%, -50%, 0px)',
+                        opacity: 1,
+                        filter: 'blur(0px)',
+                        duration: 1.4,
+                        ease: "power2.out"
+                    }
+                );
+
+                // Monolith 180° Rotation to reveal 'Voices That Shaped JBC'
+                if (finaleMonolithInner) {
+                    museumTL.to(finaleMonolithInner, {
+                        rotateY: 180,
+                        duration: 1.2,
+                        ease: "power2.inOut",
+                        onStart: () => {
+                            if (finaleEngravedTitle) finaleEngravedTitle.classList.add('illuminated');
+                        }
+                    });
+                }
+
+                // Activate Portal Light Beam
+                if (portalBeam) {
+                    museumTL.to(portalBeam, {
+                        width: '100%',
+                        opacity: 1,
+                        duration: 0.8,
+                        ease: "power2.out",
+                        onStart: () => {
+                            portalBeam.classList.add('open');
+                        }
+                    });
+                }
+
+                // Fly directly through the portal into #speakers section
+                museumTL.to(chapter, {
+                    transform: 'translate3d(-50%, -50%, 1800px)',
+                    opacity: 0,
+                    duration: 1.2,
+                    ease: "power2.in"
+                });
+            }
+        });
+
+        /* 3D Mouse Parallax Architecture Tilt */
+        museumViewport.addEventListener('mousemove', (e) => {
+            const rect = museumViewport.getBoundingClientRect();
+            const mouseX = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+            const mouseY = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
+
+            const rotX = -mouseY * 4;
+            const rotY = mouseX * 4;
+
+            if (museumStage) {
+                gsap.to(museumStage, {
+                    rotateX: rotX,
+                    rotateY: rotY,
+                    duration: 0.6,
+                    ease: "power2.out"
+                });
+            }
+        });
+
+        museumViewport.addEventListener('mouseleave', () => {
+            if (museumStage) {
+                gsap.to(museumStage, {
+                    rotateX: 0,
+                    rotateY: 0,
+                    duration: 0.9,
+                    ease: "power2.out"
+                });
+            }
+        });
+    }
+
+    /* --- Grand Roster Reveal Animation --- */
+    const rosterCardsList = document.querySelectorAll('.roster-card');
+    if (rosterCardsList.length > 0) {
+        gsap.fromTo(rosterCardsList,
+            { opacity: 0, y: 35 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                stagger: 0.08,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: ".roster-grid",
+                    start: "top 85%"
+                }
+            }
+        );
+    }
+
+    /* --- Speaker Profile Overlay --- */
+    const speakerOverlay = document.getElementById('speaker-overlay');
+    const closeProfileBtn = document.querySelector('.close-profile');
+    const viewSessionBtns = document.querySelectorAll('.view-session-btn');
+
+    // Speaker & Moderator Data
+    const speakerData = {
+        'keki': {
+            name: 'Mr. Keki Mistry',
+            role: 'SPEAKER',
+            session: 'Banking on the Future',
+            designation: 'Interim Chairman of HDFC Bank & Director on Major Boards',
+            company: 'HDFC Bank',
+            bio: 'Mr. Keki Mistry, one of the most respected voices in India’s financial ecosystem, has played a defining role in shaping the country’s banking and corporate landscape through decades of visionary leadership, strategic foresight, and institution building. His remarkable journey reflects resilience, trust, and an unwavering commitment to long-term growth in an ever-evolving economic environment.',
+            quote: '"Leadership is about taking responsibilities and creating a legacy of trust."',
+            image: 'url("keki mistry.webp")'
+        },
+        'dharmarajan': {
+            name: 'Mr. Dharmarajan Sankara Subramanian',
+            role: 'MODERATOR',
+            session: 'Banking on the Future',
+            designation: 'Founder & Managing Director',
+            company: 'Impactsure Technologies',
+            bio: 'With decades of experience across banking, financial services, and technology, Mr. Dharmarajan has been at the forefront of driving innovation, digital transformation, and sustainable growth within the financial ecosystem. Through his work, he has helped organizations navigate an evolving landscape shaped by technology, changing consumer expectations, and emerging opportunities.',
+            quote: '"Innovation at the intersection of banking and technology drives sustainable growth within the financial ecosystem."',
+            image: 'url("dharamranjan.jpeg")'
+        },
+        'maulik': {
+            name: 'Mr. Maulik Bhansali',
+            role: 'SPEAKER',
+            session: 'Navigating Risk in Your 20\'s',
+            designation: 'Chief Risk Officer',
+            company: 'Union Asset Management Co. Pvt. Ltd.',
+            bio: 'A master of foresight in India’s investment sector. Backed by a passion for financial stability and a deep understanding of the trade-off between risk and reward, Mr. Bhansali has played a pivotal role in designing risk models that protect and empower investor capital. His dynamic approach to corporate governance and asset security has set high benchmarks for institutional resilience.',
+            quote: '"Mastering the balance between risk and reward is the ultimate superpower for future leaders in their 20s."',
+            image: 'url("maulik bhansali.jpeg")'
+        },
+        'arjit': {
+            name: 'Mr. Arjit Garg',
+            role: 'MODERATOR',
+            session: 'Navigating Risk in Your 20\'s',
+            designation: 'India’s Youngest SEBI Registered Research Analyst',
+            company: 'Equity Research & Financial Markets',
+            bio: 'Known for his work in equity research, investor education, and financial markets, Arjit has developed a strong perspective on how young individuals can approach investing, decision-making, and risk management in an increasingly dynamic economic environment.',
+            quote: '"Navigating financial risk early requires disciplined curiosity, structured thinking, and calculated decision-making."',
+            image: 'url("arijit garg.jpeg")'
+        },
+        'rajat': {
+            name: 'Mr. Rajat Bhatia',
+            role: 'SPEAKER',
+            session: 'The New Language of Luxury',
+            designation: 'Commercial Director',
+            company: 'Four Seasons Mumbai',
+            bio: 'Mr. Rajat Bhatia, known for his warmth, vision, and deep understanding of modern hospitality, has been instrumental in curating world-class guest experiences that go far beyond traditional service to create genuine human connection. With an exceptional understanding of evolving consumer aspirations and premium brand experiences, he continues to shape what meaningful luxury looks like in today’s experience-driven world.',
+            quote: '"In the world of luxury, experience is the only currency that truly matters."',
+            image: 'url("rajat bhatia.jpg")'
+        },
+        'annkur': {
+            name: 'Ms. Annkur Khosla',
+            role: 'MODERATOR',
+            session: 'The New Language of Luxury',
+            designation: 'Founder & Principal Architect',
+            company: 'Annkur Khosla Design Studio',
+            bio: 'Through her work across luxury, wellness, and experiential design, Annkur has built a distinctive perspective on how spaces, stories, and experiences shape the way people connect, engage, and belong.',
+            quote: '"Design is not just visual; it is how spaces, stories, and experiences evoke deep human connection and belonging."',
+            image: 'url("ankur khosla moderatior.jpeg")'
+        },
+        'sankalp': {
+            name: 'Mr. Sankalp Kelshikar',
+            role: 'SPEAKER',
+            session: 'Moving India Forward',
+            designation: 'Co-Founder',
+            company: 'Cityflo Buses',
+            bio: 'With a vision to transform the everyday commute experience, Mr. Kelshikar has redefined urban mobility by building one of India’s most innovative and consumer-focused transportation platforms. By seamlessly combining technology, convenience, and operational efficiency, he has created a solution that continues to reshape the way modern India travels.',
+            quote: '"Redefining urban mobility is about giving modern India back its most valuable asset: time."',
+            image: 'url("sankalp cityfloe.jpeg")'
+        },
+        'sahilmakhija': {
+            name: 'Sahil Makhija',
+            role: 'MODERATOR',
+            session: 'A Seat at the Table',
+            designation: 'Creator, Producer & Media Host',
+            company: 'Media & Entertainment',
+            bio: 'Sahil Makhija is a celebrated creator, producer, and media host who leads engaging format conversations with visionaries across industries.',
+            quote: '"The power of conversation lies in asking the questions everyone thinks but few dare to voice."',
+            image: 'url("sahil makhija moderator.jpeg")'
+        },
+        'yashadvani': {
+            name: 'Mr. Yash Advani',
+            role: 'PANELIST',
+            session: 'A Seat at the Table',
+            designation: 'Founder of Maikada & Cafe Calma, Co-Founder of Pastel Patisserie',
+            company: 'The Shalimar Hotel / Pastel',
+            bio: 'Rooted in the legacy of The Shalimar Hotel, Yash represents a new generation of hospitality leaders redefining what meaningful dining experiences look like. Through thoughtfully curated concepts that combine culture, community, and modern luxury, he has created spaces that go beyond hospitality to build connection and storytelling.',
+            quote: '"Hospitality builds spaces that go beyond dining to create culture, community, and storytelling."',
+            image: 'url("yash advani panelist.jpeg")'
+        },
+        'simranadvani': {
+            name: 'Ms. Simran Advani',
+            role: 'PANELIST',
+            session: 'A Seat at the Table',
+            designation: 'Founder of Nova and Co-Founder of Pastel',
+            company: 'Nova & Pastel Patisserie',
+            bio: 'Inspired by Italy’s rich dessert culture and driven by a passion for craftsmanship, Simran transformed an unconventional journey into one of Mumbai’s most distinctive dessert ventures. Through innovation, experimentation, and an unwavering focus on quality, she has created brands that celebrate comfort, creativity, and the joy of thoughtfully crafted food.',
+            quote: '"Craftsmanship transforms unconventional journeys into distinctive, joy-filled culinary brands."',
+            image: 'url("simran advani panelist.jpeg")'
+        },
+        'abhijeetanand': {
+            name: 'Mr. Abhijeet Anand',
+            role: 'PANELIST',
+            session: 'A Seat at the Table',
+            designation: 'Founder & Chief Executive Officer',
+            company: 'abcoffee',
+            bio: 'With a disruptive and technology-driven approach to coffee retail, Abhijeet has built one of the country’s fastest growing café concepts by combining quality, convenience, and affordability for the modern consumer. His journey reflects bold thinking, adaptability, and a sharp understanding of changing customer behavior.',
+            quote: '"Disruptive coffee retail comes from combining quality, convenience, and affordability for the modern consumer."',
+            image: 'url("abhijeet anand panelist.jpeg")'
+        },
+        'enrico': {
+            name: 'Mr. Enrico Signorelli',
+            role: 'PANELIST',
+            session: 'A Seat at the Table',
+            designation: 'Founder',
+            company: 'MAMI Bombay',
+            bio: 'With a vision rooted in authenticity, creativity, and community, Enrico has built MAMI Bombay into a brand that blends indulgent food experiences with a modern and relatable dining culture. By focusing on quality, storytelling, and customer connection, he has created a space that resonates strongly with today’s generation of food lovers.',
+            quote: '"Authenticity and storytelling create dining experiences that deeply resonate with today’s generation of food lovers."',
+            image: 'url("enrico panelist.jpeg")'
+        },
+        'shloksavjani': {
+            name: 'Mr. Shlok Savjani',
+            role: 'PANELIST',
+            session: 'A Seat at the Table',
+            designation: 'Managing Partner',
+            company: 'Maroosh',
+            bio: 'Representing one of Mumbai’s most loved culinary brands, Shlok has played a key role in evolving Maroosh while staying true to the authenticity and flavors that built its loyal community. By blending tradition with changing consumer preferences, he continues to shape dining experiences that resonate with today’s audience.',
+            quote: '"Evolving a heritage brand requires blending authentic legacy flavors with changing consumer preferences."',
+            image: 'url("shlok savjani panelist.jpeg")'
+        },
+        'vikkhatwani': {
+            name: 'Mr. Vik Khatwani',
+            role: 'PANELIST',
+            session: 'A Seat at the Table',
+            designation: 'Founder',
+            company: 'Earth Café',
+            bio: 'Leaving behind a successful career in jewelry manufacturing, Vik transformed a personal philosophy into one of Mumbai’s most recognized plant-based and gluten-free café brands. Through sustainable practices, mindful innovation, and a strong community-first approach, he has redefined what modern wellness hospitality can look like.',
+            quote: '"Mindful innovation and plant-based hospitality can redefine wellness for modern India."',
+            image: 'url("vik khatwani panelist.jpeg")'
+        },
+        'ishaanbahl': {
+            name: 'Mr. Ishaan Bahl',
+            role: 'PANELIST',
+            session: 'A Seat at the Table',
+            designation: 'Restaurateur & Founder',
+            company: '145 Mumbai / Chrome Hospitality',
+            bio: 'Ishaan Bahl is a trailblazing restaurateur and hospitality entrepreneur responsible for creating iconic social dining spaces like 145 Mumbai and leading Chrome Hospitality’s expansion into luxury dining.',
+            quote: '"Modern hospitality builds spaces that feel like culture hubs, not just restaurants."',
+            image: 'url("ishaan bahl panelist.jpeg")'
+        }
+    };
+
+    /* --- Modal Background Touchpad Scroll Preventer --- */
+    window.addEventListener('wheel', (e) => {
+        if (document.body.classList.contains('modal-open')) {
+            const scrollable = e.target.closest('.profile-right');
+            if (!scrollable) {
+                e.preventDefault();
+            }
+        }
+    }, { passive: false });
+
+    window.addEventListener('touchmove', (e) => {
+        if (document.body.classList.contains('modal-open')) {
+            const scrollable = e.target.closest('.profile-right');
+            if (!scrollable) {
+                e.preventDefault();
+            }
+        }
+    }, { passive: false });
+
+    // View Session Button click handler
+    document.addEventListener('click', (e) => {
+        const btn = e.target.closest('.view-session-btn');
+        if (btn) {
+            e.stopPropagation();
+            const speakerId = btn.getAttribute('data-speaker');
+            const data = speakerData[speakerId];
+            
+            if (data && speakerOverlay) {
+                // Populate data
+                const rolePill = document.querySelector('.profile-role-pill');
+                const sessionPill = document.querySelector('.profile-session-pill');
+                const nameEl = document.querySelector('.profile-name');
+                const desigEl = document.querySelector('.profile-designation');
+                const compEl = document.querySelector('.profile-company');
+                const bioEl = document.querySelector('#speaker-overlay .bio-text');
+                const quoteEl = document.querySelector('.modal-speaker-quote');
+                const imgContainer = document.querySelector('#speaker-overlay .profile-image-container');
+
+                if (rolePill) rolePill.innerText = data.role;
+                if (sessionPill) sessionPill.innerText = `SESSION: ${data.session.toUpperCase()}`;
+                if (nameEl) nameEl.innerText = data.name;
+                if (desigEl) desigEl.innerText = data.designation;
+                if (compEl) compEl.innerText = data.company;
+                if (bioEl) bioEl.innerText = data.bio;
+                if (quoteEl) quoteEl.innerText = data.quote;
+                if (imgContainer) imgContainer.style.backgroundImage = data.image;
+                
+                // Open overlay with scroll lock
+                document.body.classList.add('modal-open');
+                lenis.stop();
+
+                const speakerRight = speakerOverlay.querySelector('.profile-right');
+                if (speakerRight) speakerRight.scrollTop = 0;
+                speakerOverlay.classList.add('open');
+                
+                // Animate content in
+                gsap.fromTo('#speaker-overlay .profile-right > *', 
+                    { opacity: 0, y: 30 }, 
+                    { opacity: 1, y: 0, duration: 0.6, stagger: 0.08, delay: 0.2, ease: "power3.out" }
+                );
+            }
+        }
+    });
+
+    if (closeProfileBtn) {
+        closeProfileBtn.addEventListener('click', () => {
+            speakerOverlay.classList.remove('open');
+            document.body.classList.remove('modal-open');
+            lenis.start();
+        });
+    }
+
+    /* --- 5-Slot Interactive Viewport Accordion --- */
+    const accordionTrack = document.getElementById('horizontal-accordion');
+    const accordionViewport = document.getElementById('accordion-viewport');
+    const accordionItems = document.querySelectorAll('.speakers-hall .accordion-item');
+    const prevBtn = document.getElementById('slot-prev');
+    const nextBtn = document.getElementById('slot-next');
+
+    let currentOffset = 0;
+    const itemWidth = 193; // 180px width + 13px gap
+
+    function slideToOffset(offset) {
+        if (!accordionTrack || !accordionViewport) return;
+        const visibleItems = Array.from(accordionItems).filter(item => item.style.display !== 'none');
+        const maxScroll = Math.max(0, (visibleItems.length * itemWidth) - accordionViewport.clientWidth + 360);
+        
+        currentOffset = Math.max(0, Math.min(offset, maxScroll));
+        gsap.to(accordionTrack, {
+            x: -currentOffset,
+            duration: 0.6,
+            ease: "power2.out"
+        });
+    }
+
+    function makeCardVisible(item) {
+        if (!accordionTrack || !accordionViewport) return;
+        const visibleItems = Array.from(accordionItems).filter(i => i.style.display !== 'none');
+        const index = visibleItems.indexOf(item);
+        if (index === -1) return;
+
+        const expandedWidth = 540;
+        const step = 193; // 180px width + 13px gap
+        const viewportWidth = accordionViewport.clientWidth;
+        const cardStartX = index * step;
+        const cardEndX = cardStartX + expandedWidth;
+        const buffer = 30;
+
+        let targetOffset = currentOffset;
+
+        if (cardEndX > currentOffset + viewportWidth - buffer) {
+            targetOffset = cardEndX - viewportWidth + buffer;
+        }
+        if (cardStartX < currentOffset + buffer) {
+            targetOffset = Math.max(0, cardStartX - buffer);
+        }
+
+        const maxScroll = Math.max(0, (visibleItems.length * step) - viewportWidth + 360);
+        targetOffset = Math.max(0, Math.min(targetOffset, maxScroll));
+
+        if (targetOffset !== currentOffset) {
+            slideToOffset(targetOffset);
+        }
+    }
+
+    if (prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', () => {
+            slideToOffset(currentOffset - itemWidth * 2);
+        });
+        nextBtn.addEventListener('click', () => {
+            slideToOffset(currentOffset + itemWidth * 2);
+        });
+    }
+
+    let hoverPopTimer = null;
+    accordionItems.forEach((item) => {
+        item.addEventListener('mouseenter', () => {
+            accordionItems.forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+
+            if (hoverPopTimer) clearTimeout(hoverPopTimer);
+            hoverPopTimer = setTimeout(() => {
+                makeCardVisible(item);
+            }, 60);
+        });
+
+        item.addEventListener('click', () => {
+            accordionItems.forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+            makeCardVisible(item);
+        });
+    });
+
+    /* --- Speaker Session Filter Tabs --- */
+    const filterBtns = document.querySelectorAll('.filter-btn');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filter = btn.getAttribute('data-filter');
+            let firstVisible = null;
+
+            accordionItems.forEach(card => {
+                const session = card.getAttribute('data-session');
+                if (filter === 'all' || session === filter) {
+                    card.style.display = 'flex';
+                    if (!firstVisible) firstVisible = card;
+                    gsap.fromTo(card, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" });
+                } else {
+                    card.style.display = 'none';
+                    card.classList.remove('active');
+                }
+            });
+
+            // Reset translation to 0
+            currentOffset = 0;
+            if (accordionTrack) {
+                gsap.to(accordionTrack, { x: 0, duration: 0.4, ease: "power2.out" });
+            }
+
+            if (firstVisible) {
+                accordionItems.forEach(i => i.classList.remove('active'));
+                firstVisible.classList.add('active');
+            }
+        });
+    });
+
+    /* --- Team Profile Overlay --- */
+    const teamOverlay = document.getElementById('team-overlay');
+    const closeTeamProfileBtn = document.querySelector('.close-team-profile');
+    
+    const teamData = {
+        'rakhi': {
+            name: 'Dr. Rakhi Sharma',
+            designation: 'Faculty Advisor',
+            about: 'She is a passionate academic and lifelong learner with a PhD in Venture Capital Management. With over 18 years in education, she is known for her leadership, resilience, and inspiring presence. She is deeply committed to empowering people with creativity, confidence, and innovation.',
+            achievements: [
+                'PhD in Venture Capital Management.',
+                'Over 18 years of experience in higher education, leadership, and inspiring mentorship.',
+                'Faculty Advisor, Jai Hind Business Conclave.',
+                'Deeply committed to empowering students with creativity, confidence, and innovation.'
+            ],
+            quote: '"Empowering people with creativity, confidence, and innovation drives true leadership."',
+            image: 'url("Rakhi maam.jpeg")'
+        },
+        'prateek': {
+            name: 'Mr. Prateek Kumar',
+            designation: 'Head of BBA Department',
+            about: 'With over 7 years of experience in academia, research, and institutional innovation, he specializes in building entrepreneurial mindsets, empowering students with real-world business frameworks, and bridging the gap between education and industry.',
+            achievements: [
+                'Head of BBA Department, Jai Hind College.',
+                'Over 7 years of experience in academia, research, and institutional innovation.',
+                'Specializes in building entrepreneurial mindsets and real-world business frameworks.',
+                'Instrumental in bridging the gap between higher education and corporate industry.'
+            ],
+            quote: '"Bridging education and industry empowers students to build real-world business frameworks."',
+            image: 'url("Prateek kumar sir.jpeg")'
+        },
+        'siya': {
+            name: 'Siya Raveendran',
+            designation: 'Joint Secretary Media',
+            about: 'Every idea has the potential to leave a lasting impact. For me, media is about bringing those ideas to life through thoughtful storytelling, purposeful design, and meaningful branding. As the Media Vice President of the Jai Hind Business Conclave 2027, I lead the conclave’s creative vision and digital presence, ensuring every campaign reflects our identity with clarity and consistency.',
+            achievements: [
+                'Built cohesive brand identities and designed supporting materials for major collegiate events.',
+                'Skilled in capturing and creating engaging visual content via photography and videography.',
+                'Proven ability to bring abstract ideas to life through compelling and authentic creative narratives.',
+                'Driven by a strong commitment to producing impactful and highly memorable work.'
+            ],
+            quote: '"Design is the silent ambassador of your brand."',
+            image: 'url("siya.PNG")'
+        },
+        'ananya': {
+            name: 'Ananya Murali',
+            designation: 'Joint Secretary Events',
+            about: 'Some people collect souvenirs—I collect stories, ideas, and events. Whether it\'s getting lost in the pages of a good book, expressing myself through creative writing, or spending hours perfecting an event plan, there\'s always something exciting to create.',
+            achievements: [
+                'A trained Bharatanatyam dancer, avid reader, and creative writer.',
+                'Former Joint Secretary for MUN who has hosted, organised, and won multiple MUNs across the state.',
+                'Articles and stories published in magazines across India.',
+                'Passionate about leadership, collaboration, and creating meaningful experiences through creativity and communication.'
+            ],
+            quote: '"Great events are not just planned, they are crafted with passion."',
+            image: 'url("ananya.jpeg")'
+        },
+        'saad': {
+            name: 'Saad Khan',
+            designation: 'Joint Secretary Marketing',
+            about: 'Between assignments and college events, I developed a new habit: overanalyzing ideas, decisions, and conversations. A curious individual with interests spanning business strategy, management, marketing, public policy, and economic transformation. I enjoy understanding how organizations operate and I love gaining new and practical experiences from wherever possible. Experiences across research, content, management and analysis. From structuring ideas and studying business models to supporting conversations.',
+            achievements: [
+                'Intern at Reliance, Dainik Bhaskar, Muskurahat foundation, Club terracota.',
+                'Founder and Co-founder of Project Ilm and Badlaav ki Lehar focusing on workshops with underprivileged children.',
+                'Patent holder.'
+            ],
+            quote: '"Marketing is no longer about the stuff that you make, but about the stories you tell."',
+            image: 'url("saad jbc.jpeg")'
+        },
+        'mehaek': {
+            name: 'Mahek Zaveri',
+            designation: 'President & Secretary',
+            about: 'Some of the most defining moments in my journey began with a simple “yes.” That one word led me from being a part of the Jai Hind Business Conclave to hosting JBC 2026, and today, to serving as its President. Each experience strengthens my belief that growth begins when we choose curiosity over comfort and action over hesitation.\n\nAs I step into this role, my goal isn’t just to organize another edition of JBC but to build a legacy that inspires innovation, challenges convention, and creates opportunities for everyone who chooses to be a part of it.',
+            achievements: [
+                'President, Jai Hind Business Conclave (2027).',
+                'Host, Jai Hind Business Conclave 2026.',
+                'Secured 99.60 percentile in MAH BBA CET.',
+                'Maintained a 9.73 SGPA in BBA at Jai Hind College.',
+                'Conducted a research project on Startup Human Capital Index (HCI) and Social Capital Index (SCI), designing variables and frameworks while carrying out extensive primary research to analyse startup ecosystems.',
+                'Headed Cost Analysis for the student startup project ShareMiles, developing pricing models and financial projections.',
+                'Class Representative, FY BBA, Jai Hind College.'
+            ],
+            quote: '"Growth begins when we choose curiosity over comfort and action over hesitation."',
+            image: 'url("shruti_page-0001.jpg")'
+        },
+        'nishi': {
+            name: 'Nishi Pawar',
+            designation: 'Deputy Secretary',
+            about: 'Stepping into the role of Deputy Secretary means being the vital link that holds multiple creative and operational teams together. My focus has always been on operational excellence and ensuring that every minor detail aligns with our overarching premium brand identity.',
+            achievements: [
+                'Managed core operational workflows ensuring seamless event execution.',
+                'Coordinated across 8+ departments to maintain structural harmony.',
+                'Played a pivotal role in scaling the conclave\'s national outreach.'
+            ],
+            quote: '"Excellence is not an act, but a continuous habit of attention to detail."',
+            image: 'url("nishi.webp")'
+        },
+        'tithi': {
+            name: 'Tithi Jain',
+            designation: 'Joint Secretary Hospitality',
+            about: 'Hospitality is the invisible thread that elevates a good event to a truly premium experience. I am passionate about creating memorable, luxurious environments where guests, speakers, and delegates feel uniquely valued from the moment they step through the doors.',
+            achievements: [
+                'Curated and managed the luxury experience at Taj President for 500+ attendees.',
+                'Designed the VIP handling protocols for CEOs and industry veterans.',
+                'Ensured seamless logistical flow for all hospitality-related operations.'
+            ],
+            quote: '"Hospitality is simply an opportunity to show love and care."',
+            image: 'url("tithi.jpeg")'
+        },
+        'meesha': {
+            name: 'Meesha Rajpal',
+            designation: 'Joint Secretary Public Relations',
+            about: 'Hi, I’m Meesha. Professionally, I overthink. Unprofessionally, I also overthink. You’ll usually find me planning an event, replying to a million WhatsApp messages, or convincing someone to join my team.\n\nI believe every experience, whether big or small, contributes towards growth and progress, which is why I always try to step out of my comfort zone and explore new opportunities to learn.\n\nCommitted, dedicated, and passionate about the things I genuinely believe in, I value consistency, teamwork, and continuous self-improvement.',
+            achievements: [
+                'Arangetram completed (8 years Bharatanatyam + Master\'s degree).',
+                'FMBH & JBC Core Member (FYBBA).',
+                'Cultural Captain in High School.',
+                'Contingent Lead for Immaculata (Interschool Flagship Fest).'
+            ],
+            quote: '"Every experience, whether big or small, contributes towards growth when you step out of your comfort zone."',
+            image: 'url("meesha.PNG")'
+        },
+        'shruti': {
+            name: 'Shruti Katak',
+            designation: 'Joint Secretary Legal & Finance',
+            about: 'I’ve always been driven by a simple instinct: wherever I put my energy, I go all in. Whether I was diving hands-on into our family business, capturing memories behind a lens, or leading event teams right through school and junior college, my focus has always been on creating real value.\n\nWhen I reached university, joining the Entrepreneurship Cell was my chance to take that drive further. I jumped straight into the action running media initiatives, juggling high-pressure operations, and handling guest relations right from day one.\n\nBut the real turning point was with JBC. Onboarding two major panelists completely on my own proved what genuine ownership looks like. For me, that milestone shifted everything from working in a committee to investing in it. That’s why I stayed—to pour that momentum right back into the team, elevate the ecosystem, and ensure we don\'t just run great events, but build something legacy-worthy together.',
+            achievements: [
+                'Onboarded two major industry panelists independently for Jai Hind Business Conclave.',
+                'Ran media initiatives, high-pressure operations, and guest relations at the Entrepreneurship Cell.',
+                'Captured visual narratives while managing family business operations.',
+                'Dedicated to building legacy-worthy corporate platforms and elevating student ecosystems.'
+            ],
+            quote: '"Growth begins when we choose curiosity over comfort and shift from working in a committee to investing in it."',
+            image: 'url("mahek.jpeg")'
+        },
+        'yash': {
+            name: 'Yash Bhamery',
+            designation: 'Joint Secretary Operations',
+            about: 'Coming from a STEM background, I bring analytical thinking, structured problem-solving, and a results-driven approach. At Jai Hind College, I represented the institution as a Top 10 finalist at the All India IRM GOER 2026–27, competing against 100+ colleges nationwide. I aim to pursue my career in the Financial field and am a CFA Level I Candidate. I have contributed to the successful execution of flagship events through the Public Relations Department at Jai Hind Business Conclave and the Executions Departments of Talaash and Novus.',
+            achievements: [
+                'Top 10 Finalist at All India IRM GOER 2026–27 (competing against 100+ colleges nationwide).',
+                'CFA Level I Candidate.',
+                'Qualified the highly competitive NDA Written Examination.',
+                'Qualified IMU-CET (Merchant Navy) - AIR 6760.',
+                'Won multiple MUN and WEF competitions across JC and FY.',
+                'Emerging Debate Champion during Junior College.'
+            ],
+            quote: '"Analytical thinking and structured problem-solving bridge STEM precision with financial vision."',
+            image: 'url("yash.jpeg")'
+        },
+        // 2025 CORE TEAM (LEGACY EDITION PROFILES)
+        'hamza_2025': {
+            name: 'Hamza Bambaot',
+            designation: 'Secretary (2025 Core)',
+            about: 'Leading the Jai Hind Business Conclave 2025 edition, driving organizational growth, strategic partnerships, and delivering one of the most successful conclaves in JBC history.',
+            achievements: [
+                'Secretary, Jai Hind Business Conclave 2025.',
+                'Expanded inter-collegiate partnerships across major Mumbai institutions.',
+                'Pioneered strategic corporate alliances for national reach.'
+            ],
+            quote: '"Leadership is about empowering teams to turn vision into impact."',
+            image: 'url("speaker session final.JPEG")'
+        },
+        'karishma_2025': {
+            name: 'Karishma Peswani',
+            designation: 'Joint Secretary (2025 Core)',
+            about: 'Pivotal in managing core operations, cross-department coordination, and maintaining structural execution across all conclave events for JBC 2025.',
+            achievements: [
+                'Joint Secretary, Jai Hind Business Conclave 2025.',
+                'Coordinated operational workflows across 8+ student departments.',
+                'Maintained structural excellence throughout event planning and execution.'
+            ],
+            quote: '"Operational harmony is the foundation of every memorable event."',
+            image: 'url("Panelist final.JPEG")'
+        },
+        'sidhveer_2025': {
+            name: 'Sidhveer Wadhwa',
+            designation: 'Joint Secretary Marketing (2025 Core)',
+            about: 'Spearheaded marketing strategies, brand partnerships, and audience acquisition for the 2025 conclave, expanding delegate enrollment exponentially.',
+            achievements: [
+                'Joint Secretary Marketing, Jai Hind Business Conclave 2025.',
+                'Drove marketing campaigns reaching over 10,000+ students.',
+                'Forged strategic brand sponsorships across retail and finance.'
+            ],
+            quote: '"Strategic marketing transforms great ideas into widespread movements."',
+            image: 'url("Sidhveer Wadhwa.jpg")'
+        },
+        'sanaa_2025': {
+            name: 'Sanaa Punwani',
+            designation: 'Joint Secretary Media (2025 Core)',
+            about: 'Directed media production, creative branding, and visual storytelling across digital and physical conclave platforms during JBC 2025.',
+            achievements: [
+                'Joint Secretary Media, Jai Hind Business Conclave 2025.',
+                'Curated digital media assets and video campaigns.',
+                'Managed press releases and digital presence.'
+            ],
+            quote: '"Visual storytelling gives identity and voice to every milestone."',
+            image: 'url("Sanaa Punwani.jpg")'
+        },
+        'keravi_2025': {
+            name: 'Keravi Javeria',
+            designation: 'Joint Secretary Creatives (2025 Core)',
+            about: 'Led the creative design team, curating visual aesthetics, stage design, and branding materials for JBC 2025.',
+            achievements: [
+                'Joint Secretary Creatives, Jai Hind Business Conclave 2025.',
+                'Designed stage aesthetics and visual identity.',
+                'Supervised graphic design and editorial layouts.'
+            ],
+            quote: '"Creativity is intelligence having fun in design."',
+            image: 'url("corporate network.jpeg")'
+        },
+        'aditi_2025': {
+            name: 'Aditi Thite',
+            designation: 'Joint Secretary Events (2025 Core)',
+            about: 'Curated and executed high-impact speaker sessions, panel discussions, and inter-collegiate business competitions for JBC 2025.',
+            achievements: [
+                'Joint Secretary Events, Jai Hind Business Conclave 2025.',
+                'Managed speaker sessions with leading CEOs and investors.',
+                'Organized flagship business competitions.'
+            ],
+            quote: '"Meticulous planning and passion turn events into unforgettable experiences."',
+            image: 'url("aaditi thite")'
+        },
+        'hussain_2025': {
+            name: 'Hussain Mama Wala',
+            designation: 'Joint Secretary Operations (2025 Core)',
+            about: 'Managed ground logistics, venue setup, and operational security for the 2025 conclave.',
+            achievements: [
+                'Joint Secretary Operations, Jai Hind Business Conclave 2025.',
+                'Handled ground logistics and venue safety.',
+                'Coordinated real-time event schedules.'
+            ],
+            quote: '"Precision in operations ensures smooth execution under pressure."',
+            image: 'url("Hussain Formal photo.jpeg")'
+        },
+        'janhavi_2025': {
+            name: 'Janhavi Pokharkar',
+            designation: 'Joint Secretary Logistics (2025 Core)',
+            about: 'Overseeing supply chain, venue logistics, and hospitality infrastructure for speakers and delegates during JBC 2025.',
+            achievements: [
+                'Joint Secretary Logistics, Jai Hind Business Conclave 2025.',
+                'Managed hospitality transport and guest accommodations.',
+                'Streamlined supply chain logistics.'
+            ],
+            quote: '"Seamless logistics elevate guest comfort and event workflow."',
+            image: 'url("Janhavi Pokharkar New.jpg")'
+        },
+        'tanisha_2025': {
+            name: 'Tanisha Hemdev',
+            designation: 'Joint Secretary Operations (2025 Core)',
+            about: 'Coordinated operational workflows, volunteer management, and stage execution during JBC 2025.',
+            achievements: [
+                'Joint Secretary Operations, Jai Hind Business Conclave 2025.',
+                'Supervised volunteer teams and back-stage management.',
+                'Ensured seamless transition between sessions.'
+            ],
+            quote: '"Consistency and teamwork drive operational success."',
+            image: 'url("Tanisha Hemdev.jpg")'
+        },
+        'zara_2025': {
+            name: 'Zara Zatakia',
+            designation: 'Joint Secretary Public Relations (2025 Core)',
+            about: 'Headed public relations, media communications, and delegate engagement, expanding JBC\'s national visibility and institutional relations.',
+            achievements: [
+                'Joint Secretary Public Relations, Jai Hind Business Conclave 2025.',
+                'Handled external media communications.',
+                'Fostered student engagement across national colleges.'
+            ],
+            quote: '"Authentic relationships and strong storytelling build enduring legacy brands."',
+            image: 'url("Zara Zatakia.jpg")'
+        },
+        'husain_u_2025': {
+            name: 'Husain Udaipurwala',
+            designation: 'Joint Secretary Legal & Finance (2025 Core)',
+            about: 'Managed financial budgeting, sponsorship accounting, and legal compliance for JBC 2025.',
+            achievements: [
+                'Joint Secretary Legal & Finance, Jai Hind Business Conclave 2025.',
+                'Oversaw conclave budget auditing and legal contracts.',
+                'Ensured financial compliance across all event verticals.'
+            ],
+            quote: '"Financial integrity and legal compliance build institutional trust."',
+            image: 'url("HUSAIN ZOHAIR UDAIPURWALA.jpg")'
+        }
+    };
+
+    // Predecessor <-> Successor Interactive Mapping
+    const successorMap = {
+        'hamza_2025': { targetId: 'mehaek', label: 'View Successor: Mahek Zaveri (2026 Core) →' },
+        'karishma_2025': { targetId: 'nishi', label: 'View Successor: Nishi Pawar (2026 Core) →' },
+        'sidhveer_2025': { targetId: 'saad', label: 'View Successor: Saad Khan (2026 Core) →' },
+        'sanaa_2025': { targetId: 'siya', label: 'View Successor: Siya Raveendran (2026 Core) →' },
+        'keravi_2025': { targetId: 'siya', label: 'View Successor: Siya Raveendran (2026 Core) →' },
+        'aditi_2025': { targetId: 'ananya', label: 'View Successor: Ananya Murali (2026 Core) →' },
+        'hussain_2025': { targetId: 'yash', label: 'View Successor: Yash Bhamery (2026 Core) →' },
+        'janhavi_2025': { targetId: 'tithi', label: 'View Successor: Tithi Jain (2026 Core) →' },
+        'tanisha_2025': { targetId: 'yash', label: 'View Successor: Yash Bhamery (2026 Core) →' },
+        'zara_2025': { targetId: 'meesha', label: 'View Successor: Meesha Rajpal (2026 Core) →' },
+        'husain_u_2025': { targetId: 'shruti', label: 'View Successor: Shruti Katak (2026 Core) →' },
+
+        'mehaek': { targetId: 'hamza_2025', label: '← View Predecessor: Hamza Bambaot (2025 Core)' },
+        'nishi': { targetId: 'karishma_2025', label: '← View Predecessor: Karishma Peswani (2025 Core)' },
+        'saad': { targetId: 'sidhveer_2025', label: '← View Predecessor: Sidhveer Wadhwa (2025 Core)' },
+        'siya': { targetId: 'sanaa_2025', label: '← View Predecessor: Sanaa Punwani (2025 Core)' },
+        'ananya': { targetId: 'aditi_2025', label: '← View Predecessor: Aditi Thite (2025 Core)' },
+        'tithi': { targetId: 'janhavi_2025', label: '← View Predecessor: Janhavi Pokharkar (2025 Core)' },
+        'meesha': { targetId: 'zara_2025', label: '← View Predecessor: Zara Zatakia (2025 Core)' },
+        'shruti': { targetId: 'husain_u_2025', label: '← View Predecessor: Husain Udaipurwala (2025 Core)' },
+        'yash': { targetId: 'hussain_2025', label: '← View Predecessor: Hussain Mama Wala (2025 Core)' }
+    };
+
+    let currentOpenTeamId = null;
+
+    function populateTeamModal(teamId) {
+        if (!teamId || !teamData[teamId]) return;
+        currentOpenTeamId = teamId;
+        const data = teamData[teamId];
+        
+        document.querySelector('.team-profile-name').innerText = data.name;
+        document.querySelector('.team-profile-designation').innerText = data.designation;
+        
+        const aboutEl = document.querySelector('.team-profile-about');
+        aboutEl.style.whiteSpace = 'pre-line';
+        aboutEl.innerText = data.about;
+        
+        const achievementsContainer = document.querySelector('.team-achievements-block');
+        const achievementsList = document.querySelector('.team-profile-achievements');
+        achievementsList.innerHTML = '';
+        
+        if (data.achievements && data.achievements.length > 0) {
+            if (achievementsContainer) achievementsContainer.style.display = 'block';
+            data.achievements.forEach(ach => {
+                const li = document.createElement('li');
+                li.style.marginBottom = '0.5rem';
+                li.innerText = ach;
+                achievementsList.appendChild(li);
+            });
+        } else if (achievementsContainer) {
+            achievementsContainer.style.display = 'none';
+        }
+        
+        document.querySelector('.team-profile-quote').innerText = data.quote;
+        document.querySelector('.team-profile-image').style.backgroundImage = data.image;
+
+        // Populate Successor / Predecessor Switcher Button inside Modal
+        const successorBtn = document.getElementById('team-successor-btn');
+        const successorBlock = document.querySelector('.team-successor-block');
+        if (successorBtn && successorBlock) {
+            if (successorMap[teamId]) {
+                successorBlock.style.display = 'block';
+                successorBtn.innerText = successorMap[teamId].label;
+            } else {
+                successorBlock.style.display = 'none';
+            }
+        }
+    }
+
+    const successorBtn = document.getElementById('team-successor-btn');
+    if (successorBtn) {
+        successorBtn.addEventListener('click', () => {
+            if (currentOpenTeamId && successorMap[currentOpenTeamId]) {
+                const targetId = successorMap[currentOpenTeamId].targetId;
+                gsap.to('#team-overlay .profile-right > *', {
+                    opacity: 0,
+                    y: -15,
+                    duration: 0.3,
+                    onComplete: () => {
+                        populateTeamModal(targetId);
+                        const teamRight = teamOverlay.querySelector('.profile-right');
+                        if (teamRight) teamRight.scrollTop = 0;
+                        gsap.fromTo('#team-overlay .profile-right > *',
+                            { opacity: 0, y: 20 },
+                            { opacity: 1, y: 0, duration: 0.4, stagger: 0.06, ease: "power2.out" }
+                        );
+                    }
+                });
+            }
+        });
+    }
+
+    /* --- Team Edition Filter Tabs (2026 vs 2025) --- */
+    const editionBtns = document.querySelectorAll('.team-edition-filters .edition-btn');
+    const editorialCards = document.querySelectorAll('.editorial-grid .team-card');
+
+    editionBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            editionBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filter = btn.getAttribute('data-edition-filter');
+
+            editorialCards.forEach(card => {
+                const ed = card.getAttribute('data-edition');
+                if (ed === 'both' || ed === filter) {
+                    card.style.display = 'block';
+                    gsap.fromTo(card, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" });
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    const teamCardsList = document.querySelectorAll('.team-card');
+    
+    teamCardsList.forEach(card => {
+        card.addEventListener('click', () => {
+            const teamId = card.getAttribute('data-team');
+            if (teamId && teamData[teamId]) {
+                populateTeamModal(teamId);
+                
+                document.body.classList.add('modal-open');
+                lenis.stop();
+                
+                const teamRight = teamOverlay.querySelector('.profile-right');
+                if (teamRight) teamRight.scrollTop = 0;
+                if(teamOverlay) teamOverlay.classList.add('open');
+                
+                // Animate content in
+                gsap.fromTo('#team-overlay .profile-right > *', 
+                    { opacity: 0, y: 30 }, 
+                    { opacity: 1, y: 0, duration: 0.6, stagger: 0.08, delay: 0.2, ease: "power3.out" }
+                );
+            }
+        });
+    });
+
+    if(closeTeamProfileBtn) {
+        closeTeamProfileBtn.addEventListener('click', () => {
+            teamOverlay.classList.remove('open');
+            document.body.classList.remove('modal-open');
+            lenis.start();
+        });
+    }
+
+    /* --- Theatre & Venue Mode Lock-in Sections --- */
+    const lockInSections = document.querySelectorAll('.theatre-mode, .venue-mode');
+
+    lockInSections.forEach((section) => {
+        const wrapper = section.querySelector('.theatre-sticky-wrapper, .venue-sticky-wrapper');
+        const video = section.querySelector('video');
+
+        if (wrapper && video) {
+            ScrollTrigger.create({
+                trigger: section,
+                start: "top top",
+                end: "+=150%", // Increased duration to ensure a solid lock-in
+                pin: true,
+                onEnter: () => {
+                    wrapper.classList.add('playing');
+                    video.play().catch(err => console.log('Video play interrupted:', err));
+                },
+                onLeaveBack: () => {
+                    wrapper.classList.remove('playing');
+                    video.pause();
+                },
+                onLeave: () => {
+                    wrapper.classList.remove('playing');
+                    video.pause();
+                },
+                onEnterBack: () => {
+                    wrapper.classList.add('playing');
+                    video.play().catch(err => console.log('Video play interrupted:', err));
+                }
+            });
+        }
+    });
+
+    /* --- Core Team Grid Reveal --- */
+    const teamCards = document.querySelectorAll('.team-card');
+    
+    gsap.fromTo(teamCards, 
+        { opacity: 0, y: 50 },
+        {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: ".editorial-grid",
+                start: "top 80%"
+            }
+        }
+    );
+
+    /* --- Experience Cards Reveal --- */
+    const expCards = document.querySelectorAll('.exp-card');
+    
+    gsap.fromTo(expCards,
+        { opacity: 0, scale: 0.95 },
+        {
+            opacity: 1,
+            scale: 1,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: ".experience-cards",
+                start: "top 80%"
+            }
+        }
+    );
+
+    /* --- Industry Panelists Grid Reveal --- */
+    const panelistCards = document.querySelectorAll('.panelist-card');
+    
+    if (panelistCards.length > 0) {
+        gsap.fromTo(panelistCards, 
+            { opacity: 0, y: 40 },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                stagger: 0.08,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: ".panelists-grid",
+                    start: "top 80%"
+                }
+            }
+        );
+    }
+});
