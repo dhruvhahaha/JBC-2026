@@ -1,0 +1,9 @@
+# Netlify Redirects for JBC 2026
+/speakers.html    /#speakers    301!
+/legacy.html      /#legacy      301!
+/team.html        /#team        301!
+/about.html       /#about       301!
+/experience.html  /#experience  301!
+/partners.html    /#partners    301!
+/register.html    /#register    301!
+/faq.html         /#faq         301!

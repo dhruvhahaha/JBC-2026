@@ -3,50 +3,53 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://jaihindconclave.com/</loc>
-    <lastmod>2026-08-14</lastmod>
+    <lastmod>2026-08-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://jaihindconclave.com/speakers.html</loc>
-    <lastmod>2026-08-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://jaihindconclave.com/legacy.html</loc>
-    <lastmod>2026-08-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://jaihindconclave.com/team.html</loc>
-    <lastmod>2026-08-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://jaihindconclave.com/about.html</loc>
-    <lastmod>2026-08-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  <url>
-    <loc>https://jaihindconclave.com/experience.html</loc>
-    <lastmod>2026-08-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://jaihindconclave.com/partners.html</loc>
-    <lastmod>2026-08-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://jaihindconclave.com/register.html</loc>
-    <lastmod>2026-08-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://jaihindconclave.com/speaker%20session%20final.webp</image:loc>
+      <image:title>Jai Hind Business Conclave 2026 Keynote Session</image:title>
+      <image:caption>Keynote session at Jai Hind College Business Conclave in Mumbai</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://jaihindconclave.com/Networking.webp</image:loc>
+      <image:title>Executive Networking Lounge at JBC 2026</image:title>
+      <image:caption>Corporate delegates and students networking at Jai Hind Business Conclave</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://jaihindconclave.com/Panelist%20final.webp</image:loc>
+      <image:title>Leadership Panel Discussion JBC 2026</image:title>
+      <image:caption>Industry leaders and CEOs participating in panel discussions at Taj President Mumbai</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://jaihindconclave.com/Fire%20side%20final%20.webp</image:loc>
+      <image:title>Fireside Chat JBC</image:title>
+      <image:caption>Exclusive fireside chat with corporate executives at Jai Hind College</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://jaihindconclave.com/keki%20mistry.webp</image:loc>
+      <image:title>Mr. Keki Mistry - Keynote Speaker</image:title>
+      <image:caption>Mr. Keki Mistry, Former Vice Chairman and CEO of HDFC Ltd speaking at JBC</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://jaihindconclave.com/dharamranjan.webp</image:loc>
+      <image:title>Mr. Dharamranjan - Chief Business Officer Jio Financial Services</image:title>
+      <image:caption>Dharamranjan delivering address at Jai Hind Business Conclave</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://jaihindconclave.com/maulik%20bhansali.webp</image:loc>
+      <image:title>Mr. Maulik Bhansali - CEO Netweb Software</image:title>
+      <image:caption>Maulik Bhansali speaker profile at JBC 2026</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://jaihindconclave.com/arijit%20garg.webp</image:loc>
+      <image:title>Mr. Arijit Garg - Managing Director Nomura</image:title>
+      <image:caption>Arijit Garg speaker session at Jai Hind College</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://jaihindconclave.com/taj-president-mumbai.jpg</image:loc>
+      <image:title>Vivanta by Taj President Mumbai - JBC Venue</image:title>
+      <image:caption>Luxury convention ballroom venue for Jai Hind Business Conclave</image:caption>
+    </image:image>
   </url>
 </urlset>
