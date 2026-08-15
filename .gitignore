@@ -18,3 +18,4 @@ Thumbs.db
 
 # Logs and temporary files
 *.log
+.split_pages_backup/

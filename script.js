@@ -36,42 +36,6 @@ gsap.ticker.lagSmoothing(0);
 // Wait for DOM
 document.addEventListener('DOMContentLoaded', () => {
 
-    /* --- Custom Cursor --- */
-    const cursorDot = document.querySelector('.cursor-dot');
-    const cursorOutline = document.querySelector('.cursor-outline');
-
-    window.addEventListener('mousemove', (e) => {
-        const posX = e.clientX;
-        const posY = e.clientY;
-
-        cursorDot.style.left = `${posX}px`;
-        cursorDot.style.top = `${posY}px`;
-
-        cursorOutline.animate({
-            left: `${posX}px`,
-            top: `${posY}px`
-        }, { duration: 500, fill: "forwards" });
-    });
-
-    // Cursor hover effects on links and buttons
-    const hoverElements = document.querySelectorAll('a, button, .accordion-item, .team-card, .session-video-placeholder');
-    
-    hoverElements.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursorOutline.style.width = '60px';
-            cursorOutline.style.height = '60px';
-            cursorOutline.style.borderColor = 'var(--accent-gold)';
-            cursorDot.style.transform = 'translate(-50%, -50%) scale(1.5)';
-        });
-        
-        el.addEventListener('mouseleave', () => {
-            cursorOutline.style.width = '40px';
-            cursorOutline.style.height = '40px';
-            cursorOutline.style.borderColor = 'var(--accent-gold-dim)';
-            cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
-        });
-    });
-
     /* --- Navbar Scroll Effect --- */
     const navbar = document.querySelector('.navbar');
     
@@ -142,7 +106,33 @@ document.addEventListener('DOMContentLoaded', () => {
         duration: 0.8,
         stagger: 0.1,
         ease: "power3.out"
-    }, "-=0.5");
+    }, "-=0.5")
+    .from('.hero-stats-bar', {
+        y: 20,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        onStart: () => {
+            // Animate the stat counters
+            document.querySelectorAll('.hero-stat-number').forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const suffix = counter.getAttribute('data-suffix') || '';
+                const duration = target > 100 ? 2000 : 1200;
+                const startTime = performance.now();
+
+                function updateCounter(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    // Ease out cubic
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    const current = Math.round(eased * target);
+                    counter.textContent = current.toLocaleString() + suffix;
+                    if (progress < 1) requestAnimationFrame(updateCounter);
+                }
+                requestAnimationFrame(updateCounter);
+            });
+        }
+    }, "-=0.3");
 
     // Parallax on hero video
     gsap.to('.hero-video', {
@@ -680,7 +670,7 @@ document.addEventListener('DOMContentLoaded', () => {
             company: 'Impactsure Technologies',
             bio: 'With decades of experience across banking, financial services, and technology, Mr. Dharmarajan has been at the forefront of driving innovation, digital transformation, and sustainable growth within the financial ecosystem. Through his work, he has helped organizations navigate an evolving landscape shaped by technology, changing consumer expectations, and emerging opportunities.',
             quote: '"Innovation at the intersection of banking and technology drives sustainable growth within the financial ecosystem."',
-            image: 'url("dharamranjan.jpeg")'
+            image: 'url("dharamranjan.webp")'
         },
         'maulik': {
             name: 'Mr. Maulik Bhansali',
@@ -690,7 +680,7 @@ document.addEventListener('DOMContentLoaded', () => {
             company: 'Union Asset Management Co. Pvt. Ltd.',
             bio: 'A master of foresight in India’s investment sector. Backed by a passion for financial stability and a deep understanding of the trade-off between risk and reward, Mr. Bhansali has played a pivotal role in designing risk models that protect and empower investor capital. His dynamic approach to corporate governance and asset security has set high benchmarks for institutional resilience.',
             quote: '"Mastering the balance between risk and reward is the ultimate superpower for future leaders in their 20s."',
-            image: 'url("maulik bhansali.jpeg")'
+            image: 'url("maulik bhansali.webp")'
         },
         'arjit': {
             name: 'Mr. Arjit Garg',
@@ -700,7 +690,7 @@ document.addEventListener('DOMContentLoaded', () => {
             company: 'Equity Research & Financial Markets',
             bio: 'Known for his work in equity research, investor education, and financial markets, Arjit has developed a strong perspective on how young individuals can approach investing, decision-making, and risk management in an increasingly dynamic economic environment.',
             quote: '"Navigating financial risk early requires disciplined curiosity, structured thinking, and calculated decision-making."',
-            image: 'url("arijit garg.jpeg")'
+            image: 'url("arijit garg.webp")'
         },
         'rajat': {
             name: 'Mr. Rajat Bhatia',
@@ -710,7 +700,7 @@ document.addEventListener('DOMContentLoaded', () => {
             company: 'Four Seasons Mumbai',
             bio: 'Mr. Rajat Bhatia, known for his warmth, vision, and deep understanding of modern hospitality, has been instrumental in curating world-class guest experiences that go far beyond traditional service to create genuine human connection. With an exceptional understanding of evolving consumer aspirations and premium brand experiences, he continues to shape what meaningful luxury looks like in today’s experience-driven world.',
             quote: '"In the world of luxury, experience is the only currency that truly matters."',
-            image: 'url("rajat bhatia.jpg")'
+            image: 'url("rajat bhatia.webp")'
         },
         'annkur': {
             name: 'Ms. Annkur Khosla',
@@ -720,7 +710,7 @@ document.addEventListener('DOMContentLoaded', () => {
             company: 'Annkur Khosla Design Studio',
             bio: 'Through her work across luxury, wellness, and experiential design, Annkur has built a distinctive perspective on how spaces, stories, and experiences shape the way people connect, engage, and belong.',
             quote: '"Design is not just visual; it is how spaces, stories, and experiences evoke deep human connection and belonging."',
-            image: 'url("ankur khosla moderatior.jpeg")'
+            image: 'url("ankur khosla moderatior.webp")'
         },
         'sankalp': {
             name: 'Mr. Sankalp Kelshikar',
@@ -730,7 +720,7 @@ document.addEventListener('DOMContentLoaded', () => {
             company: 'Cityflo Buses',
             bio: 'With a vision to transform the everyday commute experience, Mr. Kelshikar has redefined urban mobility by building one of India’s most innovative and consumer-focused transportation platforms. By seamlessly combining technology, convenience, and operational efficiency, he has created a solution that continues to reshape the way modern India travels.',
             quote: '"Redefining urban mobility is about giving modern India back its most valuable asset: time."',
-            image: 'url("sankalp cityfloe.jpeg")'
+            image: 'url("sankalp cityfloe.webp")'
         },
         'sahilmakhija': {
             name: 'Sahil Makhija',
@@ -740,7 +730,7 @@ document.addEventListener('DOMContentLoaded', () => {
             company: 'Media & Entertainment',
             bio: 'Sahil Makhija is a celebrated creator, producer, and media host who leads engaging format conversations with visionaries across industries.',
             quote: '"The power of conversation lies in asking the questions everyone thinks but few dare to voice."',
-            image: 'url("sahil makhija moderator.jpeg")'
+            image: 'url("sahil makhija moderator.webp")'
         },
         'yashadvani': {
             name: 'Mr. Yash Advani',
@@ -750,7 +740,7 @@ document.addEventListener('DOMContentLoaded', () => {
             company: 'The Shalimar Hotel / Pastel',
             bio: 'Rooted in the legacy of The Shalimar Hotel, Yash represents a new generation of hospitality leaders redefining what meaningful dining experiences look like. Through thoughtfully curated concepts that combine culture, community, and modern luxury, he has created spaces that go beyond hospitality to build connection and storytelling.',
             quote: '"Hospitality builds spaces that go beyond dining to create culture, community, and storytelling."',
-            image: 'url("yash advani panelist.jpeg")'
+            image: 'url("yash advani panelist.webp")'
         },
         'simranadvani': {
             name: 'Ms. Simran Advani',
@@ -760,7 +750,7 @@ document.addEventListener('DOMContentLoaded', () => {
             company: 'Nova & Pastel Patisserie',
             bio: 'Inspired by Italy’s rich dessert culture and driven by a passion for craftsmanship, Simran transformed an unconventional journey into one of Mumbai’s most distinctive dessert ventures. Through innovation, experimentation, and an unwavering focus on quality, she has created brands that celebrate comfort, creativity, and the joy of thoughtfully crafted food.',
             quote: '"Craftsmanship transforms unconventional journeys into distinctive, joy-filled culinary brands."',
-            image: 'url("simran advani panelist.jpeg")'
+            image: 'url("simran advani panelist.webp")'
         },
         'abhijeetanand': {
             name: 'Mr. Abhijeet Anand',
@@ -770,7 +760,7 @@ document.addEventListener('DOMContentLoaded', () => {
             company: 'abcoffee',
             bio: 'With a disruptive and technology-driven approach to coffee retail, Abhijeet has built one of the country’s fastest growing café concepts by combining quality, convenience, and affordability for the modern consumer. His journey reflects bold thinking, adaptability, and a sharp understanding of changing customer behavior.',
             quote: '"Disruptive coffee retail comes from combining quality, convenience, and affordability for the modern consumer."',
-            image: 'url("abhijeet anand panelist.jpeg")'
+            image: 'url("abhijeet anand panelist.webp")'
         },
         'enrico': {
             name: 'Mr. Enrico Signorelli',
@@ -780,7 +770,7 @@ document.addEventListener('DOMContentLoaded', () => {
             company: 'MAMI Bombay',
             bio: 'With a vision rooted in authenticity, creativity, and community, Enrico has built MAMI Bombay into a brand that blends indulgent food experiences with a modern and relatable dining culture. By focusing on quality, storytelling, and customer connection, he has created a space that resonates strongly with today’s generation of food lovers.',
             quote: '"Authenticity and storytelling create dining experiences that deeply resonate with today’s generation of food lovers."',
-            image: 'url("enrico panelist.jpeg")'
+            image: 'url("enrico panelist.webp")'
         },
         'shloksavjani': {
             name: 'Mr. Shlok Savjani',
@@ -790,7 +780,7 @@ document.addEventListener('DOMContentLoaded', () => {
             company: 'Maroosh',
             bio: 'Representing one of Mumbai’s most loved culinary brands, Shlok has played a key role in evolving Maroosh while staying true to the authenticity and flavors that built its loyal community. By blending tradition with changing consumer preferences, he continues to shape dining experiences that resonate with today’s audience.',
             quote: '"Evolving a heritage brand requires blending authentic legacy flavors with changing consumer preferences."',
-            image: 'url("shlok savjani panelist.jpeg")'
+            image: 'url("shlok savjani panelist.webp")'
         },
         'vikkhatwani': {
             name: 'Mr. Vik Khatwani',
@@ -800,7 +790,7 @@ document.addEventListener('DOMContentLoaded', () => {
             company: 'Earth Café',
             bio: 'Leaving behind a successful career in jewelry manufacturing, Vik transformed a personal philosophy into one of Mumbai’s most recognized plant-based and gluten-free café brands. Through sustainable practices, mindful innovation, and a strong community-first approach, he has redefined what modern wellness hospitality can look like.',
             quote: '"Mindful innovation and plant-based hospitality can redefine wellness for modern India."',
-            image: 'url("vik khatwani panelist.jpeg")'
+            image: 'url("vik khatwani panelist.webp")'
         },
         'ishaanbahl': {
             name: 'Mr. Ishaan Bahl',
@@ -810,7 +800,7 @@ document.addEventListener('DOMContentLoaded', () => {
             company: '145 Mumbai / Chrome Hospitality',
             bio: 'Ishaan Bahl is a trailblazing restaurateur and hospitality entrepreneur responsible for creating iconic social dining spaces like 145 Mumbai and leading Chrome Hospitality’s expansion into luxury dining.',
             quote: '"Modern hospitality builds spaces that feel like culture hubs, not just restaurants."',
-            image: 'url("ishaan bahl panelist.jpeg")'
+            image: 'url("ishaan bahl panelist.webp")'
         }
     };
 
@@ -878,11 +868,95 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    if (closeProfileBtn) {
-        closeProfileBtn.addEventListener('click', () => {
+    // Close speaker profile overlay
+    const speakerCloseBtns = document.querySelectorAll('.close-speaker-profile, .close-profile');
+    speakerCloseBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (speakerOverlay) speakerOverlay.classList.remove('open');
+            document.body.classList.remove('modal-open');
+            if (typeof lenis !== 'undefined' && lenis) lenis.start();
+        });
+    });
+
+    // Escape key to close speaker overlay
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && speakerOverlay && speakerOverlay.classList.contains('open')) {
             speakerOverlay.classList.remove('open');
             document.body.classList.remove('modal-open');
-            lenis.start();
+            if (typeof lenis !== 'undefined' && lenis) lenis.start();
+        }
+    });
+
+    /* --- Speaker Clips Video Modal --- */
+    const clipModal = document.getElementById('clip-video-modal');
+    const clipVideo = document.getElementById('clip-modal-video');
+    const clipModalClose = document.getElementById('clip-modal-close');
+    const clipCards = document.querySelectorAll('.clip-card');
+
+    // Mark cards with no video source
+    if (clipCards) {
+        clipCards.forEach(card => {
+            const src = card.getAttribute('data-video-src');
+            if (!src) card.classList.add('no-video');
+        });
+    }
+
+    // Open clip modal
+    if (clipCards && clipModal && clipVideo) {
+        clipCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const videoSrc = card.getAttribute('data-video-src');
+                if (!videoSrc) return; // No video attached yet
+
+                clipVideo.querySelector('source').setAttribute('src', videoSrc);
+                clipVideo.load();
+                clipModal.classList.add('active');
+                document.body.classList.add('modal-open');
+                if (typeof lenis !== 'undefined' && lenis) lenis.stop();
+                clipVideo.play();
+            });
+        });
+    }
+
+    // Close clip modal
+    function closeClipModal() {
+        if (clipModal) clipModal.classList.remove('active');
+        if (clipVideo) {
+            clipVideo.pause();
+            clipVideo.currentTime = 0;
+        }
+        document.body.classList.remove('modal-open');
+        if (typeof lenis !== 'undefined' && lenis) lenis.start();
+    }
+
+    if (clipModalClose) clipModalClose.addEventListener('click', closeClipModal);
+    if (clipModal) {
+        clipModal.addEventListener('click', (e) => {
+            if (e.target === clipModal) closeClipModal();
+        });
+    }
+
+    // Escape key closes clip modal
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && clipModal && clipModal.classList.contains('active')) {
+            closeClipModal();
+        }
+    });
+
+    // GSAP entrance animation for clip cards
+    const clipSection = document.querySelector('.speaker-clips-section');
+    if (clipSection && typeof ScrollTrigger !== 'undefined' && document.querySelectorAll('.clip-card').length > 0) {
+        gsap.from('.clip-card', {
+            scrollTrigger: {
+                trigger: '.speaker-clips-section',
+                start: 'top 85%',
+                once: true
+            },
+            y: 40,
+            opacity: 0,
+            duration: 0.7,
+            stagger: 0.1,
+            ease: 'power3.out'
         });
     }
 
@@ -1019,7 +1093,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Deeply committed to empowering students with creativity, confidence, and innovation.'
             ],
             quote: '"Empowering people with creativity, confidence, and innovation drives true leadership."',
-            image: 'url("Rakhi maam.jpeg")'
+            image: 'url("Rakhi maam.webp")'
         },
         'prateek': {
             name: 'Mr. Prateek Kumar',
@@ -1032,7 +1106,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Instrumental in bridging the gap between higher education and corporate industry.'
             ],
             quote: '"Bridging education and industry empowers students to build real-world business frameworks."',
-            image: 'url("Prateek kumar sir.jpeg")'
+            image: 'url("Prateek kumar sir.webp")'
         },
         'siya': {
             name: 'Siya Raveendran',
@@ -1045,7 +1119,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Driven by a strong commitment to producing impactful and highly memorable work.'
             ],
             quote: '"Design is the silent ambassador of your brand."',
-            image: 'url("siya.PNG")'
+            image: 'url("siya.webp")'
         },
         'ananya': {
             name: 'Ananya Murali',
@@ -1058,7 +1132,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Passionate about leadership, collaboration, and creating meaningful experiences through creativity and communication.'
             ],
             quote: '"Great events are not just planned, they are crafted with passion."',
-            image: 'url("ananya.jpeg")'
+            image: 'url("ananya.webp")'
         },
         'saad': {
             name: 'Saad Khan',
@@ -1070,7 +1144,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Patent holder.'
             ],
             quote: '"Marketing is no longer about the stuff that you make, but about the stories you tell."',
-            image: 'url("saad jbc.jpeg")'
+            image: 'url("saad jbc.webp")'
         },
         'mehaek': {
             name: 'Mahek Zaveri',
@@ -1086,7 +1160,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Class Representative, FY BBA, Jai Hind College.'
             ],
             quote: '"Growth begins when we choose curiosity over comfort and action over hesitation."',
-            image: 'url("shruti_page-0001.jpg")'
+            image: 'url("shruti_page-0001.webp")'
         },
         'nishi': {
             name: 'Nishi Pawar',
@@ -1110,7 +1184,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Ensured seamless logistical flow for all hospitality-related operations.'
             ],
             quote: '"Hospitality is simply an opportunity to show love and care."',
-            image: 'url("tithi.jpeg")'
+            image: 'url("tithi.webp")'
         },
         'meesha': {
             name: 'Meesha Rajpal',
@@ -1123,7 +1197,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Contingent Lead for Immaculata (Interschool Flagship Fest).'
             ],
             quote: '"Every experience, whether big or small, contributes towards growth when you step out of your comfort zone."',
-            image: 'url("meesha.PNG")'
+            image: 'url("meesha.webp")'
         },
         'shruti': {
             name: 'Shruti Katak',
@@ -1136,7 +1210,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Dedicated to building legacy-worthy corporate platforms and elevating student ecosystems.'
             ],
             quote: '"Growth begins when we choose curiosity over comfort and shift from working in a committee to investing in it."',
-            image: 'url("mahek.jpeg")'
+            image: 'url("mahek.webp")'
         },
         'yash': {
             name: 'Yash Bhamery',
@@ -1151,7 +1225,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Emerging Debate Champion during Junior College.'
             ],
             quote: '"Analytical thinking and structured problem-solving bridge STEM precision with financial vision."',
-            image: 'url("yash.jpeg")'
+            image: 'url("yash.webp")'
         },
         // 2025 CORE TEAM (LEGACY EDITION PROFILES)
         'hamza_2025': {
@@ -1164,7 +1238,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Pioneered strategic corporate alliances for national reach.'
             ],
             quote: '"Leadership is about empowering teams to turn vision into impact."',
-            image: 'url("speaker session final.JPEG")'
+            image: 'url("speaker session final.webp")'
         },
         'karishma_2025': {
             name: 'Karishma Peswani',
@@ -1176,7 +1250,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Maintained structural excellence throughout event planning and execution.'
             ],
             quote: '"Operational harmony is the foundation of every memorable event."',
-            image: 'url("Panelist final.JPEG")'
+            image: 'url("Panelist final.webp")'
         },
         'sidhveer_2025': {
             name: 'Sidhveer Wadhwa',
@@ -1188,7 +1262,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Forged strategic brand sponsorships across retail and finance.'
             ],
             quote: '"Strategic marketing transforms great ideas into widespread movements."',
-            image: 'url("Sidhveer Wadhwa.jpg")'
+            image: 'url("Sidhveer Wadhwa.webp")'
         },
         'sanaa_2025': {
             name: 'Sanaa Punwani',
@@ -1200,7 +1274,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Managed press releases and digital presence.'
             ],
             quote: '"Visual storytelling gives identity and voice to every milestone."',
-            image: 'url("Sanaa Punwani.jpg")'
+            image: 'url("Sanaa Punwani.webp")'
         },
         'keravi_2025': {
             name: 'Keravi Javeria',
@@ -1212,7 +1286,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Supervised graphic design and editorial layouts.'
             ],
             quote: '"Creativity is intelligence having fun in design."',
-            image: 'url("corporate network.jpeg")'
+            image: 'url("corporate network.webp")'
         },
         'aditi_2025': {
             name: 'Aditi Thite',
@@ -1236,7 +1310,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Coordinated real-time event schedules.'
             ],
             quote: '"Precision in operations ensures smooth execution under pressure."',
-            image: 'url("Hussain Formal photo.jpeg")'
+            image: 'url("Hussain Formal photo.webp")'
         },
         'janhavi_2025': {
             name: 'Janhavi Pokharkar',
@@ -1248,7 +1322,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Streamlined supply chain logistics.'
             ],
             quote: '"Seamless logistics elevate guest comfort and event workflow."',
-            image: 'url("Janhavi Pokharkar New.jpg")'
+            image: 'url("Janhavi Pokharkar New.webp")'
         },
         'tanisha_2025': {
             name: 'Tanisha Hemdev',
@@ -1260,7 +1334,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Ensured seamless transition between sessions.'
             ],
             quote: '"Consistency and teamwork drive operational success."',
-            image: 'url("Tanisha Hemdev.jpg")'
+            image: 'url("Tanisha Hemdev.webp")'
         },
         'zara_2025': {
             name: 'Zara Zatakia',
@@ -1272,7 +1346,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Fostered student engagement across national colleges.'
             ],
             quote: '"Authentic relationships and strong storytelling build enduring legacy brands."',
-            image: 'url("Zara Zatakia.jpg")'
+            image: 'url("Zara Zatakia.webp")'
         },
         'husain_u_2025': {
             name: 'Husain Udaipurwala',
@@ -1284,7 +1358,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Ensured financial compliance across all event verticals.'
             ],
             quote: '"Financial integrity and legal compliance build institutional trust."',
-            image: 'url("HUSAIN ZOHAIR UDAIPURWALA.jpg")'
+            image: 'url("HUSAIN ZOHAIR UDAIPURWALA.webp")'
         }
     };
 
@@ -1506,23 +1580,213 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     );
 
-    /* --- Industry Panelists Grid Reveal --- */
-    const panelistCards = document.querySelectorAll('.panelist-card');
-    
-    if (panelistCards.length > 0) {
-        gsap.fromTo(panelistCards, 
-            { opacity: 0, y: 40 },
-            {
-                opacity: 1,
-                y: 0,
-                duration: 0.8,
-                stagger: 0.08,
-                ease: "power2.out",
-                scrollTrigger: {
-                    trigger: ".panelists-grid",
-                    start: "top 80%"
+    /* --- SEO FAQ Accordion Functionality --- */
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        const questionBtn = item.querySelector('.faq-question');
+        if (questionBtn) {
+            questionBtn.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                // Close other items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                        const otherBtn = otherItem.querySelector('.faq-question');
+                        if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+                    }
+                });
+                // Toggle current item
+                if (isActive) {
+                    item.classList.remove('active');
+                    questionBtn.setAttribute('aria-expanded', 'false');
+                } else {
+                    item.classList.add('active');
+                    questionBtn.setAttribute('aria-expanded', 'true');
+                }
+                
+                // Recalculate ScrollTrigger measurements
+                setTimeout(() => {
+                    if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+                }, 400);
+            });
+        }
+    });
+    /* --- Active Nav Link Highlighting via ScrollTrigger --- */
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section[id]');
+
+    sections.forEach(section => {
+        ScrollTrigger.create({
+            trigger: section,
+            start: 'top 40%',
+            end: 'bottom 40%',
+            onToggle: self => {
+                if (self.isActive) {
+                    const sectionId = section.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
                 }
             }
-        );
+        });
+    });
+
+    // Clear active state when scrolled to top (hero)
+    ScrollTrigger.create({
+        trigger: '.hero',
+        start: 'top top',
+        end: 'bottom 40%',
+        onEnter: () => navLinks.forEach(l => l.classList.remove('active')),
+        onEnterBack: () => navLinks.forEach(l => l.classList.remove('active'))
+    });
+
+    /* --- Mobile Menu Hamburger Toggle with X Animation --- */
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinksContainer = document.querySelector('.nav-links');
+
+    if (menuToggle && navLinksContainer) {
+        function toggleMobileMenu() {
+            menuToggle.classList.toggle('active');
+            navLinksContainer.classList.toggle('active');
+            const isOpen = menuToggle.classList.contains('active');
+            menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        }
+
+        menuToggle.addEventListener('click', toggleMobileMenu);
+
+        // Keyboard: Enter and Space activate the hamburger
+        menuToggle.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleMobileMenu();
+            }
+        });
+
+        // Close mobile menu when a nav link is clicked
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (navLinksContainer.classList.contains('active')) {
+                    menuToggle.classList.remove('active');
+                    navLinksContainer.classList.remove('active');
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
     }
+
+    /* --- Lazy Loading Background Images (IntersectionObserver) --- */
+    // Convert below-fold inline background-images to deferred loading
+    const lazyTargetSelectors = '.clip-thumbnail, .exp-img, .orbiting-photo-cube, .taj-media-card, .cinematic-crop';
+    const lazyTargets = document.querySelectorAll(lazyTargetSelectors);
+
+    if (lazyTargets.length > 0 && 'IntersectionObserver' in window) {
+        lazyTargets.forEach(el => {
+            const inlineBg = el.style.backgroundImage;
+            if (inlineBg && inlineBg !== 'none') {
+                el.setAttribute('data-lazy-bg', inlineBg);
+                el.style.backgroundImage = 'none';
+                el.style.backgroundColor = 'rgba(15, 15, 20, 0.6)';
+            }
+        });
+
+        const lazyObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const bgVal = el.getAttribute('data-lazy-bg');
+                    if (bgVal) {
+                        el.style.backgroundImage = bgVal;
+                        el.style.backgroundColor = '';
+                        el.removeAttribute('data-lazy-bg');
+                        el.style.transition = 'opacity 0.5s ease';
+                    }
+                    lazyObserver.unobserve(el);
+                }
+            });
+        }, {
+            rootMargin: '300px 0px',
+            threshold: 0.01
+        });
+
+        lazyTargets.forEach(el => {
+            if (el.hasAttribute('data-lazy-bg')) {
+                lazyObserver.observe(el);
+            }
+        });
+    }
+
+    /* --- Keyboard Accessibility: Make interactive non-button elements focusable --- */
+    // Accordion speaker items
+    document.querySelectorAll('.accordion-item').forEach(item => {
+        item.setAttribute('tabindex', '0');
+        item.setAttribute('role', 'button');
+        const speakerName = item.querySelector('.speaker-surname');
+        if (speakerName) {
+            item.setAttribute('aria-label', `View ${speakerName.textContent} speaker profile`);
+        }
+        item.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                item.click();
+            }
+        });
+    });
+
+    // Team cards
+    document.querySelectorAll('.team-card').forEach(card => {
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'button');
+        const name = card.querySelector('.team-name');
+        if (name) {
+            card.setAttribute('aria-label', `View ${name.textContent} profile`);
+        }
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                card.click();
+            }
+        });
+    });
+
+    // Experience cards
+    document.querySelectorAll('.exp-card').forEach(card => {
+        card.setAttribute('tabindex', '0');
+        const title = card.querySelector('h3');
+        if (title) card.setAttribute('aria-label', title.textContent);
+    });
+
+    // Clip cards
+    document.querySelectorAll('.clip-card').forEach(card => {
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'button');
+        const name = card.querySelector('.clip-speaker-name');
+        if (name) {
+            card.setAttribute('aria-label', `Play clip: ${name.textContent}`);
+        }
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                card.click();
+            }
+        });
+    });
+
+    // Session filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.setAttribute('role', 'tab');
+    });
+
+    // Slot navigation buttons
+    const slotPrev = document.getElementById('slot-prev');
+    const slotNext = document.getElementById('slot-next');
+    if (slotPrev) slotPrev.setAttribute('tabindex', '0');
+    if (slotNext) slotNext.setAttribute('tabindex', '0');
+
+    // Refresh ScrollTrigger when all fonts and assets load
+    window.addEventListener('load', () => {
+        if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+    });
 });
