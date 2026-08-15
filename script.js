@@ -1298,7 +1298,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Organized flagship business competitions.'
             ],
             quote: '"Meticulous planning and passion turn events into unforgettable experiences."',
-            image: 'url("aaditi thite")'
+            image: 'url("aaditi thite.webp")'
         },
         'hussain_2025': {
             name: 'Hussain Mama Wala',
