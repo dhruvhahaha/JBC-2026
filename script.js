@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .set('.main-titles', { display: 'block', opacity: 1 })
     // Reveal main title lines
     .from('.title-line', {
-        y: 100,
+        y: 40,
         opacity: 0,
         duration: 1.2,
         stagger: 0.2,
@@ -244,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(212, 175, 55, ${this.alpha})`;
+                ctx.fillStyle = `rgba(204, 0, 0, ${this.alpha * 0.7})`;
                 ctx.fill();
             }
         }
@@ -277,7 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(212, 175, 55, ${lineAlpha})`;
+                        ctx.strokeStyle = `rgba(204, 0, 0, ${lineAlpha * 1.2})`;
                         ctx.lineWidth = 0.8;
                         ctx.stroke();
                     }
@@ -392,7 +392,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     this.y = (Math.random() - 0.5) * mh * 2.2;
                     this.z = Math.random() * 1200 + 1;
                     this.size = Math.random() * 1.8 + 0.6;
-                    this.isCrimson = Math.random() < 0.22; // 22% JBC Crimson, 78% Gold/Ivory
+                    this.isCrimson = Math.random() < 0.75; // 75% JBC Crimson, 25% Soft Charcoal Accent
                     this.speed = Math.random() * 0.4 + 0.2;
                 }
 
@@ -419,8 +419,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         ctx.beginPath();
                         ctx.arc(px, py, radius, 0, Math.PI * 2);
                         ctx.fillStyle = this.isCrimson 
-                            ? `rgba(204, 0, 0, ${alpha})` 
-                            : `rgba(212, 175, 55, ${alpha})`;
+                            ? `rgba(204, 0, 0, ${alpha * 0.85})` 
+                            : `rgba(30, 30, 35, ${alpha * 0.25})`;
                         ctx.fill();
                     }
                 }
@@ -489,11 +489,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const isFinale = yearAttr === 'finale';
 
             if (!isFinale) {
-                // Phase 1: Enter from deep space (-4500px -> 0px) with architectural camera movement
+                // Phase 1: Enter from perspective depth (-2000px -> 0px)
                 museumTL.fromTo(chapter,
-                    { transform: 'translate3d(-50%, -50%, -4500px)', opacity: 0, filter: 'blur(12px)' },
+                    { transform: 'translate3d(-50%, -50%, -2000px) scale(0.75)', opacity: 0, filter: 'blur(10px)' },
                     {
-                        transform: 'translate3d(-50%, -50%, 0px)',
+                        transform: 'translate3d(-50%, -50%, 0px) scale(1)',
                         opacity: 1,
                         filter: 'blur(0px)',
                         duration: 1.4,
@@ -507,7 +507,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const pRight = chapter.querySelector('.panel-right');
                     if (pLeft && pRight) {
                         museumTL.fromTo([pLeft, pRight],
-                            { opacity: 0, scale: 0.8 },
+                            { opacity: 0, scale: 0.85 },
                             { opacity: 1, scale: 1, duration: 0.8, ease: "power2.out" },
                             "-=0.6"
                         );
@@ -516,7 +516,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const photoCubes = chapter.querySelectorAll('.orbiting-photo-cube');
                     if (photoCubes.length > 0) {
                         museumTL.fromTo(photoCubes,
-                            { opacity: 0, scale: 0.5 },
+                            { opacity: 0, scale: 0.7 },
                             { opacity: 1, scale: 1, stagger: 0.1, duration: 1.0, ease: "power2.out" },
                             "-=0.8"
                         );
@@ -525,34 +525,34 @@ document.addEventListener('DOMContentLoaded', () => {
                     const tajCard = chapter.querySelector('.taj-media-card');
                     if (tajCard) {
                         museumTL.fromTo(tajCard,
-                            { opacity: 0, y: 40 },
+                            { opacity: 0, y: 30 },
                             { opacity: 1, y: 0, duration: 1.0, ease: "power2.out" },
                             "-=0.8"
                         );
                     }
                 }
 
-                // Phase 2: Hold & view milestone
-                museumTL.to(chapter, { transform: 'translate3d(-50%, -50%, 180px)', duration: 1.0, ease: "none" })
+                // Phase 2: Hold & comfortably view milestone in focus
+                museumTL.to(chapter, { transform: 'translate3d(-50%, -50%, 40px) scale(1)', duration: 1.1, ease: "none" })
 
-                // Phase 3: Exit past camera lens into darkness
+                // Phase 3: Controlled smooth exit without screen collision
                 .to(chapter,
                     {
-                        transform: 'translate3d(-50%, -50%, 1500px)',
+                        transform: 'translate3d(-50%, -52%, 260px) scale(1.06)',
                         opacity: 0,
-                        filter: 'blur(16px)',
-                        duration: 1.2,
+                        filter: 'blur(8px)',
+                        duration: 1.1,
                         ease: "power2.in"
                     },
-                    "-=0.2"
+                    "-=0.1"
                 );
 
             } else {
                 // Finale Monolith Node: 180° Monolith Flip & Light Beam Portal Activation
                 museumTL.fromTo(chapter,
-                    { transform: 'translate3d(-50%, -50%, -4000px)', opacity: 0, filter: 'blur(12px)' },
+                    { transform: 'translate3d(-50%, -50%, -2000px) scale(0.75)', opacity: 0, filter: 'blur(10px)' },
                     {
-                        transform: 'translate3d(-50%, -50%, 0px)',
+                        transform: 'translate3d(-50%, -50%, 0px) scale(1)',
                         opacity: 1,
                         filter: 'blur(0px)',
                         duration: 1.4,
@@ -585,10 +585,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
 
-                // Fly directly through the portal into #speakers section
+                // Fly smoothly into next section
                 museumTL.to(chapter, {
-                    transform: 'translate3d(-50%, -50%, 1800px)',
+                    transform: 'translate3d(-50%, -52%, 350px) scale(1.1)',
                     opacity: 0,
+                    filter: 'blur(10px)',
                     duration: 1.2,
                     ease: "power2.in"
                 });
@@ -887,38 +888,155 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    /* --- Speaker Clips Video Modal --- */
+    /* --- Speaker Clips 3D Center-Stage Carousel --- */
     const clipModal = document.getElementById('clip-video-modal');
     const clipVideo = document.getElementById('clip-modal-video');
     const clipModalClose = document.getElementById('clip-modal-close');
-    const clipCards = document.querySelectorAll('.clip-card');
+    const clipsStage = document.getElementById('clips-carousel-stage');
+    const clipCards = Array.from(document.querySelectorAll('.clip-card'));
+    const clipsPrevBtn = document.getElementById('clips-prev');
+    const clipsNextBtn = document.getElementById('clips-next');
+    const dockPrevBtn = document.getElementById('dock-prev-btn');
+    const dockNextBtn = document.getElementById('dock-next-btn');
+    const clipsPagination = document.getElementById('clips-pagination');
 
-    // Mark cards with no video source
-    if (clipCards) {
-        clipCards.forEach(card => {
-            const src = card.getAttribute('data-video-src');
-            if (!src) card.classList.add('no-video');
-        });
-    }
+    if (clipsStage && clipCards.length > 0) {
+        let currentClipIndex = 0;
+        const totalClips = clipCards.length;
+        let autoplayTimer = null;
 
-    // Open clip modal
-    if (clipCards && clipModal && clipVideo) {
-        clipCards.forEach(card => {
-            card.addEventListener('click', () => {
-                const videoSrc = card.getAttribute('data-video-src');
-                if (!videoSrc) return; // No video attached yet
+        // Create pagination dots
+        if (clipsPagination) {
+            clipsPagination.innerHTML = '';
+            clipCards.forEach((_, idx) => {
+                const dot = document.createElement('button');
+                dot.className = `clips-dot ${idx === 0 ? 'active' : ''}`;
+                dot.setAttribute('aria-label', `Go to clip ${idx + 1}`);
+                dot.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    updateCarousel(idx);
+                });
+                clipsPagination.appendChild(dot);
+            });
+        }
 
-                clipVideo.querySelector('source').setAttribute('src', videoSrc);
-                clipVideo.load();
-                clipModal.classList.add('active');
-                document.body.classList.add('modal-open');
-                if (typeof lenis !== 'undefined' && lenis) lenis.stop();
-                clipVideo.play();
+        function updateCarousel(newIndex) {
+            currentClipIndex = (newIndex + totalClips) % totalClips;
+
+            clipCards.forEach((card, idx) => {
+                // Calculate shortest distance in circular array
+                let diff = idx - currentClipIndex;
+                if (diff > totalClips / 2) diff -= totalClips;
+                if (diff < -totalClips / 2) diff += totalClips;
+
+                // Reset positioning classes
+                card.classList.remove('active', 'prev', 'next', 'far-prev', 'far-next');
+
+                if (diff === 0) {
+                    card.classList.add('active');
+                } else if (diff === -1) {
+                    card.classList.add('prev');
+                } else if (diff === 1) {
+                    card.classList.add('next');
+                } else if (diff < -1) {
+                    card.classList.add('far-prev');
+                } else if (diff > 1) {
+                    card.classList.add('far-next');
+                }
+            });
+
+            // Update pagination dots
+            if (clipsPagination) {
+                const dots = clipsPagination.querySelectorAll('.clips-dot');
+                dots.forEach((dot, idx) => {
+                    dot.classList.toggle('active', idx === currentClipIndex);
+                });
+            }
+        }
+
+        // Card Click Handler: Side card rotates to center; Active center card opens video modal
+        clipCards.forEach((card, idx) => {
+            card.addEventListener('click', (e) => {
+                if (idx !== currentClipIndex) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    updateCarousel(idx);
+                } else {
+                    // Center active card clicked - open video if available
+                    const videoSrc = card.getAttribute('data-video-src');
+                    if (videoSrc && clipModal && clipVideo) {
+                        clipVideo.querySelector('source').setAttribute('src', videoSrc);
+                        clipVideo.load();
+                        clipModal.classList.add('active');
+                        document.body.classList.add('modal-open');
+                        if (typeof lenis !== 'undefined' && lenis) lenis.stop();
+                        clipVideo.play();
+                    }
+                }
             });
         });
+
+        // Prev / Next Button Listeners (Floating & Dock)
+        function handlePrev(e) {
+            if (e) e.stopPropagation();
+            updateCarousel(currentClipIndex - 1);
+        }
+
+        function handleNext(e) {
+            if (e) e.stopPropagation();
+            updateCarousel(currentClipIndex + 1);
+        }
+
+        if (clipsPrevBtn) clipsPrevBtn.addEventListener('click', handlePrev);
+        if (clipsNextBtn) clipsNextBtn.addEventListener('click', handleNext);
+        if (dockPrevBtn) dockPrevBtn.addEventListener('click', handlePrev);
+        if (dockNextBtn) dockNextBtn.addEventListener('click', handleNext);
+
+        // Swipe & Touch Gestures
+        let touchStartX = 0;
+        let touchEndX = 0;
+        clipsStage.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        clipsStage.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 45) {
+                if (diff > 0) {
+                    updateCarousel(currentClipIndex + 1);
+                } else {
+                    updateCarousel(currentClipIndex - 1);
+                }
+            }
+        }, { passive: true });
+
+        // Autoplay Loop with Pause on Hover
+        function startAutoplay() {
+            if (autoplayTimer) clearInterval(autoplayTimer);
+            autoplayTimer = setInterval(() => {
+                updateCarousel(currentClipIndex + 1);
+            }, 5000);
+        }
+
+        function stopAutoplay() {
+            if (autoplayTimer) {
+                clearInterval(autoplayTimer);
+                autoplayTimer = null;
+            }
+        }
+
+        const clipsWrapper = document.querySelector('.clips-carousel-wrapper');
+        if (clipsWrapper) {
+            clipsWrapper.addEventListener('mouseenter', stopAutoplay);
+            clipsWrapper.addEventListener('mouseleave', startAutoplay);
+        }
+
+        startAutoplay();
+        updateCarousel(0);
     }
 
-    // Close clip modal
+    // Close video clip modal
     function closeClipModal() {
         if (clipModal) clipModal.classList.remove('active');
         if (clipVideo) {
@@ -936,143 +1054,156 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Escape key closes clip modal
+    // Escape key closes video modal
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && clipModal && clipModal.classList.contains('active')) {
             closeClipModal();
         }
     });
 
-    // GSAP entrance animation for clip cards
+    // GSAP entrance animation for clip carousel wrapper
     const clipSection = document.querySelector('.speaker-clips-section');
-    if (clipSection && typeof ScrollTrigger !== 'undefined' && document.querySelectorAll('.clip-card').length > 0) {
-        gsap.from('.clip-card', {
+    if (clipSection && typeof ScrollTrigger !== 'undefined') {
+        gsap.from('.clips-carousel-wrapper', {
             scrollTrigger: {
                 trigger: '.speaker-clips-section',
-                start: 'top 85%',
+                start: 'top 80%',
                 once: true
             },
             y: 40,
             opacity: 0,
-            duration: 0.7,
-            stagger: 0.1,
+            duration: 0.8,
             ease: 'power3.out'
         });
     }
 
-    /* --- 5-Slot Interactive Viewport Accordion --- */
+    /* --- Speakers Section: Single-Line Horizontal Carousel --- */
     const accordionTrack = document.getElementById('horizontal-accordion');
-    const accordionViewport = document.getElementById('accordion-viewport');
-    const accordionItems = document.querySelectorAll('.speakers-hall .accordion-item');
-    const prevBtn = document.getElementById('slot-prev');
-    const nextBtn = document.getElementById('slot-next');
+    const slotPrevBtn = document.getElementById('slot-prev');
+    const slotNextBtn = document.getElementById('slot-next');
 
-    let currentOffset = 0;
-    const itemWidth = 193; // 180px width + 13px gap
+    if (accordionTrack) {
+        gsap.set(accordionTrack, { clearProps: "x,transform" });
 
-    function slideToOffset(offset) {
-        if (!accordionTrack || !accordionViewport) return;
-        const visibleItems = Array.from(accordionItems).filter(item => item.style.display !== 'none');
-        const maxScroll = Math.max(0, (visibleItems.length * itemWidth) - accordionViewport.clientWidth + 360);
-        
-        currentOffset = Math.max(0, Math.min(offset, maxScroll));
-        gsap.to(accordionTrack, {
-            x: -currentOffset,
-            duration: 0.6,
-            ease: "power2.out"
+        // Prev & Next Horizontal Navigation Buttons
+        if (slotPrevBtn) {
+            slotPrevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                accordionTrack.scrollBy({ left: -380, behavior: 'smooth' });
+            });
+        }
+        if (slotNextBtn) {
+            slotNextBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                accordionTrack.scrollBy({ left: 380, behavior: 'smooth' });
+            });
+        }
+
+        // Drag to Scroll Physics
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        let isDragging = false;
+
+        accordionTrack.addEventListener('mousedown', (e) => {
+            isDown = true;
+            isDragging = false;
+            startX = e.pageX - accordionTrack.offsetLeft;
+            scrollLeft = accordionTrack.scrollLeft;
+        });
+
+        accordionTrack.addEventListener('mouseleave', () => {
+            isDown = false;
+        });
+
+        accordionTrack.addEventListener('mouseup', () => {
+            isDown = false;
+        });
+
+        accordionTrack.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - accordionTrack.offsetLeft;
+            const walk = (x - startX) * 1.5;
+            if (Math.abs(walk) > 5) isDragging = true;
+            accordionTrack.scrollLeft = scrollLeft - walk;
         });
     }
 
-    function makeCardVisible(item) {
-        if (!accordionTrack || !accordionViewport) return;
-        const visibleItems = Array.from(accordionItems).filter(i => i.style.display !== 'none');
-        const index = visibleItems.indexOf(item);
-        if (index === -1) return;
+    function openSpeakerModal(speakerId) {
+        const data = speakerData[speakerId];
+        if (data && speakerOverlay) {
+            const rolePill = document.querySelector('.profile-role-pill');
+            const sessionPill = document.querySelector('.profile-session-pill');
+            const nameEl = document.querySelector('.profile-name');
+            const desigEl = document.querySelector('.profile-designation');
+            const compEl = document.querySelector('.profile-company');
+            const bioEl = document.querySelector('#speaker-overlay .bio-text');
+            const quoteEl = document.querySelector('.modal-speaker-quote');
+            const imgContainer = document.querySelector('#speaker-overlay .profile-image-container');
 
-        const expandedWidth = 540;
-        const step = 193; // 180px width + 13px gap
-        const viewportWidth = accordionViewport.clientWidth;
-        const cardStartX = index * step;
-        const cardEndX = cardStartX + expandedWidth;
-        const buffer = 30;
+            if (rolePill) rolePill.innerText = data.role;
+            if (sessionPill) sessionPill.innerText = `SESSION: ${data.session.toUpperCase()}`;
+            if (nameEl) nameEl.innerText = data.name;
+            if (desigEl) desigEl.innerText = data.designation;
+            if (compEl) compEl.innerText = data.company;
+            if (bioEl) bioEl.innerText = data.bio;
+            if (quoteEl) quoteEl.innerText = data.quote;
+            if (imgContainer) imgContainer.style.backgroundImage = data.image;
+            
+            document.body.classList.add('modal-open');
+            if (typeof lenis !== 'undefined' && lenis) lenis.stop();
 
-        let targetOffset = currentOffset;
-
-        if (cardEndX > currentOffset + viewportWidth - buffer) {
-            targetOffset = cardEndX - viewportWidth + buffer;
-        }
-        if (cardStartX < currentOffset + buffer) {
-            targetOffset = Math.max(0, cardStartX - buffer);
-        }
-
-        const maxScroll = Math.max(0, (visibleItems.length * step) - viewportWidth + 360);
-        targetOffset = Math.max(0, Math.min(targetOffset, maxScroll));
-
-        if (targetOffset !== currentOffset) {
-            slideToOffset(targetOffset);
+            const speakerRight = speakerOverlay.querySelector('.profile-right');
+            if (speakerRight) speakerRight.scrollTop = 0;
+            speakerOverlay.classList.add('open');
+            
+            gsap.fromTo('#speaker-overlay .profile-right > *', 
+                { opacity: 0, y: 30 }, 
+                { opacity: 1, y: 0, duration: 0.6, stagger: 0.08, delay: 0.2, ease: "power3.out" }
+            );
         }
     }
 
-    if (prevBtn && nextBtn) {
-        prevBtn.addEventListener('click', () => {
-            slideToOffset(currentOffset - itemWidth * 2);
-        });
-        nextBtn.addEventListener('click', () => {
-            slideToOffset(currentOffset + itemWidth * 2);
-        });
-    }
-
-    let hoverPopTimer = null;
-    accordionItems.forEach((item) => {
-        item.addEventListener('mouseenter', () => {
-            accordionItems.forEach(i => i.classList.remove('active'));
-            item.classList.add('active');
-
-            if (hoverPopTimer) clearTimeout(hoverPopTimer);
-            hoverPopTimer = setTimeout(() => {
-                makeCardVisible(item);
-            }, 60);
-        });
-
-        item.addEventListener('click', () => {
-            accordionItems.forEach(i => i.classList.remove('active'));
-            item.classList.add('active');
-            makeCardVisible(item);
+    const speakerCards = document.querySelectorAll('.speakers-hall .accordion-item');
+    speakerCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            // Only trigger if not dragging
+            const speakerId = card.getAttribute('data-speaker');
+            if (speakerId) openSpeakerModal(speakerId);
         });
     });
 
     /* --- Speaker Session Filter Tabs --- */
-    const filterBtns = document.querySelectorAll('.filter-btn');
+    const speakerFilterBtns = document.querySelectorAll('.speaker-session-filters .filter-btn');
 
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterBtns.forEach(b => b.classList.remove('active'));
+    speakerFilterBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            speakerFilterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
             const filter = btn.getAttribute('data-filter');
-            let firstVisible = null;
 
-            accordionItems.forEach(card => {
+            speakerCards.forEach(card => {
                 const session = card.getAttribute('data-session');
                 if (filter === 'all' || session === filter) {
                     card.style.display = 'flex';
-                    if (!firstVisible) firstVisible = card;
-                    gsap.fromTo(card, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" });
+                    gsap.fromTo(card, 
+                        { opacity: 0, scale: 0.95 }, 
+                        { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" }
+                    );
                 } else {
                     card.style.display = 'none';
-                    card.classList.remove('active');
                 }
             });
 
-            // Reset translation to 0
-            currentOffset = 0;
             if (accordionTrack) {
-                gsap.to(accordionTrack, { x: 0, duration: 0.4, ease: "power2.out" });
+                accordionTrack.scrollTo({ left: 0, behavior: 'smooth' });
             }
 
-            if (firstVisible) {
-                accordionItems.forEach(i => i.classList.remove('active'));
-                firstVisible.classList.add('active');
+            if (typeof ScrollTrigger !== 'undefined') {
+                ScrollTrigger.refresh();
             }
         });
     });
@@ -1136,7 +1267,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         'saad': {
             name: 'Saad Khan',
-            designation: 'Joint Secretary Marketing',
+            designation: 'Student Joint Secretary for Marketing',
             about: 'Between assignments and college events, I developed a new habit: overanalyzing ideas, decisions, and conversations. A curious individual with interests spanning business strategy, management, marketing, public policy, and economic transformation. I enjoy understanding how organizations operate and I love gaining new and practical experiences from wherever possible. Experiences across research, content, management and analysis. From structuring ideas and studying business models to supporting conversations.',
             achievements: [
                 'Intern at Reliance, Dainik Bhaskar, Muskurahat foundation, Club terracota.',
@@ -1148,7 +1279,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         'mehaek': {
             name: 'Mahek Zaveri',
-            designation: 'President & Secretary',
+            designation: 'Student Secretary',
             about: 'Some of the most defining moments in my journey began with a simple “yes.” That one word led me from being a part of the Jai Hind Business Conclave to hosting JBC 2026, and today, to serving as its President. Each experience strengthens my belief that growth begins when we choose curiosity over comfort and action over hesitation.\n\nAs I step into this role, my goal isn’t just to organize another edition of JBC but to build a legacy that inspires innovation, challenges convention, and creates opportunities for everyone who chooses to be a part of it.',
             achievements: [
                 'President, Jai Hind Business Conclave (2027).',
@@ -1200,7 +1331,7 @@ document.addEventListener('DOMContentLoaded', () => {
             image: 'url("meesha.webp")'
         },
         'shruti': {
-            name: 'Shruti Katak',
+            name: 'Shruti Katap',
             designation: 'Joint Secretary Legal & Finance',
             about: 'I’ve always been driven by a simple instinct: wherever I put my energy, I go all in. Whether I was diving hands-on into our family business, capturing memories behind a lens, or leading event teams right through school and junior college, my focus has always been on creating real value.\n\nWhen I reached university, joining the Entrepreneurship Cell was my chance to take that drive further. I jumped straight into the action running media initiatives, juggling high-pressure operations, and handling guest relations right from day one.\n\nBut the real turning point was with JBC. Onboarding two major panelists completely on my own proved what genuine ownership looks like. For me, that milestone shifted everything from working in a committee to investing in it. That’s why I stayed—to pour that momentum right back into the team, elevate the ecosystem, and ensure we don\'t just run great events, but build something legacy-worthy together.',
             achievements: [
@@ -1213,7 +1344,7 @@ document.addEventListener('DOMContentLoaded', () => {
             image: 'url("mahek.webp")'
         },
         'yash': {
-            name: 'Yash Bhamery',
+            name: 'Yash Bhamre',
             designation: 'Joint Secretary Operations',
             about: 'Coming from a STEM background, I bring analytical thinking, structured problem-solving, and a results-driven approach. At Jai Hind College, I represented the institution as a Top 10 finalist at the All India IRM GOER 2026–27, competing against 100+ colleges nationwide. I aim to pursue my career in the Financial field and am a CFA Level I Candidate. I have contributed to the successful execution of flagship events through the Public Relations Department at Jai Hind Business Conclave and the Executions Departments of Talaash and Novus.',
             achievements: [
@@ -1229,7 +1360,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         // 2025 CORE TEAM (LEGACY EDITION PROFILES)
         'hamza_2025': {
-            name: 'Hamza Bambaot',
+            name: 'Hamza Bamboat',
             designation: 'Secretary (2025 Core)',
             about: 'Leading the Jai Hind Business Conclave 2025 edition, driving organizational growth, strategic partnerships, and delivering one of the most successful conclaves in JBC history.',
             achievements: [
@@ -1277,7 +1408,7 @@ document.addEventListener('DOMContentLoaded', () => {
             image: 'url("Sanaa Punwani.webp")'
         },
         'keravi_2025': {
-            name: 'Keravi Javeria',
+            name: 'Kairavi Javeria',
             designation: 'Joint Secretary Creatives (2025 Core)',
             about: 'Led the creative design team, curating visual aesthetics, stage design, and branding materials for JBC 2025.',
             achievements: [
@@ -1314,10 +1445,10 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         'janhavi_2025': {
             name: 'Janhavi Pokharkar',
-            designation: 'Joint Secretary Logistics (2025 Core)',
+            designation: 'Joint Secretary Hospitality (2025 Core)',
             about: 'Overseeing supply chain, venue logistics, and hospitality infrastructure for speakers and delegates during JBC 2025.',
             achievements: [
-                'Joint Secretary Logistics, Jai Hind Business Conclave 2025.',
+                'Joint Secretary Hospitality, Jai Hind Business Conclave 2025.',
                 'Managed hospitality transport and guest accommodations.',
                 'Streamlined supply chain logistics.'
             ],
@@ -1326,10 +1457,10 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         'tanisha_2025': {
             name: 'Tanisha Hemdev',
-            designation: 'Joint Secretary Operations (2025 Core)',
+            designation: 'Joint Secretary Outreach (2025 Core)',
             about: 'Coordinated operational workflows, volunteer management, and stage execution during JBC 2025.',
             achievements: [
-                'Joint Secretary Operations, Jai Hind Business Conclave 2025.',
+                'Joint Secretary Outreach, Jai Hind Business Conclave 2025.',
                 'Supervised volunteer teams and back-stage management.',
                 'Ensured seamless transition between sessions.'
             ],
@@ -1370,13 +1501,13 @@ document.addEventListener('DOMContentLoaded', () => {
         'sanaa_2025': { targetId: 'siya', label: 'View Successor: Siya Raveendran (2026 Core) →' },
         'keravi_2025': { targetId: 'siya', label: 'View Successor: Siya Raveendran (2026 Core) →' },
         'aditi_2025': { targetId: 'ananya', label: 'View Successor: Ananya Murali (2026 Core) →' },
-        'hussain_2025': { targetId: 'yash', label: 'View Successor: Yash Bhamery (2026 Core) →' },
+        'hussain_2025': { targetId: 'yash', label: 'View Successor: Yash Bhamre (2026 Core) →' },
         'janhavi_2025': { targetId: 'tithi', label: 'View Successor: Tithi Jain (2026 Core) →' },
-        'tanisha_2025': { targetId: 'yash', label: 'View Successor: Yash Bhamery (2026 Core) →' },
+        'tanisha_2025': { targetId: 'yash', label: 'View Successor: Yash Bhamre (2026 Core) →' },
         'zara_2025': { targetId: 'meesha', label: 'View Successor: Meesha Rajpal (2026 Core) →' },
-        'husain_u_2025': { targetId: 'shruti', label: 'View Successor: Shruti Katak (2026 Core) →' },
+        'husain_u_2025': { targetId: 'shruti', label: 'View Successor: Shruti Katap (2026 Core) →' },
 
-        'mehaek': { targetId: 'hamza_2025', label: '← View Predecessor: Hamza Bambaot (2025 Core)' },
+        'mehaek': { targetId: 'hamza_2025', label: '← View Predecessor: Hamza Bamboat (2025 Core)' },
         'nishi': { targetId: 'karishma_2025', label: '← View Predecessor: Karishma Peswani (2025 Core)' },
         'saad': { targetId: 'sidhveer_2025', label: '← View Predecessor: Sidhveer Wadhwa (2025 Core)' },
         'siya': { targetId: 'sanaa_2025', label: '← View Predecessor: Sanaa Punwani (2025 Core)' },
@@ -1688,7 +1819,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (inlineBg && inlineBg !== 'none') {
                 el.setAttribute('data-lazy-bg', inlineBg);
                 el.style.backgroundImage = 'none';
-                el.style.backgroundColor = 'rgba(15, 15, 20, 0.6)';
+                el.style.backgroundColor = 'rgba(242, 242, 245, 0.85)';
             }
         });
 
@@ -1723,7 +1854,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.accordion-item').forEach(item => {
         item.setAttribute('tabindex', '0');
         item.setAttribute('role', 'button');
-        const speakerName = item.querySelector('.speaker-surname');
+        const speakerName = item.querySelector('.expanded-left h3') || item.querySelector('.speaker-surname');
         if (speakerName) {
             item.setAttribute('aria-label', `View ${speakerName.textContent} speaker profile`);
         }

@@ -60,10 +60,10 @@
     <link rel="apple-touch-icon" href="Networking.webp">
 
     <!-- PWA & Mobile Web App -->
-    <meta name="theme-color" content="#050505">
+    <meta name="theme-color" content="#ffffff">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Jai Hind JBC">
     <link rel="manifest" href="manifest.json">
 
@@ -414,6 +414,7 @@
         <div class="nav-links">
             <a href="#speakers" class="nav-link">Speakers</a>
             <a href="#legacy" class="nav-link">Legacy</a>
+            <a href="#mentors" class="nav-link">Mentors</a>
             <a href="#team" class="nav-link">Core Team</a>
             <a href="#about" class="nav-link">About</a>
             <a href="#experience" class="nav-link">Experience</a>
@@ -446,7 +447,7 @@
                 <div class="main-titles">
                     <h1 class="hero-title">
                         <span class="title-line">JAI HIND</span>
-                        <span class="title-line gold-text">BUSINESS CONCLAVE</span>
+                        <span class="title-line red-text">BUSINESS CONCLAVE</span>
                         <span class="title-line year">2026</span>
                         <span class="jbc-hero-line"></span>
                     </h1>
@@ -833,6 +834,7 @@
                             <div class="expanded-right-image" style="background-image: url('ishaan bahl panelist.webp');"></div>
                         </div>
                     </div>
+                    </div> <!-- /horizontal-accordion -->
                     <button class="slot-nav-btn next-btn" id="slot-next" aria-label="Next Profile">›</button>
                 </div>
             </div>
@@ -847,143 +849,220 @@
                     <p class="section-subtitle">Watch highlights from our speakers and panelists on stage.</p>
                 </div>
 
-                <div class="clips-grid">
-                    <!-- Clip Card: Keki Mistry -->
-                    <div class="clip-card" data-video-src="" data-clip-speaker="keki">
-                        <div class="clip-thumbnail" style="background-image: url('keki mistry.webp');">
-                            <div class="clip-play-btn">
-                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M8 5.14v13.72a1 1 0 001.5.86l11.04-6.86a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z" fill="currentColor"/>
-                                </svg>
+                <!-- Speaker Clips Apple Keynote 3D Carousel -->
+                <div class="clips-carousel-wrapper">
+                    <!-- Floating Side Nav Buttons -->
+                    <button class="clips-side-nav prev" id="clips-prev" aria-label="Previous Clip">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    </button>
+
+                    <div class="clips-carousel-stage" id="clips-carousel-stage">
+                        <!-- 1. Keki Mistry -->
+                        <div class="clip-card active" data-video-src="" data-clip-speaker="keki">
+                            <div class="apple-clip-media" style="background-image: url('keki mistry.webp');">
+                                <div class="apple-clip-scrim"></div>
+                                <div class="apple-clip-header">
+                                    <span class="apple-glass-pill"><span class="badge-dot"></span> Keynote Highlight</span>
+                                    <span class="apple-format-pill">4K HDR</span>
+                                </div>
+                                <div class="apple-clip-play-wrap">
+                                    <div class="apple-play-disc" aria-label="Play Clip">
+                                        <svg viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M8 5.14v13.72a1 1 0 001.5.86l11.04-6.86a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="apple-clip-caption">
+                                    <span class="apple-session-overline">Banking on the Future</span>
+                                    <h3 class="apple-speaker-name">Mr. Keki Mistry</h3>
+                                    <p class="apple-speaker-role">Interim Chairman, HDFC Bank</p>
+                                </div>
                             </div>
-                            <div class="clip-duration">Coming Soon</div>
                         </div>
-                        <div class="clip-info">
-                            <span class="clip-session-tag">Banking on the Future</span>
-                            <h4 class="clip-speaker-name">Mr. Keki Mistry</h4>
-                            <p class="clip-designation">Interim Chairman, HDFC Bank</p>
+
+                        <!-- 2. Dharmarajan -->
+                        <div class="clip-card next" data-video-src="" data-clip-speaker="dharmarajan">
+                            <div class="apple-clip-media" style="background-image: url('dharamranjan.webp');">
+                                <div class="apple-clip-scrim"></div>
+                                <div class="apple-clip-header">
+                                    <span class="apple-glass-pill"><span class="badge-dot"></span> Keynote Highlight</span>
+                                    <span class="apple-format-pill">4K HDR</span>
+                                </div>
+                                <div class="apple-clip-play-wrap">
+                                    <div class="apple-play-disc" aria-label="Play Clip">
+                                        <svg viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M8 5.14v13.72a1 1 0 001.5.86l11.04-6.86a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="apple-clip-caption">
+                                    <span class="apple-session-overline">Banking on the Future</span>
+                                    <h3 class="apple-speaker-name">Mr. Dharmarajan</h3>
+                                    <p class="apple-speaker-role">Founder & MD, Impactsure Technologies</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 3. Maulik Bhansali -->
+                        <div class="clip-card far-next" data-video-src="" data-clip-speaker="maulik">
+                            <div class="apple-clip-media" style="background-image: url('maulik bhansali.webp');">
+                                <div class="apple-clip-scrim"></div>
+                                <div class="apple-clip-header">
+                                    <span class="apple-glass-pill"><span class="badge-dot"></span> Keynote Highlight</span>
+                                    <span class="apple-format-pill">4K HDR</span>
+                                </div>
+                                <div class="apple-clip-play-wrap">
+                                    <div class="apple-play-disc" aria-label="Play Clip">
+                                        <svg viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M8 5.14v13.72a1 1 0 001.5.86l11.04-6.86a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="apple-clip-caption">
+                                    <span class="apple-session-overline">Navigating Risk in Your 20's</span>
+                                    <h3 class="apple-speaker-name">Mr. Maulik Bhansali</h3>
+                                    <p class="apple-speaker-role">Chief Risk Officer, Union AMC</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. Arjit Garg -->
+                        <div class="clip-card far-next" data-video-src="" data-clip-speaker="arjit">
+                            <div class="apple-clip-media" style="background-image: url('arijit garg.webp');">
+                                <div class="apple-clip-scrim"></div>
+                                <div class="apple-clip-header">
+                                    <span class="apple-glass-pill"><span class="badge-dot"></span> Keynote Highlight</span>
+                                    <span class="apple-format-pill">4K HDR</span>
+                                </div>
+                                <div class="apple-clip-play-wrap">
+                                    <div class="apple-play-disc" aria-label="Play Clip">
+                                        <svg viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M8 5.14v13.72a1 1 0 001.5.86l11.04-6.86a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="apple-clip-caption">
+                                    <span class="apple-session-overline">Navigating Risk in Your 20's</span>
+                                    <h3 class="apple-speaker-name">Mr. Arjit Garg</h3>
+                                    <p class="apple-speaker-role">Youngest SEBI Reg. Research Analyst</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 5. Rajat Bhatia -->
+                        <div class="clip-card far-next" data-video-src="" data-clip-speaker="rajat">
+                            <div class="apple-clip-media" style="background-image: url('rajat bhatia.webp');">
+                                <div class="apple-clip-scrim"></div>
+                                <div class="apple-clip-header">
+                                    <span class="apple-glass-pill"><span class="badge-dot"></span> Keynote Highlight</span>
+                                    <span class="apple-format-pill">4K HDR</span>
+                                </div>
+                                <div class="apple-clip-play-wrap">
+                                    <div class="apple-play-disc" aria-label="Play Clip">
+                                        <svg viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M8 5.14v13.72a1 1 0 001.5.86l11.04-6.86a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="apple-clip-caption">
+                                    <span class="apple-session-overline">The New Language of Luxury</span>
+                                    <h3 class="apple-speaker-name">Mr. Rajat Bhatia</h3>
+                                    <p class="apple-speaker-role">Commercial Director, Four Seasons</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 6. Sankalp Kelshikar -->
+                        <div class="clip-card far-next" data-video-src="" data-clip-speaker="sankalp">
+                            <div class="apple-clip-media" style="background-image: url('sankalp cityfloe.webp');">
+                                <div class="apple-clip-scrim"></div>
+                                <div class="apple-clip-header">
+                                    <span class="apple-glass-pill"><span class="badge-dot"></span> Keynote Highlight</span>
+                                    <span class="apple-format-pill">4K HDR</span>
+                                </div>
+                                <div class="apple-clip-play-wrap">
+                                    <div class="apple-play-disc" aria-label="Play Clip">
+                                        <svg viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M8 5.14v13.72a1 1 0 001.5.86l11.04-6.86a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="apple-clip-caption">
+                                    <span class="apple-session-overline">Moving India Forward</span>
+                                    <h3 class="apple-speaker-name">Mr. Sankalp Kelshikar</h3>
+                                    <p class="apple-speaker-role">Co-Founder, Cityflo Buses</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 7. Sahil Makhija -->
+                        <div class="clip-card far-next" data-video-src="" data-clip-speaker="sahilmakhija">
+                            <div class="apple-clip-media" style="background-image: url('sahil makhija moderator.webp');">
+                                <div class="apple-clip-scrim"></div>
+                                <div class="apple-clip-header">
+                                    <span class="apple-glass-pill"><span class="badge-dot"></span> Keynote Highlight</span>
+                                    <span class="apple-format-pill">4K HDR</span>
+                                </div>
+                                <div class="apple-clip-play-wrap">
+                                    <div class="apple-play-disc" aria-label="Play Clip">
+                                        <svg viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M8 5.14v13.72a1 1 0 001.5.86l11.04-6.86a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="apple-clip-caption">
+                                    <span class="apple-session-overline">A Seat at the Table</span>
+                                    <h3 class="apple-speaker-name">Sahil Makhija</h3>
+                                    <p class="apple-speaker-role">Creator, Producer & Media Host</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 8. Annkur Khosla -->
+                        <div class="clip-card prev" data-video-src="" data-clip-speaker="annkur">
+                            <div class="apple-clip-media" style="background-image: url('ankur khosla moderatior.webp');">
+                                <div class="apple-clip-scrim"></div>
+                                <div class="apple-clip-header">
+                                    <span class="apple-glass-pill"><span class="badge-dot"></span> Keynote Highlight</span>
+                                    <span class="apple-format-pill">4K HDR</span>
+                                </div>
+                                <div class="apple-clip-play-wrap">
+                                    <div class="apple-play-disc" aria-label="Play Clip">
+                                        <svg viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M8 5.14v13.72a1 1 0 001.5.86l11.04-6.86a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="apple-clip-caption">
+                                    <span class="apple-session-overline">The New Language of Luxury</span>
+                                    <h3 class="apple-speaker-name">Ms. Annkur Khosla</h3>
+                                    <p class="apple-speaker-role">Founder, Annkur Khosla Design Studio</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Clip Card: Dharmarajan -->
-                    <div class="clip-card" data-video-src="" data-clip-speaker="dharmarajan">
-                        <div class="clip-thumbnail" style="background-image: url('dharamranjan.webp');">
-                            <div class="clip-play-btn">
-                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M8 5.14v13.72a1 1 0 001.5.86l11.04-6.86a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z" fill="currentColor"/>
-                                </svg>
-                            </div>
-                            <div class="clip-duration">Coming Soon</div>
-                        </div>
-                        <div class="clip-info">
-                            <span class="clip-session-tag">Banking on the Future</span>
-                            <h4 class="clip-speaker-name">Mr. Dharmarajan</h4>
-                            <p class="clip-designation">Founder & MD, Impactsure Technologies</p>
-                        </div>
-                    </div>
-
-                    <!-- Clip Card: Maulik Bhansali -->
-                    <div class="clip-card" data-video-src="" data-clip-speaker="maulik">
-                        <div class="clip-thumbnail" style="background-image: url('maulik bhansali.webp');">
-                            <div class="clip-play-btn">
-                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M8 5.14v13.72a1 1 0 001.5.86l11.04-6.86a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z" fill="currentColor"/>
-                                </svg>
-                            </div>
-                            <div class="clip-duration">Coming Soon</div>
-                        </div>
-                        <div class="clip-info">
-                            <span class="clip-session-tag">Navigating Risk in Your 20's</span>
-                            <h4 class="clip-speaker-name">Mr. Maulik Bhansali</h4>
-                            <p class="clip-designation">Chief Risk Officer, Union AMC</p>
-                        </div>
-                    </div>
-
-                    <!-- Clip Card: Arjit Garg -->
-                    <div class="clip-card" data-video-src="" data-clip-speaker="arjit">
-                        <div class="clip-thumbnail" style="background-image: url('arijit garg.webp');">
-                            <div class="clip-play-btn">
-                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M8 5.14v13.72a1 1 0 001.5.86l11.04-6.86a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z" fill="currentColor"/>
-                                </svg>
-                            </div>
-                            <div class="clip-duration">Coming Soon</div>
-                        </div>
-                        <div class="clip-info">
-                            <span class="clip-session-tag">Navigating Risk in Your 20's</span>
-                            <h4 class="clip-speaker-name">Mr. Arjit Garg</h4>
-                            <p class="clip-designation">Youngest SEBI Reg. Research Analyst</p>
-                        </div>
-                    </div>
-
-                    <!-- Clip Card: Rajat Bhatia -->
-                    <div class="clip-card" data-video-src="" data-clip-speaker="rajat">
-                        <div class="clip-thumbnail" style="background-image: url('rajat bhatia.webp');">
-                            <div class="clip-play-btn">
-                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M8 5.14v13.72a1 1 0 001.5.86l11.04-6.86a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z" fill="currentColor"/>
-                                </svg>
-                            </div>
-                            <div class="clip-duration">Coming Soon</div>
-                        </div>
-                        <div class="clip-info">
-                            <span class="clip-session-tag">The New Language of Luxury</span>
-                            <h4 class="clip-speaker-name">Mr. Rajat Bhatia</h4>
-                            <p class="clip-designation">Commercial Director, Four Seasons</p>
-                        </div>
-                    </div>
-
-                    <!-- Clip Card: Sankalp Kelshikar -->
-                    <div class="clip-card" data-video-src="" data-clip-speaker="sankalp">
-                        <div class="clip-thumbnail" style="background-image: url('sankalp cityfloe.webp');">
-                            <div class="clip-play-btn">
-                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M8 5.14v13.72a1 1 0 001.5.86l11.04-6.86a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z" fill="currentColor"/>
-                                </svg>
-                            </div>
-                            <div class="clip-duration">Coming Soon</div>
-                        </div>
-                        <div class="clip-info">
-                            <span class="clip-session-tag">Moving India Forward</span>
-                            <h4 class="clip-speaker-name">Mr. Sankalp Kelshikar</h4>
-                            <p class="clip-designation">Co-Founder, Cityflo Buses</p>
-                        </div>
-                    </div>
-
-                    <!-- Clip Card: Sahil Makhija -->
-                    <div class="clip-card" data-video-src="" data-clip-speaker="sahilmakhija">
-                        <div class="clip-thumbnail" style="background-image: url('sahil makhija moderator.webp');">
-                            <div class="clip-play-btn">
-                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M8 5.14v13.72a1 1 0 001.5.86l11.04-6.86a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z" fill="currentColor"/>
-                                </svg>
-                            </div>
-                            <div class="clip-duration">Coming Soon</div>
-                        </div>
-                        <div class="clip-info">
-                            <span class="clip-session-tag">A Seat at the Table</span>
-                            <h4 class="clip-speaker-name">Sahil Makhija</h4>
-                            <p class="clip-designation">Creator, Producer & Media Host</p>
-                        </div>
-                    </div>
-
-                    <!-- Clip Card: Annkur Khosla -->
-                    <div class="clip-card" data-video-src="" data-clip-speaker="annkur">
-                        <div class="clip-thumbnail" style="background-image: url('ankur khosla moderatior.webp');">
-                            <div class="clip-play-btn">
-                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M8 5.14v13.72a1 1 0 001.5.86l11.04-6.86a1 1 0 000-1.72L9.5 4.28a1 1 0 00-1.5.86z" fill="currentColor"/>
-                                </svg>
-                            </div>
-                            <div class="clip-duration">Coming Soon</div>
-                        </div>
-                        <div class="clip-info">
-                            <span class="clip-session-tag">The New Language of Luxury</span>
-                            <h4 class="clip-speaker-name">Ms. Annkur Khosla</h4>
-                            <p class="clip-designation">Founder, Annkur Khosla Design Studio</p>
-                        </div>
-                    </div>
+                    <!-- Floating Side Nav Next -->
+                    <button class="clips-side-nav next" id="clips-next" aria-label="Next Clip">
+                        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </button>
                 </div>
+
+                <!-- Bottom Apple Control Dock -->
+                <div class="clips-controls-dock-wrapper">
+                    <div class="clips-controls-dock">
+                        <button class="clips-dock-btn prev" id="dock-prev-btn" aria-label="Previous Clip">
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                            <span>Previous</span>
+                        </button>
+
+                        <div class="clips-pagination" id="clips-pagination"></div>
+
+                        <button class="clips-dock-btn next" id="dock-next-btn" aria-label="Next Clip">
+                            <span>Next</span>
+                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        </button>
+                    </div>
             </div>
         </section>
 
@@ -1014,7 +1093,7 @@
                         </div>
                         <h2 class="profile-name">Name</h2>
                         <p class="profile-designation">Designation</p>
-                        <p class="profile-company gold-text">Company</p>
+                        <p class="profile-company">Company</p>
                         
                         <div class="profile-bio">
                             <h3>Biography</h3>
@@ -1123,9 +1202,9 @@
                     <div class="museum-chapter chapter-2025" data-year="2025">
                         <div class="cathedral-void-container">
                             <div class="taj-silhouette-installation">
-                                <div class="taj-gold-aura"></div>
-                                <div class="taj-media-card" style="background-image: url('Fire side final .webp');">
-                                    <div class="taj-card-overlay">Taj President, Mumbai</div>
+                                <div class="taj-crimson-aura"></div>
+                                <div class="taj-media-card" style="background-image: url('taj-colaba.jpg');">
+                                    <div class="taj-card-overlay">Taj Colaba, Mumbai</div>
                                 </div>
                             </div>
                             <div class="monolith-glass-card cathedral-card">
@@ -1161,11 +1240,50 @@
             </div>
         </section>
 
+        <!-- Mentors Section -->
+        <section class="mentors-section" id="mentors">
+            <div class="section-header center">
+                <span class="museum-eyebrow" style="color: var(--accent-red); letter-spacing: 2px; font-weight: 600; font-size: 0.8rem; text-transform: uppercase;">ACADEMIC & ADVISORY LEADERSHIP</span>
+                <h2 class="section-title">Our Mentors</h2>
+                <p class="section-subtitle" style="margin-bottom: 2rem; color: var(--text-secondary);">Guiding the vision, excellence, and corporate ethos of the Jai Hind Business Conclave.</p>
+            </div>
+
+            <div class="mentors-grid">
+                <!-- 1. Mr. Prateek Kumar -->
+                <div class="mentor-card team-card" data-team="prateek" data-edition="mentor">
+                    <div class="mentor-image-wrap">
+                        <div class="mentor-image" style="background-image: url('Prateek kumar sir.webp');"></div>
+                    </div>
+                    <div class="mentor-content">
+                        <span class="mentor-role-badge">Department Leadership</span>
+                        <h3>Mr. Prateek Kumar</h3>
+                        <p class="mentor-designation">Head of BBA Department</p>
+                        <p class="mentor-brief">With over 7 years of experience in academia, research, and institutional innovation, specializing in entrepreneurial mindsets and real-world business frameworks.</p>
+                        <span class="mentor-link">View Full Profile →</span>
+                    </div>
+                </div>
+
+                <!-- 2. Dr. Rakhi Sharma -->
+                <div class="mentor-card team-card" data-team="rakhi" data-edition="mentor">
+                    <div class="mentor-image-wrap">
+                        <div class="mentor-image" style="background-image: url('Rakhi maam.webp');"></div>
+                    </div>
+                    <div class="mentor-content">
+                        <span class="mentor-role-badge">Faculty Advisor</span>
+                        <h3>Dr. Rakhi Sharma</h3>
+                        <p class="mentor-designation">Faculty Advisor</p>
+                        <p class="mentor-brief">Passionate academic and lifelong learner with a PhD in Venture Capital Management and over 18 years of leadership and mentorship in higher education.</p>
+                        <span class="mentor-link">View Full Profile →</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Core Team Section -->
         <section class="core-team" id="team">
             <div class="section-header center">
                 <h2 class="section-title">The Architects of JBC</h2>
-                <p class="section-subtitle" style="margin-bottom: 2rem; color: var(--text-secondary);">Celebrating the visionary leadership shaping the past and present of the Jai Hind Business Conclave.</p>
+                <p class="section-subtitle" style="margin-bottom: 2rem; color: var(--text-secondary);">Celebrating the student leadership shaping the editions of the Jai Hind Business Conclave.</p>
                 
                 <div class="speaker-session-filters team-edition-filters" style="margin-bottom: 3.5rem;">
                     <button class="filter-btn edition-btn active" data-edition-filter="2026">2026 Core Team (Current)</button>
@@ -1174,33 +1292,16 @@
             </div>
             
             <div class="editorial-grid">
-                <!-- 1. Dr. Rakhi Sharma (Faculty Advisor - Displayed in Both) -->
-                <div class="team-card" data-team="rakhi" data-edition="both">
-                    <div class="team-image" style="background-image: url('Rakhi maam.webp');"></div>
-                    <div class="team-info">
-                        <h3>Dr. Rakhi Sharma</h3>
-                        <p>Faculty Advisor</p>
-                    </div>
-                </div>
-                <!-- 2. Mr. Prateek Kumar (Head of BBA Dept - Displayed in Both) -->
-                <div class="team-card" data-team="prateek" data-edition="both">
-                    <div class="team-image" style="background-image: url('Prateek kumar sir.webp');"></div>
-                    <div class="team-info">
-                        <h3>Mr. Prateek Kumar</h3>
-                        <p>Head of BBA Department</p>
-                    </div>
-                </div>
-
                 <!-- 2026 CORE TEAM (CURRENT) -->
-                <!-- 3. Mahek -->
+                <!-- 1. Mahek -->
                 <div class="team-card" data-team="mehaek" data-edition="2026">
                     <div class="team-image" style="background-image: url('shruti_page-0001.webp');"></div>
                     <div class="team-info">
                         <h3>Mahek Zaveri</h3>
-                        <p>Secretary</p>
+                        <p>Student Secretary</p>
                     </div>
                 </div>
-                <!-- 4. Nishi -->
+                <!-- 2. Nishi -->
                 <div class="team-card" data-team="nishi" data-edition="2026">
                     <div class="team-image" style="background-image: url('nishi.webp');"></div>
                     <div class="team-info">
@@ -1208,15 +1309,15 @@
                         <p>Deputy Secretary</p>
                     </div>
                 </div>
-                <!-- 5. Saad -->
+                <!-- 3. Saad -->
                 <div class="team-card" data-team="saad" data-edition="2026">
                     <div class="team-image" style="background-image: url('saad jbc.webp');"></div>
                     <div class="team-info">
                         <h3>Saad Khan</h3>
-                        <p>Joint Secretary Marketing</p>
+                        <p>Student Joint Secretary for Marketing</p>
                     </div>
                 </div>
-                <!-- 6. Siya -->
+                <!-- 4. Siya -->
                 <div class="team-card" data-team="siya" data-edition="2026">
                     <div class="team-image" style="background-image: url('siya.webp');"></div>
                     <div class="team-info">
@@ -1224,7 +1325,7 @@
                         <p>Joint Secretary Media</p>
                     </div>
                 </div>
-                <!-- 7. Ananya -->
+                <!-- 5. Ananya -->
                 <div class="team-card" data-team="ananya" data-edition="2026">
                     <div class="team-image" style="background-image: url('ananya.webp');"></div>
                     <div class="team-info">
@@ -1232,7 +1333,7 @@
                         <p>Joint Secretary Events</p>
                     </div>
                 </div>
-                <!-- 8. Tithi -->
+                <!-- 6. Tithi -->
                 <div class="team-card" data-team="tithi" data-edition="2026">
                     <div class="team-image" style="background-image: url('tithi.webp');"></div>
                     <div class="team-info">
@@ -1240,7 +1341,7 @@
                         <p>Joint Secretary Hospitality</p>
                     </div>
                 </div>
-                <!-- 9. Meesha -->
+                <!-- 7. Meesha -->
                 <div class="team-card" data-team="meesha" data-edition="2026">
                     <div class="team-image" style="background-image: url('meesha.webp');"></div>
                     <div class="team-info">
@@ -1248,29 +1349,29 @@
                         <p>Joint Secretary Public Relations</p>
                     </div>
                 </div>
-                <!-- 10. Shruti -->
+                <!-- 8. Shruti -->
                 <div class="team-card" data-team="shruti" data-edition="2026">
                     <div class="team-image" style="background-image: url('mahek.webp');"></div>
                     <div class="team-info">
-                        <h3>Shruti Katak</h3>
+                        <h3>Shruti Katap</h3>
                         <p>Joint Secretary Legal & Finance</p>
                     </div>
                 </div>
-                <!-- 11. Yash -->
+                <!-- 9. Yash -->
                 <div class="team-card" data-team="yash" data-edition="2026">
                     <div class="team-image" style="background-image: url('yash.webp');"></div>
                     <div class="team-info">
-                        <h3>Yash Bhamery</h3>
+                        <h3>Yash Bhamre</h3>
                         <p>Joint Secretary Operations</p>
                     </div>
                 </div>
 
                 <!-- 2025 CORE TEAM (LEGACY EDITION - Initially Hidden) -->
-                <!-- Hamza Bambaot -->
+                <!-- Hamza Bamboat -->
                 <div class="team-card" data-team="hamza_2025" data-edition="2025" style="display: none;">
                     <div class="team-image placeholder-img"></div>
                     <div class="team-info">
-                        <h3>Hamza Bambaot</h3>
+                        <h3>Hamza Bamboat</h3>
                         <p>Secretary (2025)</p>
                     </div>
                 </div>
@@ -1298,11 +1399,11 @@
                         <p>Joint Secretary Media (2025)</p>
                     </div>
                 </div>
-                <!-- Keravi Javeria -->
+                <!-- Kairavi Javeria -->
                 <div class="team-card" data-team="keravi_2025" data-edition="2025" style="display: none;">
                     <div class="team-image placeholder-img"></div>
                     <div class="team-info">
-                        <h3>Keravi Javeria</h3>
+                        <h3>Kairavi Javeria</h3>
                         <p>Joint Secretary Creatives (2025)</p>
                     </div>
                 </div>
@@ -1327,7 +1428,7 @@
                     <div class="team-image" style="background-image: url('Janhavi Pokharkar New.webp');"></div>
                     <div class="team-info">
                         <h3>Janhavi Pokharkar</h3>
-                        <p>Joint Secretary Logistics (2025)</p>
+                        <p>Joint Secretary Hospitality (2025)</p>
                     </div>
                 </div>
                 <!-- Tanisha Hemdev -->
@@ -1335,7 +1436,7 @@
                     <div class="team-image" style="background-image: url('Tanisha Hemdev.webp');"></div>
                     <div class="team-info">
                         <h3>Tanisha Hemdev</h3>
-                        <p>Joint Secretary Operations (2025)</p>
+                        <p>Joint Secretary Outreach (2025)</p>
                     </div>
                 </div>
                 <!-- Zara Zatakia -->
@@ -1367,7 +1468,7 @@
                 <div class="profile-right">
                     <div class="profile-details">
                         <h2 class="profile-name team-profile-name">Name</h2>
-                        <p class="profile-designation team-profile-designation" style="margin-bottom: 2rem; color: var(--accent-gold);">Designation</p>
+                        <p class="profile-designation team-profile-designation" style="margin-bottom: 2rem;">Designation</p>
                         
                         <div class="profile-bio">
                             <h3>About</h3>
@@ -1385,7 +1486,7 @@
                         </div>
 
                         <div class="profile-bio team-successor-block" style="margin-top: 2rem;">
-                            <button class="btn btn-outline team-successor-btn" id="team-successor-btn" style="width: 100%; border-color: var(--accent-gold); color: var(--accent-gold); font-weight: 600;">View Successor / Predecessor →</button>
+                            <button class="btn btn-outline team-successor-btn" id="team-successor-btn" style="width: 100%; border-color: var(--jbc-accent); color: var(--jbc-accent); font-weight: 600;">View Successor / Predecessor →</button>
                         </div>
                     </div>
                 </div>
@@ -1399,7 +1500,7 @@
             </div>
             
             <div class="chapter chapter-2 media-reveal">
-                <div class="image-placeholder cinematic-crop" style="background-image: url('corporate network.webp'); background-size: cover; background-position: center;">
+                <div class="image-placeholder cinematic-crop" style="background-image: url('jbc-team-photo.jpg'); background-size: cover; background-position: center;">
                 </div>
             </div>
             
@@ -1455,7 +1556,7 @@
             
             <div class="chapter chapter-5 milestone">
                 <div class="milestone-media">
-                    <div class="image-placeholder cinematic-crop" style="background-image: url('taj-president-mumbai.jpg'); background-size: cover; background-position: center;">
+                    <div class="image-placeholder cinematic-crop" style="background-image: url('taj-colaba.jpg'); background-size: cover; background-position: center;">
                     </div>
                 </div>
                 <h3 class="milestone-text">A new chapter begins.</h3>
@@ -1506,7 +1607,7 @@
                 <div class="cinema-overlay"></div>
                 <div class="theatre-title">
                     <h2 class="section-title">The Conclave Experience</h2>
-                    <h3 class="venue-name gold-text">Jai Hind Business Conclave 2026</h3>
+                    <h3 class="venue-name">Jai Hind Business Conclave 2026</h3>
                 </div>
                 <div class="swipe-up-indicator">
                     <span>Swipe to continue</span>
