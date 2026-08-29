@@ -653,155 +653,345 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Speaker & Moderator Data
     const speakerData = {
-        'keki': {
-            name: 'Mr. Keki Mistry',
+        'manhar_garegrat': {
+            name: 'Mr. Manhar Garegrat',
             role: 'SPEAKER',
-            session: 'Banking on the Future',
-            designation: 'Interim Chairman of HDFC Bank & Director on Major Boards',
-            company: 'HDFC Bank',
-            bio: 'Mr. Keki Mistry, one of the most respected voices in India’s financial ecosystem, has played a defining role in shaping the country’s banking and corporate landscape through decades of visionary leadership, strategic foresight, and institution building. His remarkable journey reflects resilience, trust, and an unwavering commitment to long-term growth in an ever-evolving economic environment.',
-            quote: '"Leadership is about taking responsibilities and creating a legacy of trust."',
-            image: 'url("keki mistry.webp")'
+            session: '2022-23 • Web 3 & Cryptocurrencies',
+            designation: 'Former Executive Director & Chief Of Staff',
+            company: 'CoinDCX',
+            bio: "From having gained experience as Digital Marketing Manager at The Hyatt Hotels for Pune, Goa, Mumbai, Hyderabad & Kochi, Mr Garegrat moved on to be the Vice President, Digital Initiatives at ZebPay and Executive Director & Chief of Staff at CoinDCX. Currently the Former Executive Director & Chief of Staff at CoinDCX.",
+            quote: "Web 3 & Cryptocurrencies",
+            image: 'url("speaker_manhar_garegrat.webp")'
+        },
+        'tushar_pradhan': {
+            name: 'Mr. Tushar Pradhan',
+            role: 'SPEAKER',
+            session: '2022-23 • Investing during turbulent times',
+            designation: 'CIO',
+            company: 'HSBC Asset Management',
+            bio: "He began his career in the United States where he got his MBA degree from the Barney School of Business, Hartford, Conn. and then worked in insurance and asset management. He returned to India in 1995 and has worked for HDFC Ltd, HDFC Asset Management and AIG Investments with more than 20 years of experience.",
+            quote: "Investing during turbulent times",
+            image: 'url("speaker_tushar_pradhan.webp")'
+        },
+        'kunal_bajaj': {
+            name: 'Mr. Kunal Bajaj',
+            role: 'SPEAKER',
+            session: '2022-23 • Entrepreneurship and startups - the opportunity in India',
+            designation: 'Head of Capital Network',
+            company: 'Blume Ventures',
+            bio: "Kunal Bajaj, Venture Capitalist, Head of Capital Network at Blume Ventures, Business Head, Wealth Management at Mobikwik and Founder & CEO Clearfunds (acquired by MobiKwik).",
+            quote: "Entrepreneurship and startups - the opportunity in India",
+            image: 'url("speaker_kunal_bajaj.webp")'
+        },
+        'anirudh_rangaraj': {
+            name: 'Mr. Anirudh Rangaraj',
+            role: 'SPEAKER',
+            session: '2022-23 • Will AI & Metaverse change the world or kill it?',
+            designation: 'Manager - Consulting',
+            company: 'Deloitte',
+            bio: "He is a seasoned professional with more than a decade of experience in strategy consulting, product development and implementation. He has invested close to 10,000 hours of consulting for C-suite across digital strategy, product implementation roadmaps, and process standardisation.",
+            quote: "Will AI & Metaverse change the world or kill it?",
+            image: 'url("speaker_anirudh_rangaraj.webp")'
+        },
+        'ian_almedia': {
+            name: 'Mr. Ian Almedia',
+            role: 'SPEAKER',
+            session: '2022-23 • Will AI & Metaverse change the world or kill it?',
+            designation: 'Founder',
+            company: 'Jinxed Network',
+            bio: "Ian Almedia, Co-Founder of Stitched Network and Founder of Jinxed Network, assists businesses in conceptualising their vision and values to communicate with target audiences through design, technology, and creative marketing solutions.",
+            quote: "Will AI & Metaverse change the world or kill it?",
+            image: 'url("speaker_ian_almedia.webp")'
+        },
+        'alok_churiwala': {
+            name: 'Mr. Alok Churiwala',
+            role: 'SPEAKER',
+            session: '2022-23 • Demystifying Mutual Funds',
+            designation: 'Managing Director',
+            company: 'Churiwala Securities Pvt Ltd',
+            bio: "Managing Director at Churiwala Securities Pvt Ltd, Former Director and Vice Chairman at Bombay Stock Exchange (BSE) Brokers Forum. An esteemed financial markets expert.",
+            quote: "Demystifying Mutual Funds",
+            image: 'url("speaker_alok_churiwala.webp")'
+        },
+        'snehil_khanor': {
+            name: 'Mr. Snehil Khanor',
+            role: 'SPEAKER',
+            session: '2023-24 • Building Modern Consumer Platforms',
+            designation: 'Co-Founder & CEO',
+            company: 'TrulyMadly',
+            bio: "He is the Co-founder and CEO at TrulyMadly. With his sharp strategic acumen and consumer-first mindset, Snehil has transformed TrulyMadly into one of India\u2019s leading dating and relationship apps. His expertise spans product development, growth strategies, and consumer behavior.",
+            quote: "Building Modern Consumer Platforms",
+            image: 'url("speaker_snehil_khanor.webp")'
+        },
+        'avelo_roy': {
+            name: 'Mr. Avelo Roy',
+            role: 'SPEAKER',
+            session: '2023-24 • Startup Ecosystem & Venture Creation',
+            designation: 'Managing Director',
+            company: 'Kolkata Ventures',
+            bio: "MD at Kolkata Ventures, 4-time TEDx Speaker and Guest Lecturer at IITs & IIMs. Avelo has built multimillion-dollar businesses in the US and India and mentored thousands of entrepreneurs.",
+            quote: "Startup Ecosystem & Venture Creation",
+            image: 'url("speaker_avelo_roy.webp")'
+        },
+        'ashish_limaye': {
+            name: 'Mr. Ashish Limaye',
+            role: 'SPEAKER',
+            session: '2023-24 • Creative Tech & Immersive Media',
+            designation: 'CEO - APAC',
+            company: 'HappyFinish',
+            bio: "A pioneering creative technologist and CEO - APAC at HappyFinish, leading transformative AR, VR, and AI-driven creative experiences for global marquee brands.",
+            quote: "Creative Tech & Immersive Media",
+            image: 'url("speaker_ashish_limaye.webp")'
+        },
+        'ryan_gomes': {
+            name: 'Mr. Ryan Gomes',
+            role: 'SPEAKER',
+            session: '2023-24 • Design Thinking & Visual Identity',
+            designation: 'Lead Designer & Creative Director',
+            company: 'Creative Media',
+            bio: "A seasoned creative leader known for his forward-thinking design philosophies, brand storytelling, and visual strategy for modern youth audiences.",
+            quote: "Design Thinking & Visual Identity",
+            image: 'url("speaker_ryan_gomes.webp")'
+        },
+        'tushar_pradhan_24': {
+            name: 'Mr. Tushar Pradhan',
+            role: 'SPEAKER',
+            session: '2023-24 • Navigating Macro Cycles',
+            designation: 'Former CIO',
+            company: 'HSBC Asset Management',
+            bio: "Senior investment strategist and financial markets veteran with over two decades of experience managing institutional funds across HDFC, AIG, and HSBC.",
+            quote: "Navigating Macro Cycles",
+            image: 'url("speaker_tushar_pradhan_24.webp")'
+        },
+        'khushnooma_kapadia': {
+            name: 'Mrs. Khushnooma Kapadia',
+            role: 'SPEAKER',
+            session: '2024-25 • Breaking The Glass Ceiling',
+            designation: 'Vice President, Marketing South Asia',
+            company: 'Marriott International',
+            bio: "She is a remarkable individual whose passion, dedication, and vision have shaped her successful journey. With a background rich in experience across brand building and hospitality, she has consistently demonstrated exceptional leadership and a deep commitment to making a difference.",
+            quote: "Breaking The Glass Ceiling",
+            image: 'url("speaker_khushnooma_kapadia.webp")'
+        },
+        'darayus_mehta': {
+            name: 'Mr. Darayus Mehta',
+            role: 'SPEAKER',
+            session: '2024-25 • A brand new story, winning the hearts in the hyper connected world',
+            designation: 'Founder Director',
+            company: 'Unified Collaborations Services LLP',
+            bio: "He has over a decade of experience driving innovations at Reliance Communications, leading Product Life Cycle Management for Voice, Cloud Telephony, and Collaboration Tools. He has transformed enterprise communication through groundbreaking innovations like live conferencing surgeries and CEO town halls.",
+            quote: "A brand new story, winning the hearts in the hyper connected world",
+            image: 'url("speaker_darayus_mehta.webp")'
+        },
+        'mehul_gupta': {
+            name: 'Mr. Mehul Gupta',
+            role: 'SPEAKER',
+            session: '2024-25 • Digital Disruption & Agency Growth',
+            designation: 'CEO & Co-Founder',
+            company: 'SoCheers',
+            bio: "With a passion for innovation and a keen eye for emerging trends, Mehul has been at the forefront of transforming brands and digital marketing strategies. As a dynamic entrepreneur, he has successfully built SoCheers into a thriving agency that delivers results-driven solutions for clients across industries.",
+            quote: "Digital Disruption & Agency Growth",
+            image: 'url("speaker_mehul_gupta.webp")'
+        },
+        'rahul_agarwal': {
+            name: 'Mr. Rahul Agarwal',
+            role: 'SPEAKER',
+            session: '2024-25 • Global Supply Chains & Logistics',
+            designation: 'CEO',
+            company: 'Express Global Logistics',
+            bio: "With his visionary leadership, Mr. Agarwal has been instrumental in transforming Express Global Logistics into a trusted name in global freight and transportation solutions. Under his guidance, the company has expanded its reach, innovated operations, and consistently delivered excellence in service.",
+            quote: "Global Supply Chains & Logistics",
+            image: 'url("speaker_rahul_agarwal.webp")'
+        },
+        'hitarth_dadia': {
+            name: 'Mr. Hitarth Dadia',
+            role: 'SPEAKER',
+            session: '2024-25 • Influencer Economy & Digital Culture',
+            designation: 'CEO & Partner',
+            company: 'NoFiltr Group',
+            bio: "As a seasoned leader in the digital marketing space, Hitarth has been at the forefront of helping brands engage with their audiences in new and impactful ways. With a focus on creativity, technology, and measurable results, Nofiltr Group has made its mark as a trailblazer in the industry.",
+            quote: "Influencer Economy & Digital Culture",
+            image: 'url("speaker_hitarth_dadia.webp")'
+        },
+        'karan_rana': {
+            name: 'Mr. Karan Rana',
+            role: 'SPEAKER',
+            session: '2024-25 • Hyperlocal Growth & Product Marketing',
+            designation: 'Senior Product Marketing Manager',
+            company: 'Swiggy',
+            bio: "With a strong background in marketing strategy and project management, Karan plays a pivotal role in driving Swiggy's innovative marketing campaigns and customer-centric initiatives. His expertise in building brand awareness and executing large-scale projects has contributed significantly to Swiggy's growth.",
+            quote: "Hyperlocal Growth & Product Marketing",
+            image: 'url("speaker_karan_rana.webp")'
+        },
+        'mili_paul': {
+            name: 'Mrs. Mili Paul',
+            role: 'SPEAKER',
+            session: '2024-25 • Workshop with CDSL (BSE Subsidiary)',
+            designation: 'DDSL Resource Person & SEBI Empanelled Trainer',
+            company: 'BSE / CDSL',
+            bio: "With over 14 years of experience in Academics, Finance & Accounts, she has motivated over 35,000 participants across India to become financially literate and investment conscious.",
+            quote: "Workshop with CDSL (BSE Subsidiary)",
+            image: 'url("speaker_mili_paul.webp")'
+        },
+        'vishal_shah': {
+            name: 'Mr. Vishal Shah',
+            role: 'SPEAKER',
+            session: '2024-25 • The paradox of banking',
+            designation: 'Vice President',
+            company: 'Barclays Bank',
+            bio: "With extensive experience in the banking industry, Mr. Shah brings a wealth of knowledge on financial strategies, innovation, and the evolving landscape of global banking. He offers invaluable insights into the balance between risk, regulation, and profitability.",
+            quote: "The paradox of banking",
+            image: 'url("speaker_vishal_shah.webp")'
         },
         'dharmarajan': {
             name: 'Mr. Dharmarajan Sankara Subramanian',
             role: 'MODERATOR',
-            session: 'Banking on the Future',
+            session: '2025-26 • Banking on the Future',
             designation: 'Founder & Managing Director',
             company: 'Impactsure Technologies',
-            bio: 'With decades of experience across banking, financial services, and technology, Mr. Dharmarajan has been at the forefront of driving innovation, digital transformation, and sustainable growth within the financial ecosystem. Through his work, he has helped organizations navigate an evolving landscape shaped by technology, changing consumer expectations, and emerging opportunities.',
-            quote: '"Innovation at the intersection of banking and technology drives sustainable growth within the financial ecosystem."',
-            image: 'url("dharamranjan.webp")'
+            bio: "With decades of experience across banking, financial services and technology, Mr. Dharmarajan has been at the forefront of driving innovation, digital transformation and sustainable growth within the financial ecosystem.",
+            quote: "Banking on the Future",
+            image: 'url("speaker_dharmarajan.webp")'
         },
-        'maulik': {
-            name: 'Mr. Maulik Bhansali',
-            role: 'SPEAKER',
-            session: 'Navigating Risk in Your 20\'s',
-            designation: 'Chief Risk Officer',
-            company: 'Union Asset Management Co. Pvt. Ltd.',
-            bio: 'A master of foresight in India’s investment sector. Backed by a passion for financial stability and a deep understanding of the trade-off between risk and reward, Mr. Bhansali has played a pivotal role in designing risk models that protect and empower investor capital. His dynamic approach to corporate governance and asset security has set high benchmarks for institutional resilience.',
-            quote: '"Mastering the balance between risk and reward is the ultimate superpower for future leaders in their 20s."',
-            image: 'url("maulik bhansali.webp")'
-        },
-        'arjit': {
-            name: 'Mr. Arjit Garg',
-            role: 'MODERATOR',
-            session: 'Navigating Risk in Your 20\'s',
-            designation: 'India’s Youngest SEBI Registered Research Analyst',
-            company: 'Equity Research & Financial Markets',
-            bio: 'Known for his work in equity research, investor education, and financial markets, Arjit has developed a strong perspective on how young individuals can approach investing, decision-making, and risk management in an increasingly dynamic economic environment.',
-            quote: '"Navigating financial risk early requires disciplined curiosity, structured thinking, and calculated decision-making."',
-            image: 'url("arijit garg.webp")'
-        },
-        'rajat': {
-            name: 'Mr. Rajat Bhatia',
-            role: 'SPEAKER',
-            session: 'The New Language of Luxury',
-            designation: 'Commercial Director',
-            company: 'Four Seasons Mumbai',
-            bio: 'Mr. Rajat Bhatia, known for his warmth, vision, and deep understanding of modern hospitality, has been instrumental in curating world-class guest experiences that go far beyond traditional service to create genuine human connection. With an exceptional understanding of evolving consumer aspirations and premium brand experiences, he continues to shape what meaningful luxury looks like in today’s experience-driven world.',
-            quote: '"In the world of luxury, experience is the only currency that truly matters."',
-            image: 'url("rajat bhatia.webp")'
-        },
-        'annkur': {
-            name: 'Ms. Annkur Khosla',
-            role: 'MODERATOR',
-            session: 'The New Language of Luxury',
-            designation: 'Founder & Principal Architect',
-            company: 'Annkur Khosla Design Studio',
-            bio: 'Through her work across luxury, wellness, and experiential design, Annkur has built a distinctive perspective on how spaces, stories, and experiences shape the way people connect, engage, and belong.',
-            quote: '"Design is not just visual; it is how spaces, stories, and experiences evoke deep human connection and belonging."',
-            image: 'url("ankur khosla moderatior.webp")'
-        },
-        'sankalp': {
-            name: 'Mr. Sankalp Kelshikar',
-            role: 'SPEAKER',
-            session: 'Moving India Forward',
-            designation: 'Co-Founder',
-            company: 'Cityflo Buses',
-            bio: 'With a vision to transform the everyday commute experience, Mr. Kelshikar has redefined urban mobility by building one of India’s most innovative and consumer-focused transportation platforms. By seamlessly combining technology, convenience, and operational efficiency, he has created a solution that continues to reshape the way modern India travels.',
-            quote: '"Redefining urban mobility is about giving modern India back its most valuable asset: time."',
-            image: 'url("sankalp cityfloe.webp")'
-        },
-        'sahilmakhija': {
+        'sahil_makhija': {
             name: 'Sahil Makhija',
             role: 'MODERATOR',
-            session: 'A Seat at the Table',
-            designation: 'Creator, Producer & Media Host',
-            company: 'Media & Entertainment',
-            bio: 'Sahil Makhija is a celebrated creator, producer, and media host who leads engaging format conversations with visionaries across industries.',
-            quote: '"The power of conversation lies in asking the questions everyone thinks but few dare to voice."',
-            image: 'url("sahil makhija moderator.webp")'
+            session: '2025-26 • A Seat at the Table',
+            designation: 'Founder of Headbanger’s Kitchen & Media Host',
+            company: 'Media & Gastronomy',
+            bio: "Through his work across digital media, gourmet comfort food and experiential gastronomy, he has built a distinctive perspective on how culinary content, bold flavors and community shape the way people connect and engage.",
+            quote: "A Seat at the Table",
+            image: 'url("speaker_sahil_makhija.webp")'
         },
-        'yashadvani': {
-            name: 'Mr. Yash Advani',
-            role: 'PANELIST',
-            session: 'A Seat at the Table',
-            designation: 'Founder of Maikada & Cafe Calma, Co-Founder of Pastel Patisserie',
-            company: 'The Shalimar Hotel / Pastel',
-            bio: 'Rooted in the legacy of The Shalimar Hotel, Yash represents a new generation of hospitality leaders redefining what meaningful dining experiences look like. Through thoughtfully curated concepts that combine culture, community, and modern luxury, he has created spaces that go beyond hospitality to build connection and storytelling.',
-            quote: '"Hospitality builds spaces that go beyond dining to create culture, community, and storytelling."',
-            image: 'url("yash advani panelist.webp")'
+        'keki_mistry': {
+            name: 'Mr. Keki Mistry',
+            role: 'SPEAKER',
+            session: '2025-26 • Banking on the Future',
+            designation: 'Interim Chairman',
+            company: 'HDFC Bank',
+            bio: "Keki Mistry, one of the most respected voices in India\u2019s financial ecosystem, has played a defining role in shaping the country\u2019s banking and corporate landscape through decades of visionary leadership and strategic foresight.",
+            quote: "Banking on the Future",
+            image: 'url("speaker_keki_mistry.webp")'
         },
-        'simranadvani': {
+        'arjit_garg': {
+            name: 'Mr. Arjit Garg',
+            role: 'MODERATOR',
+            session: '2025-26 • Navigating Risk in Your 20’s',
+            designation: 'India’s Youngest SEBI Registered Research Analyst',
+            company: 'Financial Markets',
+            bio: "Known for his work in equity research, investor education, and financial markets, Arjit has developed a strong perspective on how young individuals can approach investing, decision-making, and risk management.",
+            quote: "Navigating Risk in Your 20\u2019s",
+            image: 'url("speaker_arjit_garg.webp")'
+        },
+        'annkur_khosla': {
+            name: 'Ms. Annkur Khosla',
+            role: 'MODERATOR',
+            session: '2025-26 • The New Language of Luxury',
+            designation: 'Founder & Principal Architect',
+            company: 'Annkur Khosla Design Studio',
+            bio: "Through her work across luxury, wellness and experiential design, Annkur has built a distinctive perspective on how spaces, stories and experiences shape the way people connect, engage and belong.",
+            quote: "The New Language of Luxury",
+            image: 'url("speaker_annkur_khosla.webp")'
+        },
+        'simran_advani': {
             name: 'Ms. Simran Advani',
             role: 'PANELIST',
-            session: 'A Seat at the Table',
-            designation: 'Founder of Nova and Co-Founder of Pastel',
+            session: '2025-26 • A Seat at the Table',
+            designation: 'Founder of Nova & Co-Founder of Pastel',
             company: 'Nova & Pastel Patisserie',
-            bio: 'Inspired by Italy’s rich dessert culture and driven by a passion for craftsmanship, Simran transformed an unconventional journey into one of Mumbai’s most distinctive dessert ventures. Through innovation, experimentation, and an unwavering focus on quality, she has created brands that celebrate comfort, creativity, and the joy of thoughtfully crafted food.',
-            quote: '"Craftsmanship transforms unconventional journeys into distinctive, joy-filled culinary brands."',
-            image: 'url("simran advani panelist.webp")'
+            bio: "Inspired by Italy\u2019s rich dessert culture and driven by a passion for craftsmanship, Simran transformed an unconventional journey into one of Mumbai\u2019s most distinctive dessert ventures.",
+            quote: "A Seat at the Table",
+            image: 'url("speaker_simran_advani.webp")'
         },
-        'abhijeetanand': {
-            name: 'Mr. Abhijeet Anand',
-            role: 'PANELIST',
-            session: 'A Seat at the Table',
-            designation: 'Founder & Chief Executive Officer',
-            company: 'abcoffee',
-            bio: 'With a disruptive and technology-driven approach to coffee retail, Abhijeet has built one of the country’s fastest growing café concepts by combining quality, convenience, and affordability for the modern consumer. His journey reflects bold thinking, adaptability, and a sharp understanding of changing customer behavior.',
-            quote: '"Disruptive coffee retail comes from combining quality, convenience, and affordability for the modern consumer."',
-            image: 'url("abhijeet anand panelist.webp")'
-        },
-        'enrico': {
+        'enrico_signorelli': {
             name: 'Mr. Enrico Signorelli',
             role: 'PANELIST',
-            session: 'A Seat at the Table',
+            session: '2025-26 • A Seat at the Table',
             designation: 'Founder',
             company: 'MAMI Bombay',
-            bio: 'With a vision rooted in authenticity, creativity, and community, Enrico has built MAMI Bombay into a brand that blends indulgent food experiences with a modern and relatable dining culture. By focusing on quality, storytelling, and customer connection, he has created a space that resonates strongly with today’s generation of food lovers.',
-            quote: '"Authenticity and storytelling create dining experiences that deeply resonate with today’s generation of food lovers."',
-            image: 'url("enrico panelist.webp")'
+            bio: "With a vision rooted in authenticity, creativity, and community, Enrico has built MAMI Bombay into a brand that blends indulgent food experiences with a modern dining culture.",
+            quote: "A Seat at the Table",
+            image: 'url("speaker_enrico_signorelli.webp")'
         },
-        'shloksavjani': {
-            name: 'Mr. Shlok Savjani',
+        'abhijeet_anand': {
+            name: 'Mr. Abhijeet Anand',
             role: 'PANELIST',
-            session: 'A Seat at the Table',
-            designation: 'Managing Partner',
-            company: 'Maroosh',
-            bio: 'Representing one of Mumbai’s most loved culinary brands, Shlok has played a key role in evolving Maroosh while staying true to the authenticity and flavors that built its loyal community. By blending tradition with changing consumer preferences, he continues to shape dining experiences that resonate with today’s audience.',
-            quote: '"Evolving a heritage brand requires blending authentic legacy flavors with changing consumer preferences."',
-            image: 'url("shlok savjani panelist.webp")'
+            session: '2025-26 • A Seat at the Table',
+            designation: 'Founder & Chief Executive Officer',
+            company: 'abcoffee',
+            bio: "With a disruptive and technology-driven approach to coffee retail, Abhijeet has built one of the country\u2019s fastest growing caf\u00e9 concepts by combining quality, convenience, and affordability.",
+            quote: "A Seat at the Table",
+            image: 'url("speaker_abhijeet_anand.webp")'
         },
-        'vikkhatwani': {
+        'vik_khatwani': {
             name: 'Mr. Vik Khatwani',
             role: 'PANELIST',
-            session: 'A Seat at the Table',
+            session: '2025-26 • A Seat at the Table',
             designation: 'Founder',
             company: 'Earth Café',
-            bio: 'Leaving behind a successful career in jewelry manufacturing, Vik transformed a personal philosophy into one of Mumbai’s most recognized plant-based and gluten-free café brands. Through sustainable practices, mindful innovation, and a strong community-first approach, he has redefined what modern wellness hospitality can look like.',
-            quote: '"Mindful innovation and plant-based hospitality can redefine wellness for modern India."',
-            image: 'url("vik khatwani panelist.webp")'
+            bio: "Leaving behind a successful career in jewelry manufacturing, Vik transformed a personal philosophy into one of Mumbai\u2019s most recognized plant based and gluten free caf\u00e9 brands.",
+            quote: "A Seat at the Table",
+            image: 'url("speaker_vik_khatwani.webp")'
         },
-        'ishaanbahl': {
+        'shlok_savjani': {
+            name: 'Mr. Shlok Savjani',
+            role: 'PANELIST',
+            session: '2025-26 • A Seat at the Table',
+            designation: 'Managing Partner',
+            company: 'Maroosh',
+            bio: "Representing one of Mumbai\u2019s most loved culinary brands, Shlok has played a key role in evolving Maroosh while staying true to the authenticity and flavors that built its loyal community.",
+            quote: "A Seat at the Table",
+            image: 'url("speaker_shlok_savjani.webp")'
+        },
+        'ishaan_bahl': {
             name: 'Mr. Ishaan Bahl',
             role: 'PANELIST',
-            session: 'A Seat at the Table',
-            designation: 'Restaurateur & Founder',
-            company: '145 Mumbai / Chrome Hospitality',
-            bio: 'Ishaan Bahl is a trailblazing restaurateur and hospitality entrepreneur responsible for creating iconic social dining spaces like 145 Mumbai and leading Chrome Hospitality’s expansion into luxury dining.',
-            quote: '"Modern hospitality builds spaces that feel like culture hubs, not just restaurants."',
-            image: 'url("ishaan bahl panelist.webp")'
+            session: '2025-26 • A Seat at the Table',
+            designation: 'Founder of Khyber & 145 Café & Bar, CEO',
+            company: 'RISA Hospitality',
+            bio: "Blending the legacy of an iconic dining institution with the pulse of contemporary food culture, Ishaan has redefined what it means to create hospitality experiences that are timeless and relevant.",
+            quote: "A Seat at the Table",
+            image: 'url("speaker_ishaan_bahl.webp")'
+        },
+        'yash_advani': {
+            name: 'Mr. Yash Advani',
+            role: 'PANELIST',
+            session: '2025-26 • A Seat at the Table',
+            designation: 'Founder of Maikada & Cafe Calma, Co-Founder',
+            company: 'Pastel Patisserie / Shalimar Hotel',
+            bio: "Rooted in the legacy of The Shalimar Hotel, Yash represents a new generation of hospitality leaders redefining meaningful dining experiences through thoughtfully curated concepts.",
+            quote: "A Seat at the Table",
+            image: 'url("speaker_yash_advani.webp")'
+        },
+        'sankalp_kelshikar': {
+            name: 'Mr. Sankalp Kelshikar',
+            role: 'SPEAKER',
+            session: '2025-26 • Moving India Forward',
+            designation: 'Co-Founder',
+            company: 'Cityflo Buses',
+            bio: "With a vision to transform the everyday commute experience, Mr. Kelshikar has redefined urban mobility by building one of India\u2019s most innovative consumer-focused transportation platforms.",
+            quote: "Moving India Forward",
+            image: 'url("speaker_sankalp_kelshikar.webp")'
+        },
+        'rajat_bhatia': {
+            name: 'Mr. Rajat Bhatia',
+            role: 'SPEAKER',
+            session: '2025-26 • The New Language of Luxury',
+            designation: 'Commercial Director',
+            company: 'Four Seasons Mumbai',
+            bio: "Known for his warmth, vision and deep understanding of modern hospitality, Rajat has been instrumental in curating world-class guest experiences that create genuine human connection.",
+            quote: "The New Language of Luxury",
+            image: 'url("speaker_rajat_bhatia.webp")'
+        },
+        'maulik_bhansali': {
+            name: 'Mr. Maulik Bhansali',
+            role: 'SPEAKER',
+            session: '2025-26 • Navigating Risk in Your 20’s',
+            designation: 'Chief Risk Officer',
+            company: 'Union Asset Management Co. Pvt. Ltd.',
+            bio: "A master of foresight in India\u2019s investment sector. Backed by a passion for financial stability and risk-reward optimization, Mr. Bhansali has played a pivotal role in institutional resilience.",
+            quote: "Navigating Risk in Your 20\u2019s",
+            image: 'url("speaker_maulik_bhansali.webp")'
         }
     };
 

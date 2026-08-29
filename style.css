@@ -1247,14 +1247,16 @@ body {
     box-shadow: 0 0 20px rgba(204, 0, 0, 0.4);
 }
 
-/* --- Card Image & Badge Area --- */
+/* --- Card Image & Badge Area: Clean Square Portrait --- */
 .accordion-collapsed {
     position: relative;
     width: 100%;
-    height: 290px;
+    aspect-ratio: 1 / 1;
+    height: auto;
     overflow: hidden;
     display: block;
     opacity: 1 !important;
+    background: #f4f4f7;
 }
 
 .speaker-crop {
@@ -1262,6 +1264,7 @@ body {
     height: 100%;
     background-size: cover;
     background-position: center top;
+    background-repeat: no-repeat;
     filter: none;
     opacity: 1;
     border-radius: 0;
