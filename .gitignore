@@ -20,3 +20,7 @@ Thumbs.db
 *.log
 .split_pages_backup/
 .netlify/
+
+# Local Python environments
+venv/
+.venv/

@@ -3,58 +3,74 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://jaihindconclave.com/</loc>
-    <lastmod>2026-08-15</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://jaihindconclave.com/speaker%20session%20final.webp</image:loc>
-      <image:title>Jai Hind Business Conclave 2026 Keynote Session</image:title>
-      <image:caption>Keynote session at Jai Hind College Business Conclave in Mumbai</image:caption>
+      <image:loc>https://jaihindconclave.com/speaker_session_poster.webp</image:loc>
+      <image:title>Jai Hind Business Conclave Official Poster</image:title>
+      <image:caption>Official event poster for Jai Hind Business Conclave in Mumbai</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://jaihindconclave.com/Networking.webp</image:loc>
-      <image:title>Executive Networking Lounge at JBC 2026</image:title>
-      <image:caption>Corporate delegates and students networking at Jai Hind Business Conclave</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://jaihindconclave.com/Panelist%20final.webp</image:loc>
-      <image:title>Leadership Panel Discussion JBC 2026</image:title>
-      <image:caption>Industry leaders and CEOs participating in panel discussions at Taj President Mumbai</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://jaihindconclave.com/Fire%20side%20final%20.webp</image:loc>
-      <image:title>Fireside Chat JBC</image:title>
-      <image:caption>Exclusive fireside chat with corporate executives at Jai Hind College</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://jaihindconclave.com/keki%20mistry.webp</image:loc>
+      <image:loc>https://jaihindconclave.com/speaker_keki_mistry.webp</image:loc>
       <image:title>Mr. Keki Mistry - Keynote Speaker</image:title>
-      <image:caption>Mr. Keki Mistry, Former Vice Chairman and CEO of HDFC Ltd speaking at JBC</image:caption>
+      <image:caption>Mr. Keki Mistry, Interim Chairman of HDFC Bank, speaking at Jai Hind Business Conclave</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://jaihindconclave.com/dharamranjan.webp</image:loc>
-      <image:title>Mr. Dharamranjan - Chief Business Officer Jio Financial Services</image:title>
-      <image:caption>Dharamranjan delivering address at Jai Hind Business Conclave</image:caption>
+      <image:loc>https://jaihindconclave.com/speaker_dharmarajan.webp</image:loc>
+      <image:title>Mr. Dharmarajan Sankara Subramanian - Speaker</image:title>
+      <image:caption>Mr. Dharmarajan, Founder and MD of Impactsure Technologies at JBC</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://jaihindconclave.com/maulik%20bhansali.webp</image:loc>
-      <image:title>Mr. Maulik Bhansali - CEO Netweb Software</image:title>
-      <image:caption>Maulik Bhansali speaker profile at JBC 2026</image:caption>
+      <image:loc>https://jaihindconclave.com/prateek_kumar.webp</image:loc>
+      <image:title>Mr. Prateek Kumar - Faculty, BBA department</image:title>
+      <image:caption>Faculty, BBA department at Jai Hind College</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://jaihindconclave.com/arijit%20garg.webp</image:loc>
-      <image:title>Mr. Arijit Garg - Managing Director Nomura</image:title>
-      <image:caption>Arijit Garg speaker session at Jai Hind College</image:caption>
+      <image:loc>https://jaihindconclave.com/rakhi_sharma.webp</image:loc>
+      <image:title>Dr. Rakhi Sharma - Faculty Advisor</image:title>
+      <image:caption>Faculty Advisor and Head of Department at Jai Hind College</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://jaihindconclave.com/taj-colaba.jpg</image:loc>
-      <image:title>The Taj Mahal Palace, Colaba, Mumbai - JBC Venue</image:title>
-      <image:caption>The Taj Mahal Palace Colaba luxury convention venue for Jai Hind Business Conclave</image:caption>
+      <image:loc>https://jaihindconclave.com/Hamza%20Bamboat.webp</image:loc>
+      <image:title>Hamza Bamboat - Student Secretary</image:title>
+      <image:caption>Student Secretary leading the Jai Hind Business Conclave 2025-26</image:caption>
     </image:image>
-    <image:image>
-      <image:loc>https://jaihindconclave.com/jbc-team-photo.jpg</image:loc>
-      <image:title>Jai Hind Business Conclave Organizing Committee and Leadership</image:title>
-      <image:caption>Official JBC Organizing Committee at Jai Hind Business Conclave</image:caption>
-    </image:image>
+  </url>
+  <url>
+    <loc>https://jaihindconclave.com/#press</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://jaihindconclave.com/#speakers</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://jaihindconclave.com/#legacy</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jaihindconclave.com/#about</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jaihindconclave.com/#faq</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jaihindconclave.com/jbc_report_2025_2026.pdf</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
   </url>
 </urlset>

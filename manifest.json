@@ -1,17 +1,15 @@
 {
   "name": "Jai Hind College | Jai Hind Business Conclave 2026",
   "short_name": "JBC 2026",
-  "description": "The flagship annual business summit organized by the BBA Department of Jai Hind College, Mumbai.",
+  "description": "The flagship annual business conclave organized by the BBA Department of Jai Hind College, Mumbai.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#050505",
-  "theme_color": "#050505",
+  "background_color": "#FAF7F2",
+  "theme_color": "#A91D22",
   "icons": [
-    {
-      "src": "Networking.webp",
-      "sizes": "192x192 512x512",
-      "type": "image/webp",
-      "purpose": "any maskable"
-    }
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
 }
