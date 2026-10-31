@@ -3640,10 +3640,10 @@ body.modal-open {
     top: 0;
     left: 0;
     height: 3px;
-    background: linear-gradient(90deg, #ffffff, #ffe0e0);
+    background: var(--accent-red);
     width: 0%;
     z-index: 9999;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    box-shadow: 0 1px 2px rgba(60, 8, 12, 0.35);
     transition: width 0.1s;
 }
 
@@ -5184,17 +5184,17 @@ a:focus-visible {
         inset: 0;
         z-index: -1;
         pointer-events: none;
-        /* tinted "regular" glass: 78% crimson keeps white labels above 4.5:1 over white content */
+        /* tinted glass held close to brand crimson (#A91D22) so the bar reads as the site's red, not a faded wash */
         background:
-            linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 55%),
-            linear-gradient(135deg, rgba(169, 29, 34, 0.78) 0%, rgba(125, 12, 16, 0.84) 100%);
+            linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 55%),
+            linear-gradient(135deg, rgba(169, 29, 34, 0.93) 0%, rgba(150, 22, 27, 0.95) 100%);
         -webkit-backdrop-filter: blur(22px) saturate(180%);
         backdrop-filter: blur(22px) saturate(180%);
     }
     .navbar.scrolled::before {
         background:
-            linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 55%),
-            linear-gradient(135deg, rgba(150, 18, 22, 0.80) 0%, rgba(110, 8, 12, 0.86) 100%);
+            linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0) 55%),
+            linear-gradient(135deg, rgba(169, 29, 34, 0.94) 0%, rgba(150, 22, 27, 0.96) 100%);
     }
     /* Glass capsule for the hamburger */
     .menu-toggle {
@@ -5229,4 +5229,65 @@ a:focus-visible {
         -webkit-backdrop-filter: none !important;
         backdrop-filter: none !important;
     }
+}
+
+/* ---------- 2026-27 team: five edition tabs + profile photo framing ---------- */
+.profile-image-container.team-profile-image {
+    background-position: center 18%;
+}
+
+@media (min-width: 769px) {
+    .team-edition-tabs-container {
+        max-width: none;
+    }
+
+    .team-edition-tabs {
+        flex-wrap: nowrap;
+        border-radius: 28px;
+    }
+
+    .team-tab-btn {
+        flex-direction: column;
+        gap: 0.3rem;
+        padding: 0.6rem 1.4rem;
+        border-radius: 22px;
+        white-space: nowrap;
+    }
+}
+
+/* LinkedIn badge on 2026-27 team photo cards: small glass disc, always visible, 44px tap target */
+.team-card-linkedin {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.16);
+    -webkit-backdrop-filter: blur(10px) saturate(160%);
+    backdrop-filter: blur(10px) saturate(160%);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28), 0 2px 8px rgba(30, 4, 8, 0.25);
+    transition: background-color 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.team-card-linkedin::before {
+    content: "";
+    position: absolute;
+    inset: -5px;
+}
+
+.team-card-linkedin:hover,
+.team-card-linkedin:focus-visible {
+    background: #0A66C2;
+    transform: scale(1.06);
+}
+
+.team-card-linkedin:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
 }

@@ -1488,6 +1488,87 @@ document.addEventListener('DOMContentLoaded', () => {
             image: 'url("Prateek kumar sir.webp")'
         },
         // CORE TEAM PROFILES
+        'mahek_2026': {
+            name: 'Mahek Zaveri',
+            designation: 'Student Secretary',
+            about: 'Leads the Jai Hind Business Conclave 2026–27, steering the core team, speaker outreach, and institutional partnerships for the 5th edition of JBC.',
+            achievements: [],
+            quote: '',
+            image: 'url("team_2026_mahek.webp")',
+            linkedin: 'https://www.linkedin.com/in/mahek-zaveri-6559b23b5/'
+        },
+        'nishi_2026': {
+            name: 'Nishi Pawar',
+            designation: 'Deputy Student Secretary',
+            about: 'Works alongside the Student Secretary to coordinate every department and keep planning and execution on track for JBC 2026–27.',
+            achievements: [],
+            quote: '',
+            image: 'url("team_2026_nishi.webp")',
+            linkedin: 'https://www.linkedin.com/in/nishi-pawar-382805324/'
+        },
+        'shruti_2026': {
+            name: 'Shruti Katap',
+            designation: 'Student Joint Secretary • Legal & Finance',
+            about: 'Oversees budgeting, sponsorship accounting, agreements, and compliance for JBC 2026–27.',
+            achievements: [],
+            quote: '',
+            image: 'url("team_2026_shruti.webp")',
+            linkedin: 'https://www.linkedin.com/in/shruti-katap-310990332/'
+        },
+        'yash_2026': {
+            name: 'Yash Bhamre',
+            designation: 'Student Joint Secretary • Operations',
+            about: 'Runs on-ground logistics, venue coordination, and day-of execution for JBC 2026–27.',
+            achievements: [],
+            quote: '',
+            image: 'url("team_2026_yash.webp")',
+            linkedin: 'https://www.linkedin.com/in/yash-bhamre/'
+        },
+        'ananya_2026': {
+            name: 'Ananya Murali',
+            designation: 'Student Joint Secretary • Events',
+            about: 'Designs and delivers the conclave programme, from session flow to stage management, for JBC 2026–27.',
+            achievements: [],
+            quote: '',
+            image: 'url("team_2026_ananya.webp")',
+            linkedin: 'https://www.linkedin.com/in/ananya-murali-82a168374/'
+        },
+        'meesha_2026': {
+            name: 'Meesha Rajpal',
+            designation: 'Student Joint Secretary • Public Relations',
+            about: 'Manages media relations, press outreach, and the public voice of JBC 2026–27.',
+            achievements: [],
+            quote: '',
+            image: 'url("team_2026_meesha.webp")',
+            linkedin: 'https://www.linkedin.com/in/meesha-rajpal-700283357/'
+        },
+        'tithi_2026': {
+            name: 'Tithi Jain',
+            designation: 'Student Joint Secretary • Hospitality',
+            about: 'Looks after speakers, guests, and delegates so every visitor to JBC 2026–27 is well received.',
+            achievements: [],
+            quote: '',
+            image: 'url("team_2026_tithi.webp")',
+            linkedin: 'https://www.linkedin.com/in/tithi-jain-6b406b3a1/'
+        },
+        'saad_2026': {
+            name: 'Saad Khan',
+            designation: 'Student Joint Secretary • Marketing',
+            about: 'Drives sponsorships, brand partnerships, and promotion for JBC 2026–27.',
+            achievements: [],
+            quote: '',
+            image: 'url("team_2026_saad.webp")',
+            linkedin: 'https://www.linkedin.com/in/saad-khan-b51a59377/'
+        },
+        'siya_2026': {
+            name: 'Siya Raveendran',
+            designation: 'Student Joint Secretary • Media',
+            about: 'Leads photography, video, and social content capturing the story of JBC 2026–27.',
+            achievements: [],
+            quote: '',
+            image: 'url("team_2026_siya.webp")',
+            linkedin: 'https://www.linkedin.com/in/siya-raveendran/'
+        },
         'hamza_2025': {
             name: 'Hamza Bamboat',
             designation: 'Student Secretary',
@@ -1502,10 +1583,10 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         'karishma_2025': {
             name: 'Karishma Peswani',
-            designation: 'Student Joint Secretary',
+            designation: 'Deputy Student Secretary',
             about: 'Pivotal in managing core operations, cross-department coordination, and maintaining structural execution across all conclave events for JBC.',
             achievements: [
-                'Student Joint Secretary, Jai Hind Business Conclave.',
+                'Deputy Student Secretary, Jai Hind Business Conclave.',
                 'Coordinated operational workflows across student departments.',
                 'Maintained structural excellence throughout event planning and execution.'
             ],
@@ -1974,7 +2055,9 @@ document.addEventListener('DOMContentLoaded', () => {
             achievementsContainer.style.display = 'none';
         }
         
-        document.querySelector('.team-profile-quote').innerText = data.quote;
+        const teamQuoteEl = document.querySelector('.team-profile-quote');
+        teamQuoteEl.innerText = data.quote || '';
+        teamQuoteEl.style.display = data.quote ? '' : 'none';
         const thumbEl = document.querySelector(`.team-card[data-team="${teamId}"] .team-image, .mentor-card[data-team="${teamId}"] .mentor-image-wrap`);
         document.querySelector('.team-profile-image').style.backgroundImage = layeredBackground(data.image, thumbEl);
 
