@@ -836,7 +836,7 @@ document.addEventListener('DOMContentLoaded', () => {
             quote: "Navigating Macro Cycles",
             linkedin: "https://www.linkedin.com/in/tushar-pradhan-1068b810/",
             instagram: "",
-            image: 'url("speaker_tushar_pradhan_24.webp")'
+            image: 'url("speaker_tushar_pradhan.webp")'
         },
         'khushnooma_kapadia': {
             name: 'Mrs. Khushnooma Kapadia',
@@ -1471,7 +1471,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Deeply committed to empowering students with creativity, confidence, and innovation.'
             ],
             quote: '"Empowering people with creativity, confidence, and innovation drives true leadership."',
-            image: 'url("Rakhi maam.webp")'
+            image: 'url("rakhi_sharma.webp")'
         },
         'prateek': {
             name: 'Mr. Prateek Kumar',
@@ -1485,7 +1485,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'Instrumental in bridging the gap between higher education and corporate industry.'
             ],
             quote: '"Bridging education and industry empowers students to build real-world business frameworks."',
-            image: 'url("Prateek kumar sir.webp")'
+            image: 'url("prateek_kumar.webp")'
         },
         // CORE TEAM PROFILES
         'mahek_2026': {
