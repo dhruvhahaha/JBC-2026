@@ -5519,3 +5519,14 @@ a:focus-visible {
         padding-bottom: 3.5rem;
     }
 }
+
+/* Team cards: department on its own line, shared title beneath in a quieter style */
+.team-info .team-title-sub {
+    display: block;
+    margin-top: 0.3rem;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.6875rem;
+    line-height: 1.35;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+}
