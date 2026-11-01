@@ -1518,7 +1518,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         'shruti_2026': {
             name: 'Shruti Katap',
-            designation: 'Vice President • Legal & Finance',
+            designation: 'Vice President / Student Joint Secretary • Legal & Finance',
             about: "Overseeing the legal and financial aspects of Jai Hind Business Conclave 2026–27, with a focus on documentation, budgeting, and financial coordination.",
             achievements: [
                 "Vice President – Legal & Finance, Jai Hind Business Conclave 2026–27.",
@@ -1532,7 +1532,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         'yash_2026': {
             name: 'Yash Bhamre',
-            designation: 'Vice President • Operations',
+            designation: 'Vice President / Student Joint Secretary • Operations',
             about: "Managing on-ground execution and event operations for Jai Hind Business Conclave 2026–27, ensuring plans are translated into smooth and organised event experiences.",
             achievements: [
                 "Vice President – Operations, Jai Hind Business Conclave 2026–27.",
@@ -1546,7 +1546,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         'ananya_2026': {
             name: 'Ananya Murali',
-            designation: 'Vice President • Events',
+            designation: 'Vice President / Student Joint Secretary • Events',
             about: "Planning and coordinating events for Jai Hind Business Conclave 2026–27, focusing on event concepts, scheduling, and overall experience.",
             achievements: [
                 "Vice President – Events, Jai Hind Business Conclave 2026–27.",
@@ -1560,7 +1560,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         'meesha_2026': {
             name: 'Meesha Rajpal',
-            designation: 'Vice President • Public Relations',
+            designation: 'Vice President / Student Joint Secretary • Public Relations',
             about: "Handling public relations and external communication for Jai Hind Business Conclave 2026–27, with a focus on maintaining relationships and coordinating communication with stakeholders.",
             achievements: [
                 "Vice President – Public Relations, Jai Hind Business Conclave 2026–27.",
@@ -1574,7 +1574,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         'tithi_2026': {
             name: 'Tithi Jain',
-            designation: 'Vice President • Hospitality',
+            designation: 'Vice President / Student Joint Secretary • Hospitality',
             about: "Managing hospitality and guest coordination for Jai Hind Business Conclave 2026–27, ensuring smooth communication and arrangements for speakers, guests, and delegates.",
             achievements: [
                 "Vice President – Hospitality, Jai Hind Business Conclave 2026–27.",
@@ -1588,7 +1588,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         'saad_2026': {
             name: 'Saad Khan',
-            designation: 'Vice President • Marketing',
+            designation: 'Vice President / Student Joint Secretary • Marketing',
             about: "Leading marketing initiatives for Jai Hind Business Conclave 2026–27, focusing on brand partnerships, sponsorships, outreach, and promotional strategy.",
             achievements: [
                 "Vice President – Marketing, Jai Hind Business Conclave 2026–27.",
@@ -1602,7 +1602,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         'siya_2026': {
             name: 'Siya Raveendran',
-            designation: 'Vice President • Media',
+            designation: 'Vice President / Student Joint Secretary • Media',
             about: "Leading media operations, creative direction, and digital communication for Jai Hind Business Conclave 2026–27, with a focus on content, branding, and event storytelling.",
             achievements: [
                 "Vice President – Media, Jai Hind Business Conclave 2026–27.",
