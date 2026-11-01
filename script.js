@@ -1491,81 +1491,126 @@ document.addEventListener('DOMContentLoaded', () => {
         'mahek_2026': {
             name: 'Mahek Zaveri',
             designation: 'Student Secretary',
-            about: 'Leads the Jai Hind Business Conclave 2026–27, steering the core team, speaker outreach, and institutional partnerships for the 5th edition of JBC.',
-            achievements: [],
-            quote: '',
+            about: "Serving as the Student Secretary of Jai Hind College, leading the student committee and overseeing its activities, coordination, and responsibilities.",
+            achievements: [
+                "Student Secretary, Jai Hind College.",
+                "Heading the student committee and coordinating its functioning.",
+                "Facilitating communication between committee members and college authorities.",
+                "Overseeing student initiatives and committee activities."
+            ],
+            quote: "",
             image: 'url("team_2026_mahek.webp")',
             linkedin: 'https://www.linkedin.com/in/mahek-zaveri-6559b23b5/'
         },
         'nishi_2026': {
             name: 'Nishi Pawar',
             designation: 'Deputy Student Secretary',
-            about: 'Works alongside the Student Secretary to coordinate every department and keep planning and execution on track for JBC 2026–27.',
-            achievements: [],
-            quote: '',
+            about: "Serving as the Deputy Student Secretary of Jai Hind College, working closely with the Student Secretary to oversee committee operations, coordinate student initiatives, and support the planning and functioning of college activities.",
+            achievements: [
+                "Deputy Student Secretary, Jai Hind College.",
+                "Assisting in managing committee operations and delegating responsibilities.",
+                "Coordinating with committee members to ensure smooth functioning.",
+                "Supporting the planning and execution of student initiatives and college events."
+            ],
+            quote: "",
             image: 'url("team_2026_nishi.webp")',
             linkedin: 'https://www.linkedin.com/in/nishi-pawar-382805324/'
         },
         'shruti_2026': {
             name: 'Shruti Katap',
-            designation: 'Student Joint Secretary • Legal & Finance',
-            about: 'Oversees budgeting, sponsorship accounting, agreements, and compliance for JBC 2026–27.',
-            achievements: [],
-            quote: '',
+            designation: 'Vice President • Legal & Finance',
+            about: "Overseeing the legal and financial aspects of Jai Hind Business Conclave 2026–27, with a focus on documentation, budgeting, and financial coordination.",
+            achievements: [
+                "Vice President – Legal & Finance, Jai Hind Business Conclave 2026–27.",
+                "Managing budgets, financial records, and expense tracking.",
+                "Coordinating legal documentation and formal requirements.",
+                "Ensuring financial planning and accountability across event operations."
+            ],
+            quote: "“Strong foundations make ambitious ideas possible.”",
             image: 'url("team_2026_shruti.webp")',
             linkedin: 'https://www.linkedin.com/in/shruti-katap-310990332/'
         },
         'yash_2026': {
             name: 'Yash Bhamre',
-            designation: 'Student Joint Secretary • Operations',
-            about: 'Runs on-ground logistics, venue coordination, and day-of execution for JBC 2026–27.',
-            achievements: [],
-            quote: '',
+            designation: 'Vice President • Operations',
+            about: "Managing on-ground execution and event operations for Jai Hind Business Conclave 2026–27, ensuring plans are translated into smooth and organised event experiences.",
+            achievements: [
+                "Vice President – Operations, Jai Hind Business Conclave 2026–27.",
+                "Coordinating logistics, setups, and on-ground requirements.",
+                "Working with different departments to streamline event operations.",
+                "Overseeing execution timelines and operational coordination."
+            ],
+            quote: "“Turning plans into experiences, one detail at a time.”",
             image: 'url("team_2026_yash.webp")',
             linkedin: 'https://www.linkedin.com/in/yash-bhamre/'
         },
         'ananya_2026': {
             name: 'Ananya Murali',
-            designation: 'Student Joint Secretary • Events',
-            about: 'Designs and delivers the conclave programme, from session flow to stage management, for JBC 2026–27.',
-            achievements: [],
-            quote: '',
+            designation: 'Vice President • Events',
+            about: "Planning and coordinating events for Jai Hind Business Conclave 2026–27, focusing on event concepts, scheduling, and overall experience.",
+            achievements: [
+                "Vice President – Events, Jai Hind Business Conclave 2026–27.",
+                "Developing event concepts and formats.",
+                "Coordinating event planning, schedules, and requirements.",
+                "Working with internal departments to ensure seamless execution."
+            ],
+            quote: "“Creating experiences that leave a lasting impression.”",
             image: 'url("team_2026_ananya.webp")',
             linkedin: 'https://www.linkedin.com/in/ananya-murali-82a168374/'
         },
         'meesha_2026': {
             name: 'Meesha Rajpal',
-            designation: 'Student Joint Secretary • Public Relations',
-            about: 'Manages media relations, press outreach, and the public voice of JBC 2026–27.',
-            achievements: [],
-            quote: '',
+            designation: 'Vice President • Public Relations',
+            about: "Handling public relations and external communication for Jai Hind Business Conclave 2026–27, with a focus on maintaining relationships and coordinating communication with stakeholders.",
+            achievements: [
+                "Vice President – Public Relations, Jai Hind Business Conclave 2026–27.",
+                "Managing external communication and stakeholder relationships.",
+                "Coordinating outreach and communication with speakers, partners, and industry representatives.",
+                "Contributing to JBC’s public image and professional presence."
+            ],
+            quote: "“Strong relationships build a stronger reputation.”",
             image: 'url("team_2026_meesha.webp")',
             linkedin: 'https://www.linkedin.com/in/meesha-rajpal-700283357/'
         },
         'tithi_2026': {
             name: 'Tithi Jain',
-            designation: 'Student Joint Secretary • Hospitality',
-            about: 'Looks after speakers, guests, and delegates so every visitor to JBC 2026–27 is well received.',
-            achievements: [],
-            quote: '',
+            designation: 'Vice President • Hospitality',
+            about: "Managing hospitality and guest coordination for Jai Hind Business Conclave 2026–27, ensuring smooth communication and arrangements for speakers, guests, and delegates.",
+            achievements: [
+                "Vice President – Hospitality, Jai Hind Business Conclave 2026–27.",
+                "Coordinating guest relations and hospitality arrangements.",
+                "Overseeing speaker and delegate requirements.",
+                "Working with internal teams to ensure a smooth event experience."
+            ],
+            quote: "“Every detail matters when it comes to making someone feel welcome.”",
             image: 'url("team_2026_tithi.webp")',
             linkedin: 'https://www.linkedin.com/in/tithi-jain-6b406b3a1/'
         },
         'saad_2026': {
             name: 'Saad Khan',
-            designation: 'Student Joint Secretary • Marketing',
-            about: 'Drives sponsorships, brand partnerships, and promotion for JBC 2026–27.',
-            achievements: [],
-            quote: '',
+            designation: 'Vice President • Marketing',
+            about: "Leading marketing initiatives for Jai Hind Business Conclave 2026–27, focusing on brand partnerships, sponsorships, outreach, and promotional strategy.",
+            achievements: [
+                "Vice President – Marketing, Jai Hind Business Conclave 2026–27.",
+                "Driving brand outreach and sponsorship collaborations.",
+                "Developing promotional strategies to strengthen JBC’s reach and visibility.",
+                "Working on brand partnerships and on-ground marketing opportunities."
+            ],
+            quote: "“Building connections that turn ideas into opportunities.”",
             image: 'url("team_2026_saad.webp")',
             linkedin: 'https://www.linkedin.com/in/saad-khan-b51a59377/'
         },
         'siya_2026': {
             name: 'Siya Raveendran',
-            designation: 'Student Joint Secretary • Media',
-            about: 'Leads photography, video, and social content capturing the story of JBC 2026–27.',
-            achievements: [],
-            quote: '',
+            designation: 'Vice President • Media',
+            about: "Leading media operations, creative direction, and digital communication for Jai Hind Business Conclave 2026–27, with a focus on content, branding, and event storytelling.",
+            achievements: [
+                "Vice President – Media, Jai Hind Business Conclave 2026–27.",
+                "Leading the media team across designing, editing, and video production.",
+                "Overseeing digital content, social media strategy, and event coverage.",
+                "Contributing to JBC’s website, visual identity, and overall brand communication."
+            ],
+            quote: "“Good media doesn’t just capture a moment; it gives it a presence.”",
             image: 'url("team_2026_siya.webp")',
             linkedin: 'https://www.linkedin.com/in/siya-raveendran/'
         },

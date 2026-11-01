@@ -5291,3 +5291,231 @@ a:focus-visible {
     outline: 2px solid #fff;
     outline-offset: 2px;
 }
+
+/* Short hero blurb exists only for phones */
+.hero-subtitle-short {
+    display: none;
+}
+
+/* =====================================================================
+   Mobile layout pass (phones only, <=768px). Desktop is untouched.
+   1. Cinematic hero: full-bleed film/poster, white type anchored low
+   2. Tighter About: one paragraph, compact facts, no repeated stats
+   3. Swipe rows: About pillars, press coverage, partner logos
+   ===================================================================== */
+@media (max-width: 768px) {
+    /* ---------- 1. Hero ---------- */
+    .hero {
+        align-items: flex-end;
+        padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 2rem);
+        background-color: #1a0d0e;
+    }
+
+    .hero-video,
+    .hero-video-wrapper {
+        background-color: #1a0d0e;
+    }
+
+    .hero-video {
+        opacity: 1;
+    }
+
+    .hero-overlay {
+        background:
+            linear-gradient(180deg,
+                rgba(20, 8, 10, 0.35) 0%,
+                rgba(20, 8, 10, 0.10) 28%,
+                rgba(20, 8, 10, 0.55) 55%,
+                rgba(20, 8, 10, 0.92) 100%) !important;
+    }
+
+    .hero-title {
+        color: #ffffff;
+        text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
+        font-size: clamp(2.4rem, 11vw, 3.4rem) !important;
+        line-height: 1.02;
+    }
+
+    .hero-title .red-text {
+        color: #ffffff;
+    }
+
+    .title-line.year {
+        color: rgba(255, 255, 255, 0.82);
+        letter-spacing: 4px;
+    }
+
+    .jbc-hero-line {
+        box-shadow: none;
+    }
+
+    .hero-subtitle {
+        color: rgba(255, 255, 255, 0.86);
+        text-shadow: none;
+        font-size: 0.98rem;
+        line-height: 1.55;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-subtitle-full {
+        display: none;
+    }
+
+    .hero-subtitle-short {
+        display: block;
+    }
+
+    .hero-cta .btn-outline {
+        background: rgba(255, 255, 255, 0.12);
+        color: #ffffff;
+        border-color: rgba(255, 255, 255, 0.45);
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
+    }
+
+    .hero-stats-bar {
+        background: rgba(255, 255, 255, 0.10) !important;
+        border: 1px solid rgba(255, 255, 255, 0.22) !important;
+        box-shadow: none !important;
+        -webkit-backdrop-filter: blur(14px);
+        backdrop-filter: blur(14px);
+    }
+
+    .hero-stat-number {
+        color: #ffffff;
+    }
+
+    .hero-stat-label {
+        color: rgba(255, 255, 255, 0.78);
+    }
+
+    /* ---------- 2. About ---------- */
+    .about {
+        padding-top: 4rem;
+    }
+
+    .about-sub-p,
+    .about-hero-text .inst-badge,
+    .credential-footer,
+    .credential-divider,
+    .about-pillars-sub {
+        display: none !important;
+    }
+
+    .about-hero-split {
+        gap: 1.75rem;
+        margin-bottom: 2.75rem;
+    }
+
+    .about-lead-p {
+        margin-bottom: 1.5rem;
+    }
+
+    .about-credential-card {
+        padding: 1.25rem 1.1rem;
+    }
+
+    .credential-header {
+        margin-bottom: 1rem;
+    }
+
+    .credential-list {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.9rem 1rem;
+    }
+
+    .credential-item {
+        margin: 0 !important;
+        padding: 0 !important;
+        border: 0 !important;
+    }
+
+    /* ---------- 3. Swipe rows (shared) ---------- */
+    .about-grid,
+    .press-cards-grid,
+    .sponsors-logo-wall {
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: var(--gutter-l);
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        margin-left: calc(-1 * var(--gutter-l));
+        margin-right: calc(-1 * var(--gutter-r));
+        padding: 0.25rem var(--gutter-r) 1rem var(--gutter-l);
+    }
+
+    .about-grid::-webkit-scrollbar,
+    .press-cards-grid::-webkit-scrollbar,
+    .sponsors-logo-wall::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* About pillars */
+    .about-grid {
+        display: flex !important;
+        gap: 0.85rem !important;
+    }
+
+    .about-grid .about-card {
+        flex: 0 0 78%;
+        scroll-snap-align: start;
+        padding: 1.5rem 1.3rem;
+    }
+
+    /* Press coverage */
+    .press-cards-grid {
+        display: flex !important;
+        gap: 0.85rem !important;
+        align-items: stretch;
+    }
+
+    .press-cards-grid .press-photo-card {
+        flex: 0 0 82%;
+        scroll-snap-align: start;
+        border-radius: 16px;
+    }
+
+    .press-photo-card .press-img-wrap {
+        aspect-ratio: 16 / 10;
+    }
+
+    /* Partner logos: two rows that swipe sideways */
+    .sponsors-unified-board {
+        background: transparent !important;
+        border: 0 !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin-top: 1.75rem !important;
+        overflow: visible !important;
+    }
+
+    .sponsors-unified-board::before {
+        display: none;
+    }
+
+    .sponsors-logo-wall {
+        display: grid !important;
+        grid-auto-flow: column;
+        grid-template-rows: repeat(2, 76px);
+        grid-auto-columns: 38%;
+        gap: 0.75rem !important;
+        justify-content: start;
+        align-items: stretch !important;
+    }
+
+    .sponsor-logo-item {
+        width: auto !important;
+        height: 100% !important;
+        padding: 0.9rem !important;
+        background: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        border-radius: 14px;
+        scroll-snap-align: start;
+    }
+
+    .partners {
+        padding-bottom: 3.5rem;
+    }
+}
